@@ -1,0 +1,128 @@
+@charset "UTF-8";
+	nav{
+		width: 100dvw;
+		display:flex;
+		margin-top: 2dvw;
+		margin-bottom: 2dvw;
+	}
+	
+	#menu-btn{
+		width: 5dvh;
+		height: 5dvh;
+		font-size: 4dvh;
+		text-align: center;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	
+	#close-btn{
+		position: fixed;
+		top: 1dvh;
+		left: 0;
+		width: 5dvh;
+		height: 5dvh;
+		font-size: 4dvh;
+		text-align: center;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	
+	#logo{
+		width: 90dvw;
+		text-align: center;
+	}
+	
+	nav img{
+		height: 5dvh;
+	}
+	
+	nav a{
+		height: 5dvh;
+		width: 5dvh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		text-decoration: none;
+		color: black;
+	}
+	
+	nav a svg{
+		height: 4dvh;
+		width: 4dvh;
+	}
+	
+	form{
+		width:90dvw;
+		height: 4dvh;
+		margin-left: 5dvw;
+		margin-right: 5dvw;
+		margin-bottom: 2dvw;
+		border:solid 1px;
+		border-radius: 2dvw;
+		display: flex;
+	}
+	
+	header form input{
+		height: 4dvh;
+	}
+	
+	input[type="search"]{
+		height: 4dvh;
+		width: calc(90dvw - 4dvh);
+		font-size: 3dvh;
+		padding-left: 2dvw;
+		border-radius: 2dvw 0 0 2dvw;
+	}
+	
+	input[type="search"]::placeholder{
+		font-size: 2.5dvh;
+	}
+	
+	button{
+		width:4dvh;
+		height: 4dvh;
+		border-radius: 0 2dvw 2dvw 0;
+		background-color: orange;
+	}
+	
+	button span[class="material-symbols-outlined"]{
+		font-size:4dvh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	
+	
+	#menu{
+		display: none;
+	}
+	
+	#menu.open{
+		background-color: #ffffff;
+		display: block;
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 80dvw;
+		height: 100dvh;
+		border: solid 1px;
+		border-color: gray;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-evenly;
+	}
+	
+	#menu a{
+		width:80dvw;
+		height: 10dvh;
+		color: black;
+		text-decoration: underline;
+		font-size: 5dvw;
+		text-align: center;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	
