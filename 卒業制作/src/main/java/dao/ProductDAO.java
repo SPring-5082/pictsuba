@@ -27,7 +27,7 @@ public class ProductDAO extends DAO {
 			int point = rs.getInt(8);
 			String images = rs.getString(9);
 			String descryption = rs.getString(10);
-			return new Product(product_id, product_name, add_date, price, creator_id, stock, lookup, point, images, descryption);
+			return null;
 		}
 		return null;
 	}
@@ -88,17 +88,6 @@ public class ProductDAO extends DAO {
 				+ ";";
 		PreparedStatement pstmt = getPsTmt(sql);
 		for(ResultSet rs = pstmt.executeQuery();rs.next();
-				new Product(
-						rs.getInt(1), 
-						rs.getString(2), 
-						rs.getDate(3), 
-						rs.getInt(4), 
-						rs.getInt(5), 
-						rs.getInt(6),
-						rs.getInt(7), 
-						rs.getInt(8), 
-						rs.getString(9), 
-						rs.getString(10))
 				) {}
 		return list;
 	}
