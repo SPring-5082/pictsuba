@@ -30,8 +30,19 @@ public class Address implements Serializable{
 	/**番地以降*/
 	private String building;
 	
-	public Address(int address_id,int customer_id, String zip_code, String pref, 
-			String municipalities, String street,String building) {
+	/**INSERT用コンストラクタ*/
+	public Address(int customer_id, String zip_code, String pref, String municipalities, String street,
+			String building) {
+		this.customer_id = customer_id;
+		this.zip_code = zip_code;
+		this.pref = pref;
+		this.municipalities = municipalities;
+		this.street = street;
+		this.building = building;
+	}
+
+	public Address(int address_id, int customer_id, String zip_code, String pref, String municipalities, String street,
+			String building) {
 		this.address_id = address_id;
 		this.customer_id = customer_id;
 		this.zip_code = zip_code;
@@ -40,7 +51,7 @@ public class Address implements Serializable{
 		this.street = street;
 		this.building = building;
 	}
-	
+
 	public int address_id() {
 		return address_id;
 	}
