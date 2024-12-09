@@ -15,7 +15,7 @@ public class SQL {
 		DELETE = "DELETE TABLE NAME ",
 		
 		/**UPDATEの定型文*/
-		UPDATE = "UPDATE TABLE_NAME SET STATEMENT "
+		UPDATE = "UPDATE TABLE_NAME SET "
 	;
 	
 	static String insert(String table_name) {
