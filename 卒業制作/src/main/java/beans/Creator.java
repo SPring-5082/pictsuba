@@ -7,7 +7,7 @@ public class Creator implements Serializable{
 	private int creator_id;
 	private String creator_name;
 	private int popularity;
-	
+
 	public Creator(int creator_id, String creator_name ,int popularity) {
 		this.creator_id = creator_id;
 		this.creator_name = creator_name;

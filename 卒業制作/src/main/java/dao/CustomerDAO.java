@@ -23,8 +23,7 @@ public class CustomerDAO extends DAO {
 		final String where = "WHERE MAIL = ? AND PASSWORD = ?";
 		final String sql = SQL.select("CUSTOMERS").concat(where);
 		PreparedStatement pstmt = getPsTmt(sql);
-		ResultSet rs = pstmt.executeQuery();
-		
+		ResultSet rs = pstmt.executeQuery();	
 		return null;
 	}
 }

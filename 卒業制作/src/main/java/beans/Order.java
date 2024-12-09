@@ -14,6 +14,7 @@ public class Order implements Serializable{
 	
 	public Order(int order_id, int customer_id, int product_id, int quantity, int address_id, Date order_date,
 			String state) {
+		super();
 		this.order_id = order_id;
 		this.customer_id = customer_id;
 		this.product_id = product_id;
@@ -22,7 +23,7 @@ public class Order implements Serializable{
 		this.order_date = order_date;
 		this.state = state;
 	}
-	
+
 	public int order_id() {
 		return order_id;
 	}
