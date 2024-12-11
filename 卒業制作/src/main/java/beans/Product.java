@@ -54,7 +54,7 @@ public class Product implements Serializable{
 		this.point = point;
 		this.images = images;
 		this.descryption = descryption;
-		this.url = JSON.getURLs(images);
+		this.url = new JSON(images).getList("url");
 	}
 
 	public int product_id() {

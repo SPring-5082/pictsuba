@@ -24,7 +24,7 @@ class TestProduct {
 		int stock = 10;
 		int lookup = 0;
 		int point = 1;
-		String images = "{\"array\":[\"https://www.ota.ac.jp/info/\"]}";
+		String images = "{\"url\":[\"https://www.ota.ac.jp/info/\"]}";
 		String descryption = "めちゃ売れてるよ";
 		Product p =
 		new Product(pid, name, date, price, cre_id, cate_id, stock, lookup, point, images, descryption);

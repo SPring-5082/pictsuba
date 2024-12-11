@@ -9,13 +9,27 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class JSON {
-	public static List<String> getURLs(String json) {
-		List<String> list = new ArrayList<String>();
+	
+	String json;
+	
+	public JSON(String json) {
+		this.json = json;
+	}
+	
+	private JsonNode readTree() throws JsonMappingException, JsonProcessingException {
 		ObjectMapper om = new ObjectMapper();
+		return om.readTree(json);
+	}
+	
+	public String getText(String key) throws JsonMappingException, JsonProcessingException {
+		return readTree().get(key).textValue();
+	}
+	
+	public List<String> getList(String key) {
+		List<String> list = new ArrayList<String>();
+
 		try {
-			JsonNode node1 =  om.readTree(json);
-			JsonNode node2 = node1.get("array");
-			node2.forEach(node->{
+			readTree().get(key).forEach(node->{
 						list.add(node.textValue());
 					});
 			return list;
