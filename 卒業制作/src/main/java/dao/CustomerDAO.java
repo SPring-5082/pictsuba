@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import beans.Customer;
@@ -18,8 +19,11 @@ public class CustomerDAO extends DAO {
 		return pstmt.execute();
 	}
 	
-	public static Customer findByMail(String mail) throws SQLException{
-		
+	public static Customer findByMailandPass(String mail, String password) throws SQLException{
+		final String where = "WHERE MAIL = ? AND PASSWORD = ?";
+		final String sql = SQL.select("CUSTOMERS").concat(where);
+		PreparedStatement pstmt = getPsTmt(sql);
+		ResultSet rs = pstmt.executeQuery();	
 		return null;
 	}
 }
