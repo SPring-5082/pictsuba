@@ -35,8 +35,37 @@ public class CookieLogic {
 		return false;
 	}
 	
-	public static String toJson(Cookie cookie) {
-		return null;
+	public static String toJson(Cookie[] cookies) {
+		StringBuilder sb = new StringBuilder();
+		final String HEAD = "{";
+		final String FORMAT = '\"' + "%" + '\"';
+		final String FOOT = "}";
+		for(int i = 0;i < cookies.length;i ++) {
+			String key = FORMAT.replaceFirst("%", cookies[i].getName());
+			String value = toJsonValue(cookies[i].getValue());
+			try {
+				Integer.parseInt(value);
+			}catch (Exception e) {
+				if(value.indexOf("[") < 0) {
+					value = FORMAT.replaceFirst("%", value);
+				}
+			}
+			sb.append(key).append(':').append(value);
+			if(i != cookies.length-1) {
+				sb.append(',');
+			}
+		}
+		return HEAD + sb.toString() + FOOT;
+	}
+	
+	private static String toJsonValue(String cValue) {
+		String value = null;
+		if(cValue.indexOf("/") >= 0) {
+			value = cValue.replaceAll("/", ",");
+			return "[" + value + "]";
+		}else {
+			return cValue;
+		}
 	}
 	
 }
