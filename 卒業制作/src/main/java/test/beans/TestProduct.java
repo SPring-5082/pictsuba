@@ -26,8 +26,16 @@ class TestProduct {
 		int point = 1;
 		String images = "{\"url\":[\"https://www.ota.ac.jp/info/\"]}";
 		String descryption = "めちゃ売れてるよ";
+		
+		String creator_name = "大塚";
+		String category_name = "自然";
+		int sales_quantity = 100;
 		Product p =
-		new Product(pid, name, date, price, cre_id, cate_id, stock, lookup, point, images, descryption);
+		new Product(pid, name, date,
+				price, cre_id, cate_id,
+				stock, lookup, point,
+				images, descryption, creator_name,
+				category_name,sales_quantity);
 		assertEquals(pid, p.product_id());
 		assertEquals(name, p.name());
 		assertEquals(date, p.add_date());
@@ -39,6 +47,10 @@ class TestProduct {
 		assertEquals(point, p.point());
 		assertEquals(images, p.images());
 		assertEquals(descryption, p.descryption());
+		assertEquals(creator_name, p.creator_name());
+		assertEquals(category_name, p.category_name());
+		assertEquals(sales_quantity, p.sales_quantity());
+		
 		List<String> list = new ArrayList<String>();
 		list.add("https://www.ota.ac.jp/info/");
 		assertEquals(list, p.url());

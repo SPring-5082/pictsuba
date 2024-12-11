@@ -26,7 +26,7 @@ public class Product implements Serializable{
 	 * );
 	 */
 	
-	
+	/*DBの列要素*/
 	private int product_id;
 	private String product_name;
 	private Date add_date;
@@ -39,10 +39,17 @@ public class Product implements Serializable{
 	private String images;
 	private String descryption;
 	
+	
+	private String creator_name;
+	private String category_name;
+	private int sales_quantity;
 	private List<String> url;
 	
-	public Product(int product_id, String product_name, Date add_date, int price, int creator_id, int category_id,
-			int stock, int lookup, int point, String images, String descryption) {
+	public Product(int product_id, String product_name, Date add_date,
+			int price, int creator_id, int category_id,
+			int stock, int lookup, int point, String images,
+			String descryption, String creator_name, String category_name,
+			int sales_quantity) {
 		this.product_id = product_id;
 		this.product_name = product_name;
 		this.add_date = add_date;
@@ -54,6 +61,10 @@ public class Product implements Serializable{
 		this.point = point;
 		this.images = images;
 		this.descryption = descryption;
+		
+		this.creator_name = creator_name;
+		this.category_name = category_name;
+		this.sales_quantity = sales_quantity;
 		this.url = new JSON(images).getList("url");
 	}
 
@@ -99,6 +110,18 @@ public class Product implements Serializable{
 
 	public String descryption() {
 		return descryption;
+	}
+
+	public String creator_name() {
+		return creator_name;
+	}
+
+	public String category_name() {
+		return category_name;
+	}
+
+	public int sales_quantity() {
+		return sales_quantity;
 	}
 
 	public List<String> url() {
