@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-/test/
 /beans/
-/dao/
-/servlet/
 /model/
-=======
-/model/
-/servlet/
->>>>>>> branch 'master' of https://github.com/SPring-5082/pictsuba.git
+/test/
