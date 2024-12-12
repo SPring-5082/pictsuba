@@ -2,13 +2,10 @@ package beans;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
-
-import model.JSON;
 
 public class Product implements Serializable{
 	/* S3内オブジェクトのURL
-	 * httsp://pictsuba.s3.amazonaws.com/<商品ID>/<画像番号>.jpg
+	 * httsp://pictsuba.s3.amazonaws.com/<商品ID>.jpg
 	 */
 	
 	/*
@@ -21,7 +18,7 @@ public class Product implements Serializable{
 	 * 		SALES_QUANTITY INT NOT NULL CHECK(SALES_QUANTITY >= 0) DEFAULT 0,
 	 * 		LOOKUP INT NOT NULL CHECK(LOOKUP >= 0) DEFAULT 0,
 	 * 		POINT INT NOT NULL CHECK(POINT >= 0),
-	 * 		IMAGES VARCHAR(50) NOT NULL CHECK(IMAGES LIKE 'https://%.s3.amazonaws.com/%/_.jpg'),
+	 * 		IMAGE VARCHAR(50) NOT NULL CHECK(IMAGE LIKE 'https://%.s3.amazonaws.com/%.jpg'),
 	 * 		DESCRYPTION VARCHAR(3000)
 	 * );
 	 */
@@ -36,18 +33,17 @@ public class Product implements Serializable{
 	private int stock;
 	private int lookup;
 	private int point;
-	private String images;
+	private String image;
 	private String descryption;
 	
 	
 	private String creator_name;
 	private String category_name;
 	private int sales_quantity;
-	private List<String> url;
 	
 	public Product(int product_id, String product_name, Date add_date,
 			int price, int creator_id, int category_id,
-			int stock, int lookup, int point, String images,
+			int stock, int lookup, int point, String image,
 			String descryption, String creator_name, String category_name,
 			int sales_quantity) {
 		this.product_id = product_id;
@@ -59,13 +55,12 @@ public class Product implements Serializable{
 		this.stock = stock;
 		this.lookup = lookup;
 		this.point = point;
-		this.images = images;
+		this.image = image;
 		this.descryption = descryption;
 		
 		this.creator_name = creator_name;
 		this.category_name = category_name;
 		this.sales_quantity = sales_quantity;
-		this.url = new JSON(images).getList("url");
 	}
 
 	public int product_id() {
@@ -104,8 +99,8 @@ public class Product implements Serializable{
 		return point;
 	}
 
-	public String images() {
-		return images;
+	public String image() {
+		return image;
 	}
 
 	public String descryption() {
@@ -122,10 +117,6 @@ public class Product implements Serializable{
 
 	public int sales_quantity() {
 		return sales_quantity;
-	}
-
-	public List<String> url() {
-		return url;
 	}
 
 }

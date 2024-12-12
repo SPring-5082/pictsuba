@@ -2,9 +2,7 @@ package test.beans;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +22,7 @@ class TestProduct {
 		int stock = 10;
 		int lookup = 0;
 		int point = 1;
-		String images = "{\"url\":[\"https://www.ota.ac.jp/info/\"]}";
+		String images = "https://www.ota.ac.jp/info/";
 		String descryption = "めちゃ売れてるよ";
 		
 		String creator_name = "大塚";
@@ -45,17 +43,12 @@ class TestProduct {
 		assertEquals(stock, p.stock());
 		assertEquals(lookup, p.lookup());
 		assertEquals(point, p.point());
-		assertEquals(images, p.images());
+		assertEquals(images, p.image());
 		assertEquals(descryption, p.descryption());
 		assertEquals(creator_name, p.creator_name());
 		assertEquals(category_name, p.category_name());
 		assertEquals(sales_quantity, p.sales_quantity());
 		
-		List<String> list = new ArrayList<String>();
-		list.add("https://www.ota.ac.jp/info/");
-		assertEquals(list, p.url());
-		assertEquals(list.get(0), p.url().get(0));
-		System.out.println(p.url().get(0));
 	}
 
 }
