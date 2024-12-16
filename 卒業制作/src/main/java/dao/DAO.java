@@ -9,7 +9,7 @@ public abstract class DAO {
 	
 	private final static String
 		/**接続先データベース名*/
-		DATABASE = "site-name";
+		DATABASE = "pictsuba";
 	/**
 	 * ConnectionからPreparedStatementを取得するメソッド。
 	 */

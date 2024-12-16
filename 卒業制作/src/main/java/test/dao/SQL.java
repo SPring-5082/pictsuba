@@ -1,4 +1,4 @@
-package dao;
+package test.dao;
 
 public class SQL {
 	
@@ -12,7 +12,7 @@ public class SQL {
 		SELECT = "SELECT * FROM TABLE_NAME ",
 		
 		/**DELETEの定型文*/
-		DELETE = "DELETE FROM TABLE_NAME ",
+		DELETE = "DELETE TABLE_NAME ",
 		
 		/**UPDATEの定型文*/
 		UPDATE = "UPDATE TABLE_NAME "
