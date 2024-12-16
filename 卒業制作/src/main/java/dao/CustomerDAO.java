@@ -11,11 +11,9 @@ import beans.Customer;
 public class CustomerDAO extends DAO {
 	
 	public static boolean insert(Customer customer) throws SQLException {
-		String sql =
-		SQL.insert("CUSTOMERS",
-		"NAME,PASSWORD,PHONE,MAIL,AGE,BIRTH_DAY,GENDER,FIRST_LOG,FIN_LOG");
+		String columns = "NAME,PASSWORD,PHONE,MAIL,AGE,BIRTH_DAY,GENDER,FIRST_LOG,FIN_LOG";
 		String values = "?,?,?,?,?,?,?,?,?";
-		sql = sql.replaceFirst("STATEMENT", values);
+		String sql = SQL.insert("CUSTOMERS", values, columns);
 		PreparedStatement pstmt = getPsTmt(sql);
 		pstmt.setString(1, customer.name());
 		

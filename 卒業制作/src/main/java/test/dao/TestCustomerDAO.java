@@ -1,6 +1,14 @@
 package test.dao;
 
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.sql.SQLException;
+import java.util.Date;
+
 import org.junit.jupiter.api.Test;
+
+import beans.Customer;
+import dao.CustomerDAO;
 
 class TestCustomerDAO {
 
@@ -31,7 +39,7 @@ class TestCustomerDAO {
 			e.printStackTrace();
 		}
 	}*/
-	/*
+	
 	@Test
 	void testupdateBycustomer_id() {
 		String name = "IceCream";
@@ -57,7 +65,7 @@ class TestCustomerDAO {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
-	}*/
+	}
 	/*
 	@Test
 	void testUpdateFin_log() {
