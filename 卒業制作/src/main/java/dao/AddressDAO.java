@@ -10,12 +10,16 @@ import java.util.List;
 import beans.Address;
 
 public class AddressDAO extends DAO {
-	/**DBへの住所追加メソッド
-	 * @throws SQLException */
+	/**
+	 * DBへの住所追加メソッド
+	 * @param address 登録する住所情報
+	 * @return 登録の実行結果
+	 * @throws SQLException
+	 */
 	public static boolean insert(Address address) throws SQLException{
 		final String VALUES = "CUSTOMER_ID,ZIP_CODE,PREF,MUNICIPALITIES,STREET,BUILDING";
 		final String COLUMNS = "?,?,?,?,?,?";
-		final String sql  = SQL.insert("ADDRESS",VALUES, COLUMNS);
+		final String sql  = SQL.insert("ADDRESS",COLUMNS, VALUES);
 		PreparedStatement pstmt = getPsTmt(sql);
 		pstmt.setInt(1, address.customer_id());
 		pstmt.setString(2, address.zip_code());
@@ -30,8 +34,12 @@ public class AddressDAO extends DAO {
 		return pstmt.executeUpdate() > 0;
 	}
 	
-	/**顧客情報に基づくDBからの住所の取得
-	 * @throws SQLException */
+	/**
+	 * 顧客情報に基づくDBからの住所の取得
+	 * @param customer_id 取得する住所情報の元となる顧客ID
+	 * @return 顧客IDに基づく住所情報一覧
+	 * @throws SQLException
+	 */
 	public static List<Address> findByCustomer_id(int customer_id) throws SQLException{
 		List<Address> list = new ArrayList<Address>();
 		final String WHERE = "WHERE CUSTOMER_ID = ?";
@@ -52,6 +60,44 @@ public class AddressDAO extends DAO {
 		return list;
 	}
 	
-	/**特定住所の削除*/
-	public static boolean delByAddress_id(int address_id) {return false;}
+	/**
+	 * 住所の登録内容変更
+	 * @param 新しく登録する情所情報
+	 * @return 変更の実行結果
+	 * @throws SQLException
+	 */
+	public static boolean update(Address address) throws SQLException {
+		final String SET ="SET "
+						+ "ZIP_CODE = ?,"
+						+ "PREF = ?,"
+						+ "MUNICIPALITIES = ?,"
+						+ "STREET = ?,"
+						+ "BUILDING = ?";
+		final String sql = SQL.update("ADDRESS").concat(SET);
+		PreparedStatement pstmt = getPsTmt(sql);
+		pstmt.setString(1, address.zip_code());
+		pstmt.setString(2, address.pref());
+		pstmt.setString(3, address.municipalities());
+		pstmt.setString(4, address.street());
+		if(address.building() == null) {
+			pstmt.setNull(5, Types.VARCHAR);
+		}else {
+			pstmt.setString(5, address.building());
+		}
+		return pstmt.executeUpdate() > 0;
+	}
+	
+	/**
+	 * 特定住所の削除
+	 * @param address_id 削除する対象データのID
+	 * @return 削除の実行結果
+	 * @throws SQLException
+	 */
+	public static boolean delByAddress_id(int address_id) throws SQLException {
+		final String WHERE = "WHERE ADDRESS_ID = ?";
+		final String sql = SQL.delete("ADDRESS").concat(WHERE);
+		PreparedStatement pstmt = getPsTmt(sql);
+		pstmt.setInt(1, address_id);
+		return pstmt.executeUpdate() > 0;
+	}
 }

@@ -3,11 +3,9 @@ package test.dao;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.SQLException;
-import java.util.Date;
 
 import org.junit.jupiter.api.Test;
 
-import beans.Customer;
 import dao.CustomerDAO;
 
 class TestCustomerDAO {
@@ -39,7 +37,7 @@ class TestCustomerDAO {
 			e.printStackTrace();
 		}
 	}*/
-	
+	/*
 	@Test
 	void testupdateBycustomer_id() {
 		String name = "IceCream";
@@ -62,7 +60,6 @@ class TestCustomerDAO {
 			boolean b = CustomerDAO.updateByCustomer_id(c3);
 			assertEquals(b, true);
 		} catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
 	}
@@ -91,7 +88,22 @@ class TestCustomerDAO {
 	
 	@Test
 	void testupdateAddress_id() {
-		
+		try {
+			boolean b = CustomerDAO.updateAddress_id(1, 1);
+			assertEquals(true, b);
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	void testupdateCard_id() {
+		try {
+			boolean b = CustomerDAO.updateCard_id(1, 1);
+			assertEquals(true, b);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/*

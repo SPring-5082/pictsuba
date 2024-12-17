@@ -80,6 +80,26 @@ public class CustomerDAO extends DAO {
 		}
 	}
 	
+	public static boolean updateCard_id(int customer_id, int card_id) throws SQLException {
+		final String SET = "SET CARD_ID = ? ";
+		final String WHERE = "WHERE CUSTOMER_ID = ?";
+		final String sql = SQL.update("CUSTOMERS").concat(SET).concat(WHERE);
+		PreparedStatement pstmt = getPsTmt(sql);
+		pstmt.setInt(1, card_id);
+		pstmt.setInt(2, customer_id);
+		return pstmt.executeUpdate() > 0;
+	}
+	
+	public static boolean updateAddress_id(int customer_id, int address_id) throws SQLException {
+		final String SET = "SET ADDRESS_ID = ? ";
+		final String WHERE = "WHERE CUSTOMER_ID = ?";
+		final String sql = SQL.update("CUSTOMERS").concat(SET).concat(WHERE);
+		PreparedStatement pstmt = getPsTmt(sql);
+		pstmt.setInt(1, address_id);
+		pstmt.setInt(2, customer_id);
+		return pstmt.executeUpdate() > 0;
+	}
+	
 	public static boolean updatePoint(int id, int point) throws SQLException {
 		final String SET = " SET POINT = ? ";
 		final String WHERE = "WHERE CUSTOMER_ID = ?";
