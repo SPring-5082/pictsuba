@@ -9,8 +9,8 @@ import org.junit.jupiter.api.Test;
 import dao.CustomerDAO;
 
 class TestCustomerDAO {
-
-	/*@Test
+	/*
+	@Test
 	void testInsertnull() {
 		String name = "IceCream";
 		String pass = "rootpass";
@@ -26,7 +26,7 @@ class TestCustomerDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}*/
+	}
 
 	/*@Test
 	void testfindByMailAndPass() {
@@ -85,7 +85,6 @@ class TestCustomerDAO {
 		}
 	}
 	*/
-	
 	@Test
 	void testupdateAddress_id() {
 		try {

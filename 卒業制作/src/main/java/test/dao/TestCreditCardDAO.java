@@ -10,9 +10,10 @@ import beans.CreditCard;
 import dao.CreditCardDAO;
 
 class TestCreditCardDAO {
+	
 	@Test
 	void testInsert() throws SQLException {
-		CreditCard card = new CreditCard(1, "1234543678991222", "05/25", 169, "HARU TAKATORI");
+		CreditCard card = new CreditCard(1,"1234543678991222", "05/25", 169, "HARU TAKATORI");
 		boolean b = CreditCardDAO.insert(card);
 		assertEquals(true, b);
 	}
