@@ -1,4 +1,12 @@
 /beans/
+/dao/
+/demo.class
 /model/
+/servlet/
 /test/
+<<<<<<< HEAD
+=======
+/dao/
+/servlet/
+>>>>>>> branch 'master' of https://github.com/SPring-5082/pictsuba.git
 /demo.class

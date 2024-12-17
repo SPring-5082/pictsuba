@@ -1,4 +1,4 @@
-package dao;
+package test.dao;
 
 public class SQL {
 	
@@ -12,18 +12,18 @@ public class SQL {
 		SELECT = "SELECT * FROM TABLE_NAME ",
 		
 		/**DELETEの定型文*/
-		DELETE = "DELETE FROM TABLE_NAME ",
+		DELETE = "DELETE TABLE_NAME ",
 		
 		/**UPDATEの定型文*/
 		UPDATE = "UPDATE TABLE_NAME "
 	;
 	
-	static String insert(String table_name, String statement) {
-		return INSERT.replaceFirst("TABLE_NAME", table_name).replaceFirst("STATEMENT", statement);
+	static String insert(String table_name) {
+		return INSERT.replaceFirst("TABLE_NAME", table_name);
 	}
 	
-	static String insert(String table_name, String statement, String columns) {
-		return INSERTcol.replaceFirst("TABLE_NAME", table_name).replaceFirst("COLUMNS", columns).replaceFirst("STATEMENT", statement);
+	static String insert(String table_name,String columns) {
+		return INSERTcol.replaceFirst("TABLE_NAME", table_name).replaceFirst("COLUMNS", columns);
 	}
 	
 	static String select(String table_name) {
