@@ -12,8 +12,8 @@ public class CreditCardDAO extends DAO{
 	/**
 	 * クレジットカード情報入力メソッド
 	 * @param card 登録するカード情報
-	 * @return 登録の実行結果
-	 * @exception SQLException
+	 * @return 登録の成否
+	 * @throws SQLException
 	 */
 	public static boolean insert(CreditCard card) throws SQLException {
 		final String values = "?,?,?,?,?";
@@ -32,7 +32,7 @@ public class CreditCardDAO extends DAO{
 	 * 顧客IDに基づくカード情報の取得
 	 * @param customer_id 顧客ID
 	 * @return 条件に合う顧客一覧
-	 * @exception SQLException
+	 * @throws SQLException
 	 */
 	public static List<CreditCard> findByCustomer_id(int customer_id) throws SQLException{
 		List<CreditCard> list = new ArrayList<CreditCard>();
@@ -56,8 +56,8 @@ public class CreditCardDAO extends DAO{
 	/**
 	 * カードIDに基づくカード情報の削除
 	 * @param card_id 削除対象のカードID
-	 * @return 削除の実行結果
-	 * @exception SQLException
+	 * @return 削除の成否
+	 * @throws SQLException
 	 */
 	public static boolean delByCard_id(int card_id) throws SQLException {
 		final String WHERE = "WHERE CARD_ID = ?";

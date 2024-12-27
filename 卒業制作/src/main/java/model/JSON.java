@@ -27,11 +27,11 @@ public class JSON {
 	
 	public List<String> getList(String key) {
 		List<String> list = new ArrayList<String>();
-
 		try {
-			readTree().get(key).forEach(node->{
+			readTree().get(key).forEach(
+				node->{
 						list.add(node.textValue());
-					});
+				});
 			return list;
 		} catch (JsonMappingException e) {
 			e.printStackTrace();

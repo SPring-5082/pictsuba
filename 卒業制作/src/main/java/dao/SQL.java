@@ -1,6 +1,6 @@
 package dao;
 
-public class SQL {
+class SQL {
 	
 	private static final String 
 		/**INSERTの定型文*/

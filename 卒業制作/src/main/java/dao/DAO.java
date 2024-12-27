@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public abstract class DAO {
+abstract class DAO {
 	
 	private final static String
 		/**接続先データベース名*/

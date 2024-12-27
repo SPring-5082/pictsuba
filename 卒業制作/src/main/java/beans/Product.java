@@ -3,25 +3,7 @@ package beans;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Product implements Serializable{
-	/* S3内オブジェクトのURL
-	 * httsp://pictsuba.s3.amazonaws.com/<商品ID>.jpg
-	 */
-	
-	/*
-	 * CREATE TABLE PRODUCTS(
-	 * 		PRODUCT_ID INT PRIMARY KEY,
-	 * 		NAME VARCHAR(128) NOT NULL,
-	 * 		ADD_DATE DATE NOT NULL,
-	 * 		PRICE INT NOT NULL CHECK(PRICE > 0),
-	 * 		STOCK INT NOT NULL CHECK(STOCK >= 0) DEFAULT 0,
-	 * 		SALES_QUANTITY INT NOT NULL CHECK(SALES_QUANTITY >= 0) DEFAULT 0,
-	 * 		LOOKUP INT NOT NULL CHECK(LOOKUP >= 0) DEFAULT 0,
-	 * 		POINT INT NOT NULL CHECK(POINT >= 0),
-	 * 		IMAGE VARCHAR(50) NOT NULL CHECK(IMAGE LIKE 'https://%.s3.amazonaws.com/%.jpg'),
-	 * 		DESCRYPTION VARCHAR(3000)
-	 * );
-	 */
+public class Product implements Serializable,Comparable<Product>{
 	
 	/*DBの列要素*/
 	private int product_id;
@@ -41,6 +23,28 @@ public class Product implements Serializable{
 	private String category_name;
 	private int sales_quantity;
 	
+	/**数量抜きコンストラクタ*/
+	public Product(int product_id, String product_name, Date add_date,
+			int price, int creator_id, int category_id,
+			int stock, int lookup, int point, String image,
+			String descryption, String creator_name, String category_name) {
+		this.product_id = product_id;
+		this.product_name = product_name;
+		this.add_date = add_date;
+		this.price = price;
+		this.creator_id = creator_id;
+		this.category_id = category_id;
+		this.stock = stock;
+		this.lookup = lookup;
+		this.point = point;
+		this.image = image;
+		this.descryption = descryption;
+		
+		this.creator_name = creator_name;
+		this.category_name = category_name;
+	}
+	
+	/**全フィールドコンストラクタ*/
 	public Product(int product_id, String product_name, Date add_date,
 			int price, int creator_id, int category_id,
 			int stock, int lookup, int point, String image,
@@ -62,6 +66,15 @@ public class Product implements Serializable{
 		this.category_name = category_name;
 		this.sales_quantity = sales_quantity;
 	}
+
+
+	@Override
+	public int compareTo(Product other) {
+		int my = this.sales_quantity()  + this.lookup()/10 ;
+		int your = other.sales_quantity() + other.lookup()/10 ;
+		return my > your? -1 : 1 ;
+	}
+
 
 	public int product_id() {
 		return product_id;
@@ -118,5 +131,5 @@ public class Product implements Serializable{
 	public int sales_quantity() {
 		return sales_quantity;
 	}
-
+	
 }

@@ -60,6 +60,25 @@ public class AddressDAO extends DAO {
 		return list;
 	}
 	
+	public static Address findByAddress_id(int address_id) throws SQLException {
+		final String WHERE = "WHERE ADDRESS_ID = ?";
+		final String sql = SQL.select("ADDRESS").concat(WHERE);
+		PreparedStatement pstmt = getPsTmt(sql);
+		pstmt.setInt(1, address_id);
+		ResultSet rs = pstmt.executeQuery();
+		if(rs.next()) {
+			//address_id = rs.getInt(1);
+			int customer_id = rs.getInt(2);
+			String zip_code = rs.getString(3);
+			String pref = rs.getString(4);
+			String municipalities = rs.getString(5);
+			String street = rs.getString(6);
+			String building = rs.getString(7);
+			return new Address(address_id, customer_id, zip_code, pref, municipalities, street, building);
+		}
+		return null;
+	}
+	
 	/**
 	 * 住所の登録内容変更
 	 * @param 新しく登録する情所情報

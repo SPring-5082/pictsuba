@@ -8,16 +8,30 @@ public class Order implements Serializable{
 	private int customer_id;
 	private int product_id;
 	private int quantity;
+	private int price;
 	private int address_id;
 	private Date order_date;
 	private String state;
 	
-	public Order(int order_id, int customer_id, int product_id, int quantity, int address_id, Date order_date,
+	
+	/**INSERT用コンストラクタ*/
+	public Order(int order_id, int customer_id, int product_id, int quantity, int price, int address_id,String state) {
+		this.order_id = order_id;
+		this.customer_id = customer_id;
+		this.product_id = product_id;
+		this.quantity = quantity;
+		this.price = price;
+		this.address_id = address_id;
+		this.state = state;
+	}
+	
+	public Order(int order_id, int customer_id, int product_id, int quantity, int price, int address_id, Date order_date,
 			String state) {
 		this.order_id = order_id;
 		this.customer_id = customer_id;
 		this.product_id = product_id;
 		this.quantity = quantity;
+		this.price = price;
 		this.address_id = address_id;
 		this.order_date = order_date;
 		this.state = state;
@@ -37,6 +51,10 @@ public class Order implements Serializable{
 
 	public int quantity() {
 		return quantity;
+	}
+
+	public int price() {
+		return price;
 	}
 
 	public int address_id() {

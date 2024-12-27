@@ -7,14 +7,16 @@ public class Order_History {
 	private int customer_id;
 	private int product_id;
 	private int quantity;
+	private int price;
 	private int address_id;
 	private Date order_date;
 	
-	public Order_History(int order_id, int customer_id, int product_id, int quantity, int address_id, Date order_date) {
+	public Order_History(int order_id, int customer_id, int product_id, int quantity, int price, int address_id, Date order_date) {
 		this.order_id = order_id;
 		this.customer_id = customer_id;
 		this.product_id = product_id;
 		this.quantity = quantity;
+		this.price = price;
 		this.address_id = address_id;
 		this.order_date = order_date;
 	}
@@ -34,6 +36,10 @@ public class Order_History {
 
 	public int quantity() {
 		return quantity;
+	}
+
+	public int price() {
+		return price;
 	}
 
 	public int address_id() {

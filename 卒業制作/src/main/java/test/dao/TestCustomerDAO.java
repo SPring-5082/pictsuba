@@ -6,7 +6,9 @@ import java.sql.SQLException;
 
 import org.junit.jupiter.api.Test;
 
+import beans.Customer;
 import dao.CustomerDAO;
+import model.HashLogic;
 
 class TestCustomerDAO {
 	/*
@@ -27,16 +29,16 @@ class TestCustomerDAO {
 			e.printStackTrace();
 		}
 	}
-
-	/*@Test
+*/
+	@Test
 	void testfindByMailAndPass() {
 		try {
-			Customer c = CustomerDAO.findByMailandPass("oibc35282@ojs.ac.jp", "rootpass");
-			assertEquals(1, c.customer_id());
+			Customer c = CustomerDAO.findByMailandPass("oibc34242@ojs.ac.jp", HashLogic.execute("dadminpass"));
+			assertEquals(3, c.customer_id());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}*/
+	}
 	/*
 	@Test
 	void testupdateBycustomer_id() {
@@ -67,7 +69,7 @@ class TestCustomerDAO {
 	@Test
 	void testUpdateFin_log() {
 		try {
-			boolean b = CustomerDAO.updateFin_log(1, new Date(1900,1,1));
+			boolean b = CustomerDAO.updateFin_log(1);
 			assertEquals(b, true);
 		} catch (SQLException e) {
 			e.printStackTrace();

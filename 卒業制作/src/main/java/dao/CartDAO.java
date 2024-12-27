@@ -9,7 +9,7 @@ public class CartDAO extends DAO{
 	/**
 	 * カート情報の追加メソッド
 	 * @param cart カート情報
-	 * @return 追加の実行結果
+	 * @return 追加の成否
 	 * @throws SQLException
 	 */
 	public static boolean insert(Cart cart) throws SQLException {
@@ -25,8 +25,8 @@ public class CartDAO extends DAO{
 	/**
 	 * カート内の数量変更メソッド
 	 * @param cart 更新するカート情報
-	 * @return 更新の実行結果
-	 * @exception SQLException
+	 * @return 更新の成否
+	 * @throws SQLException
 	 */
 	public static boolean updateQuantityByCustomer_id(Cart cart) throws SQLException {
 		final String SET = "SET QUANTITY = ? ";
@@ -43,7 +43,7 @@ public class CartDAO extends DAO{
 	/**
 	 * カートから商品を削除するメソッド
 	 * @param cart 削除対象のカート内商品情報
-	 * @return 削除の実行結果
+	 * @return 削除の成否
 	 * @exception SQLException
 	 */
 	public static boolean delByCustomerANDProduct_Id(Cart cart) throws SQLException {

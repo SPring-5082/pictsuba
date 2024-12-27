@@ -1,22 +1,11 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import beans.Product;
-
 /**
  * 商品検索ロジッククラス
  */
 public class SearchResultLogic {
-	/**
-	 * 実行メソッド
-	 * @param productList 商品一覧
-	 * @param searchWord 検索ワード
-	 * @return 検索結果
-	 */
+	
+	/*
 	public static List<Product> execute(List<Product> productList, String searchWord) {
 		
 		Map<Product, Integer> scoreMap = new HashMap<Product, Integer>();
@@ -52,5 +41,5 @@ public class SearchResultLogic {
         }
 		
 		return responsProductList;
-	}
+	}*/
 }

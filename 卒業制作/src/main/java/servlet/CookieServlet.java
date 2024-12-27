@@ -14,11 +14,8 @@ import model.CookieLogic;
 public class CookieServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	/**
-	 * リクエスト情報をもとに
-	 * クッキーにカート情報を
+	 * リクエスト情報をもとにクッキーにカート情報を
 	 * 追加、更新するメソッド
-	 * @param request ブラウザからのリクエスト
-	 * @param response サーバからのレスポンス
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		final String paramKey = "product_id";

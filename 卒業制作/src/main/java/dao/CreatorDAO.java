@@ -9,7 +9,7 @@ public class CreatorDAO extends DAO{
 	/**
 	 * クリエイター登録メソッド
 	 * @param creator 登録するクリエイター情報
-	 * @return 登録の実行結果
+	 * @return 登録の成否
 	 * @throws SQLException 
 	 */
 	public static boolean insert(Creator creator) throws SQLException {
@@ -25,7 +25,7 @@ public class CreatorDAO extends DAO{
 	/**
 	 * クリエイター削除メソッド
 	 * @param creator_id 削除するクリエイターのID
-	 * @return 削除の実行結果
+	 * @return 削除の成否
 	 * @exception SQLException
 	 */
 	public static boolean delByCreator_id(int creator_id) throws SQLException {

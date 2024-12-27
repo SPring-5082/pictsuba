@@ -3,6 +3,8 @@ package beans;
 import java.io.Serializable;
 import java.util.Date;
 
+import model.HashLogic;
+
 public class Customer implements Serializable{
 	/*
 	 * CREATE TABLE CUSTOMERS(
@@ -43,7 +45,7 @@ public class Customer implements Serializable{
 	/**INSERT用コンストラクタ*/
 	public Customer(String name, String password, String phone, String mail, int age, Date birth_day, String gender) {
 		this.name = name;
-		this.password = password;
+		this.password = HashLogic.execute(password);
 		this.phone = phone;
 		this.mail = mail;
 		this.age = age;

@@ -1,5 +1,7 @@
 package test.dao;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.sql.SQLException;
 
 import org.junit.jupiter.api.Test;
@@ -8,7 +10,7 @@ import beans.Address;
 import dao.AddressDAO;
 
 class TestAddressDAO {
-
+	/*
 	@Test
 	void testInsert() {
 		Address address = new Address(1,"333-3333", "群馬県", "太田市石原町", "123-4576", "アパート"); 
@@ -17,6 +19,24 @@ class TestAddressDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}*/
+	
+	
+	@Test
+	void testfindByAddress_id(){
+		try {
+			Address address = AddressDAO.findByAddress_id(1);
+			assertEquals(1, address.address_id());
+			assertEquals(1, address.customer_id());
+			assertEquals("376-0101", address.zip_code());
+			assertEquals("群馬県", address.pref());
+			assertEquals("みどり市大間々町", address.municipalities());
+			assertEquals("0120-500", address.street());
+			assertEquals(null, address.building());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	/*
