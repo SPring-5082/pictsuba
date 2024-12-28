@@ -25,7 +25,7 @@ public class TopServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String page = "WEB-INF/jsp/index.jsp";
 		HttpSession session = request.getSession();
-		
+			
 		//広告の取得
 		List<Advertisement> advertisements;
 		try {

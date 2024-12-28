@@ -20,8 +20,6 @@ public class LoginFilter extends HttpFilter implements Filter {
 	 * ログインしていない場合、クッキー内のセッションIDを用いたログインを試みる
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		//インバウンド
-		//<in-bound>
 		if(request instanceof HttpServletRequest) {
 			HttpSession session = ((HttpServletRequest)request).getSession();
 			if(!LoginLogic.isLogin(session)) {
@@ -30,16 +28,8 @@ public class LoginFilter extends HttpFilter implements Filter {
 					session.setAttribute("user", customer);
 				}
 			}
-			
 		}
-		
-		//</in-bound>
 		chain.doFilter(request, response);
-		//アウトバウンド
-		//<out-bound>
-		
-		
-		//</out-bound>
 	}
 	
 }

@@ -3,7 +3,7 @@ package beans;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Product implements Serializable,Comparable<Product>{
+public class Product implements Serializable{
 	
 	/*DBの列要素*/
 	private int product_id;
@@ -66,15 +66,7 @@ public class Product implements Serializable,Comparable<Product>{
 		this.category_name = category_name;
 		this.sales_quantity = sales_quantity;
 	}
-
-
-	@Override
-	public int compareTo(Product other) {
-		int my = this.sales_quantity()  + this.lookup()/10 ;
-		int your = other.sales_quantity() + other.lookup()/10 ;
-		return my > your? -1 : 1 ;
-	}
-
+	
 
 	public int product_id() {
 		return product_id;

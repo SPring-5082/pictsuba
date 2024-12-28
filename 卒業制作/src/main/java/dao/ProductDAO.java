@@ -4,11 +4,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import beans.Auto_Increment;
 import beans.CartSet;
 import beans.Product;
 
@@ -144,7 +142,6 @@ public class ProductDAO extends DAO {
 		pstmt.setInt(1, customer_id);
 		pstmt.setInt(2, customer_id);
 		pstmt.setInt(3, customer_id);
-		System.out.println(pstmt);
 		for(ResultSet rs = pstmt.executeQuery();rs.next();) {
 			int product_id = rs.getInt(1);
 			String product_name = rs.getString(2);
@@ -162,7 +159,6 @@ public class ProductDAO extends DAO {
 			int sales_quantity = rs.getInt(14);
 			list.add(new Product(product_id, product_name, add_date, price, creator_id, category_id, stock, lookup, point, image, descryption, creator_name, category_name,sales_quantity));
 		}
-		Collections.sort(list);
 		return list;
 	}
 	
@@ -244,26 +240,24 @@ public class ProductDAO extends DAO {
 			+ "    DESCRYPTION LIKE ?";
 		final String sql = SELECT.concat(WHERE);
 		PreparedStatement pstmt = getPsTmt(sql);
-		Auto_Increment ai = new Auto_Increment();
-		pstmt.setString(ai.next(), LIKE);
-		pstmt.setString(ai.next(), LIKE);
-		pstmt.setString(ai.next(), LIKE);
-		pstmt.setString(ai.next(), LIKE);
+		pstmt.setString(1, LIKE);
+		pstmt.setString(2, LIKE);
+		pstmt.setString(3, LIKE);
+		pstmt.setString(4, LIKE);
 		for(ResultSet rs = pstmt.executeQuery();rs.next();) {
-			ai = new Auto_Increment();
-			int product_id = rs.getInt(ai.next());
-			String product_name = rs.getString(ai.next());
-			Date add_date = rs.getDate(ai.next());
-			int price = rs.getInt(ai.next());
-			int creator_id = rs.getInt(ai.next());
-			String creator_name = rs.getString(ai.next());
-			int category_id = rs.getInt(ai.next());
-			String category_name = rs.getString(ai.next());
-			int stock = rs.getInt(ai.next());
-			int lookup = rs.getInt(ai.next());
-			int point = rs.getInt(ai.next());
-			String image = rs.getString(ai.next());
-			String descryption = rs.getString(ai.next());
+			int product_id = rs.getInt(1);
+			String product_name = rs.getString(2);
+			Date add_date = rs.getDate(3);
+			int price = rs.getInt(4);
+			int creator_id = rs.getInt(5);
+			String creator_name = rs.getString(6);
+			int category_id = rs.getInt(7);
+			String category_name = rs.getString(8);
+			int stock = rs.getInt(9);
+			int lookup = rs.getInt(10);
+			int point = rs.getInt(11);
+			String image = rs.getString(12);
+			String descryption = rs.getString(13);
 			results.add(new Product(product_id, product_name, add_date, price, creator_id, category_id, stock, lookup, point, image, descryption, creator_name, category_name));
 		}
 		return results;

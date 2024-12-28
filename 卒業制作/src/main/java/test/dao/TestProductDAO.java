@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import beans.CartSet;
 import beans.Product;
 import dao.ProductDAO;
 
@@ -41,7 +40,7 @@ class TestProductDAO {
 			System.out.println(p.name());
 		}
 	}*/
-	
+	/*
 	@Test
 	void test() {
 		try {
@@ -56,7 +55,18 @@ class TestProductDAO {
 		}
 		
 	}
-	
+	*/
+	@Test
+	void testSearch() {
+		try {
+			List<Product> list = ProductDAO.findBySearchWord("キャラクターデザイン");
+			for(Product p : list) {
+				System.out.println(p.name());
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	/*
 	@Test
 	void testfindbyRecomend() {

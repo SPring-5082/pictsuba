@@ -7,7 +7,6 @@ import jakarta.servlet.http.HttpSession;
 
 public class LoginLogic {
 	
-	
 	/**
 	 * ログイン状態の判別
 	 * @param session ユーザーのセッション

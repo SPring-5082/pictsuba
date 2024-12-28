@@ -5,19 +5,22 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title><c:out value="${ application }"/></title>
+<title>${ application }</title>
 </head>
 <body>
 	<c:choose>
-		<c:when test="${ not empty products }">
-			<c:forEach items="${ products }" var="product">
+		<c:when test="${ not empty user }">
+			<p>購入履歴に基づくおすすめ</p>
+			<c:forEach items="${ recomends }" var="product">
 				<c:out value="${ product.name() }"/>
 			</c:forEach>
 		</c:when>
 		<c:otherwise>
-			検索結果が得られませんでした
+			<p>売上量TOPのおすすめ</p>
+			<c:forEach items="${ popularities }" var="product">
+				<c:out value="${ product.name() }"/>
+			</c:forEach>
 		</c:otherwise>
 	</c:choose>
-	
 </body>
 </html>
