@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>${ application }</title>
+<title><c:out value="${ application } 絵の総合販売サイト"/></title>
 </head>
 <body>
 	<c:choose>

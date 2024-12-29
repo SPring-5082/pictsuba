@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>${ application }</title>
+<title><c:out value="${ application } 住所"/></title>
 </head>
 <body>
 	<c:choose>

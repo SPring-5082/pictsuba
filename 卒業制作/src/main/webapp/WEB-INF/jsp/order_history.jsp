@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title><c:out value="${ application }"/></title>
+<title><c:out value="${ application } 注文履歴"/></title>
 </head>
 <body>
 	<p>注文履歴</p>

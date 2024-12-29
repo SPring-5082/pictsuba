@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>${ application }</title>
+<title><c:out value="${ application } カード情報"/></title>
 </head>
 <body>
 	<c:choose>
