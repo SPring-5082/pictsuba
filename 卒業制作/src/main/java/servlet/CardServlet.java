@@ -29,7 +29,7 @@ public class CardServlet extends HttpServlet {
 			try {
 				creditCards = CreditCardDAO.findByCustomer_id(user.customer_id());
 			} catch (SQLException e) {}
-			//リクエストスコープに履歴情報を追加
+			//リクエストスコープにカード情報を追加
 			request.setAttribute("cards", creditCards);
 			RequestDispatcher dispatcher = request.getRequestDispatcher(page);
 			dispatcher.forward(request, response);

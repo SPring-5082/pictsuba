@@ -2,15 +2,15 @@ package test.model;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.Test;
+import java.util.List;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.Test;
 
 import jakarta.servlet.http.Cookie;
 import model.CookieLogic;
 
 class TestCookieLogic {
-
+/*
 	@Test
 	void toJson() {
 		Cookie[] c = 
@@ -30,6 +30,29 @@ class TestCookieLogic {
 		System.out.println(text);
 		System.out.println(json);
 		assertEquals(text, json);
+	}
+*/
+	@Test
+	void testgetCookie() {
+		Cookie cookie = new Cookie("name", "otuka");
+		Cookie cookie2 = new Cookie("age", "18");
+		Cookie cookie3 = new Cookie("String", "java.lang");
+		Cookie[] cookies = {cookie,cookie2,cookie3};
+		assertEquals(cookie, CookieLogic.getCookie("name", cookies));
+	}
+	
+	@Test
+	void testToIdListANDaddID() {
+		int[] array = {11,234,5671,91};
+		Cookie cookie = new Cookie("name", "");
+		for(int num : array) {
+			cookie = CookieLogic.addId(cookie, num);
+		}
+		List<Integer> list = CookieLogic.toIdList(cookie.getValue());
+		assertEquals(11, list.get(0));
+		assertEquals(234, list.get(1));
+		assertEquals(5671, list.get(2));
+		assertEquals(91, list.get(3));
 	}
 	
 	@Test

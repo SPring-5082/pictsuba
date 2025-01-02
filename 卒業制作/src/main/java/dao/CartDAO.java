@@ -1,7 +1,10 @@
 package dao;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import beans.Cart;
 
@@ -20,6 +23,24 @@ public class CartDAO extends DAO{
 		pstmt.setInt(2, cart.product_id());
 		pstmt.setInt(3, cart.quantity());
 		return pstmt.executeUpdate() > 0;
+	}
+	
+	/**
+	 * 特定顧客のカート内容を返すメソッド
+	 * @return カート内容
+	 * @throws SQLException
+	 */
+	public static List<Cart> findByCustomer_id(int customer_id) throws SQLException{
+		List<Cart> carts = new ArrayList<Cart>();
+		final String WHERE = "WHERE CUSTOMER_ID = ?";
+		final String sql = SQL.select("CART").concat(WHERE);
+		PreparedStatement pstmt = getPsTmt(sql);
+		pstmt.setInt(1, customer_id);
+		for(ResultSet rs = pstmt.executeQuery();rs.next();) {
+			Cart cart = new Cart(rs.getInt(1), rs.getInt(2), rs.getInt(3));
+			carts.add(cart);
+		}
+		return carts;
 	}
 	
 	/**
