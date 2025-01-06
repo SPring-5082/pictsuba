@@ -16,9 +16,9 @@ import model.DateLogic;
 @WebServlet("/account")
 public class AccountServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private final String page = "WEB-INF/jsp/";
+	private final String page = "WEB-INF/jsp/account.jsp";
 	/**
-	 * 現在の顧客情報の表示
+	 * 現在の顧客情報の表示ページを返す
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher dispatcher = request.getRequestDispatcher(page);
@@ -26,6 +26,10 @@ public class AccountServlet extends HttpServlet {
 		return;
 	}
 	
+	/**
+	 * 入力された顧客情報から顧客情報を更新し、
+	 * 更新後の顧客情報を返す
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String name = request.getParameter("name");
 		String password = request.getParameter("password");

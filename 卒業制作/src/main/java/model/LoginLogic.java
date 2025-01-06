@@ -1,5 +1,7 @@
 package model;
 
+import java.sql.SQLException;
+
 import beans.Customer;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,11 +22,13 @@ public class LoginLogic {
 	 * クッキー情報によるログインの試行
 	 * @param request リクエストパラメーター
 	 * @return クッキー情報から取得した顧客情報(nullの場合はクッキーがない、または期限切れ)
+	 * @throws SQLException 
 	 */
-	public static Customer doLogin(HttpServletRequest request) {
+	public static Customer doLogin(HttpServletRequest request) throws SQLException {
 		Customer customer = null;
 		Cookie[] cookies = request.getCookies();
 		if(cookies == null)return null;
+		if(!CookieLogic.existKey("session_id", cookies))return null;
 		String session_id = CookieLogic.getValueFromKey("session_id", cookies);
 		customer = SessionLogic.execute(session_id);
 		if(customer != null) {

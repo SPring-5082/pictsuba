@@ -1,6 +1,7 @@
 package filter;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import beans.Customer;
 import jakarta.servlet.Filter;
@@ -23,10 +24,12 @@ public class LoginFilter extends HttpFilter implements Filter {
 		if(request instanceof HttpServletRequest) {
 			HttpSession session = ((HttpServletRequest)request).getSession();
 			if(!LoginLogic.isLogin(session)) {
-				Customer customer = LoginLogic.doLogin((HttpServletRequest)request);
-				if(customer != null) {
-					session.setAttribute("user", customer);
-				}
+				try {
+					Customer customer = LoginLogic.doLogin((HttpServletRequest)request);
+					if(customer != null) {
+						session.setAttribute("user", customer);
+					}
+				} catch (SQLException e) {}
 			}
 		}
 		chain.doFilter(request, response);

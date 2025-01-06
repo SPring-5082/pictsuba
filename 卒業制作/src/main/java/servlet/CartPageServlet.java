@@ -23,6 +23,9 @@ import model.CustomerLogic;
 public class CartPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	final String page = "WEB-INF/jsp/cart.jsp";
+	/**
+	 * 顧客のカート内情報のページを返す
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Customer user = (Customer)session.getAttribute("user");

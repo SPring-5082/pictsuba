@@ -84,6 +84,51 @@ public class CustomerDAO extends DAO {
 	*/
 	
 	/**
+	 * 顧客番号による顧客情報の取得
+	 * 条件に一致するものがない場合、nullを返す
+	 * @param customer_id 顧客番号
+	 * @return 条件に一致する顧客情報
+	 * @throws SQLException
+	 */
+	public static Customer findById(int customer_id) throws SQLException{
+		final String where = "WHERE CUSTOMER_ID = ?";
+		final String sql = SQL.select("CUSTOMERS").concat(where);
+		PreparedStatement pstmt = getPsTmt(sql);
+		pstmt.setInt(1, customer_id);
+		ResultSet rs = pstmt.executeQuery();	
+		if(rs.next()){
+			customer_id =  rs.getInt(1);
+			String name = rs.getString(2);
+			String password = rs.getString(3);
+			String phone = rs.getString(4);
+			String mail =  rs.getString(5);
+			int age = rs.getInt(6);
+			Date birth_day = rs.getDate(7);
+			String gender = rs.getString(8);
+			int point = rs.getInt(9);
+			Date first_log = rs.getDate(10);
+			Date fin_log = rs.getDate(11);
+			
+			int address_id;
+			int card_id;
+			try {
+				address_id = rs.getInt(12);
+			}catch (Exception e) {
+				address_id = -1;
+			}
+			try {
+				card_id = rs.getInt(13);
+			}catch (Exception e) {
+				card_id = -1;
+			}
+			Customer customer = new Customer(customer_id, name, password, phone, mail, age, birth_day, gender, point, first_log, fin_log, address_id, card_id);
+			return customer;
+		}else{
+			return null;
+		}
+	}
+	
+	/**
 	 * メールアドレスとパスワードによる顧客情報の取得
 	 * 条件に一致するものがない場合、nullを返す
 	 * @param mail メールアドレス
@@ -123,7 +168,7 @@ public class CustomerDAO extends DAO {
 			}catch (Exception e) {
 				card_id = -1;
 			}
-			Customer customer = new Customer(customer_id, name, phone, mail, age, birth_day, gender, point, first_log, fin_log, address_id, card_id);
+			Customer customer = new Customer(customer_id, name, password, phone, mail, age, birth_day, gender, point, first_log, fin_log, address_id, card_id);
 			return customer;
 		}else{
 			return null;
