@@ -68,7 +68,8 @@ public class ProductDAO extends DAO {
 		+ "    PRODUCT_ID NOT IN\n"
 		+ "		(SELECT PRODUCT_ID FROM ORDER_HISTORIES WHERE CUSTOMER_ID = ?)\n"
 		+ "	ORDER BY\n"
-		+ "		(SALES_QUANTITY+LOOKUP/10) DESC";
+		+ "		(SALES_QUANTITY+LOOKUP/10) DESC"
+		+ " LIMIT 30s";
 	
 	/**
 	 * 商品IDに基づく特定商品の情報取得
@@ -131,6 +132,7 @@ public class ProductDAO extends DAO {
 	
 	/**
 	 * 顧客IDに基づくおすすめ商品の取得
+	 * 数量が少ない場合は、Popularityを使用する
 	 * @param customer_id 顧客ID
 	 * @return おすすめ商品リスト
 	 * @throws SQLException
@@ -158,6 +160,12 @@ public class ProductDAO extends DAO {
 			String descryption = rs.getString(13);
 			int sales_quantity = rs.getInt(14);
 			list.add(new Product(product_id, product_name, add_date, price, creator_id, category_id, stock, lookup, point, image, descryption, creator_name, category_name,sales_quantity));
+		}
+		if(list.size() < 30) {
+			for(Product p : findByPopularity()) {
+				list.add(p);
+				if(list.size() >= 30) break;
+			}
 		}
 		return list;
 	}

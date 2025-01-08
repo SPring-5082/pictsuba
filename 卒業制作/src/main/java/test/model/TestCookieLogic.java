@@ -2,11 +2,10 @@ package test.model;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
 
 import jakarta.servlet.http.Cookie;
+import model.ArrayLogic;
 import model.CookieLogic;
 
 class TestCookieLogic {
@@ -32,6 +31,18 @@ class TestCookieLogic {
 		assertEquals(text, json);
 	}
 */
+	
+	@Test
+	void testAddId() {
+		Cookie cookie = new Cookie("array", ArrayLogic.encode(new int[]{12,21,35}));
+		cookie = CookieLogic.addId(cookie, 31);
+		int[] array = ArrayLogic.decode(cookie.getValue());
+		assertEquals(array[0], 12);
+		assertEquals(array[1], 21);
+		assertEquals(array[2], 35);
+		assertEquals(array[3], 31);
+	}
+	
 	@Test
 	void testgetCookie() {
 		Cookie cookie = new Cookie("name", "otuka");
@@ -43,16 +54,6 @@ class TestCookieLogic {
 	
 	@Test
 	void testToIdListANDaddID() {
-		int[] array = {11,234,5671,91};
-		Cookie cookie = new Cookie("name", "");
-		for(int num : array) {
-			cookie = CookieLogic.addId(cookie, num);
-		}
-		List<Integer> list = CookieLogic.toIdList(cookie.getValue());
-		assertEquals(11, list.get(0));
-		assertEquals(234, list.get(1));
-		assertEquals(5671, list.get(2));
-		assertEquals(91, list.get(3));
 	}
 	
 	@Test

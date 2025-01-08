@@ -3,6 +3,11 @@ package beans;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+
+import model.EncryptionLogic;
+
 public class Customer implements Serializable{
 	/*
 	 * CREATE TABLE CUSTOMERS(
@@ -99,6 +104,18 @@ public class Customer implements Serializable{
 
 	public String password() {
 		return password;
+	}
+	
+	public String decryptPassword() throws IllegalBlockSizeException, BadPaddingException {
+		return EncryptionLogic.dec(password);
+	}
+	
+	public String blindPassword() throws IllegalBlockSizeException, BadPaddingException {
+		StringBuilder sb = new StringBuilder();
+		for(int i = 0;i < decryptPassword().length();i++) {
+			sb.append('*');
+		}
+		return sb.toString();
 	}
 
 	public String phone() {

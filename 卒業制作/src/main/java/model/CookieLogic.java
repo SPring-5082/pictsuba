@@ -1,7 +1,5 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -30,7 +28,7 @@ public class CookieLogic {
 	 */
 	public static Map<String, String> toMap(Cookie[] cookies){
 		if(cookies == null)return null;
-		Map<String, String> map = new TreeMap();
+		Map<String, String> map = new TreeMap<String, String>();
 		for(Cookie cookie : cookies) {
 			map.put(cookie.getName(), cookie.getValue());
 		}
@@ -69,37 +67,18 @@ public class CookieLogic {
 	}
 	
 	/**
-	 * cartやfavoriteなどの[ number/number/… ]Cookie内に格納された商品IDリスト情報を
-	 * IDのリスト形式で返すメソッド
-	 * @param cookieValue Cookieの値
-	 * @return IDのリスト
-	 */
-	public static List<Integer> toIdList(String cookieValue){
-		List<Integer> id_list = new ArrayList<Integer>();
-		StringBuilder sb = new StringBuilder();
-		for(char c : cookieValue.toCharArray()) {
-			if(c == '/') {
-				id_list.add(Integer.parseInt(sb.toString()));
-				sb = new StringBuilder();
-			}else {
-				sb.append(c);
-			}
-		}
-		return id_list;
-	}
-	
-	/**
-	 * cartやfavoriteなどの[ number/number/… ]Cookie内に格納された商品IDリスト情報の
+	 * Base64にエンコードされた商品IDのCookie情報の
 	 * 末尾に新しく商品IDを追加するメソッド
 	 * @param cookie 現在のCookie情報
 	 * @param product_id 新しく追加する商品ID
 	 * @return 更新したCookie
 	 */
 	public static Cookie addId(Cookie cookie, int product_id) {
-		//if(cookie == null)throw new NullPointerException("");
+		if(cookie == null)return cookie;
 		final String key = cookie.getName();
-		String value = cookie.getValue();
-		value += String.valueOf(product_id).concat("/");
+		int[] array = ArrayLogic.decode(cookie.getValue());
+		array = ArrayLogic.addEnd(array, product_id);
+		final String value = ArrayLogic.encode(array);
 		return new Cookie(key, value);
 	}
 	/*

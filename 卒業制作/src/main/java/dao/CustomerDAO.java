@@ -24,7 +24,7 @@ public class CustomerDAO extends DAO {
 		
 		pstmt.setString(2, customer.password());
 		
-		if(customer.phone() == null) {
+		if(customer.phone() == null || customer.phone().equals("")) {
 			pstmt.setNull(3, Types.CHAR);
 		}else {
 			pstmt.setString(3, customer.phone());

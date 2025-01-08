@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+import beans.Advertisement;
 import beans.Customer;
 import beans.Product;
+import dao.AdvertisementDAO;
 import dao.ProductDAO;
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
@@ -21,11 +23,11 @@ import model.LoginLogic;
 @WebFilter("/index.jsp")
 public class TopPageFilter extends HttpFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		/*List<Advertisement> advertisements;
+		List<Advertisement> advertisements;
 		try {
 			advertisements = AdvertisementDAO.findAll();
 			request.setAttribute("advertisements", advertisements);
-		} catch (SQLException e) {}*/
+		} catch (SQLException e) {}
 		
 		if(request instanceof HttpServletRequest) {
 			HttpSession session = ((HttpServletRequest)request).getSession();

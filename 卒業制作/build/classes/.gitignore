@@ -1,7 +1,6 @@
-/model/
 /test/
-/listener/
-/beans/
-/dao/
 /servlet/
+/model/
 /filter/
+/dao/
+/beans/
