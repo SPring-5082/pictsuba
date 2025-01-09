@@ -28,6 +28,7 @@ public class SearchServlet extends HttpServlet {
 			products =  SearchLogic.execute(word,order_word);
 		}catch (Exception e) {}
 		request.setAttribute("products", products);
+		request.setAttribute("search", word);
 		RequestDispatcher dispatcher = request.getRequestDispatcher(page);
 		dispatcher.forward(request, response);
 	}

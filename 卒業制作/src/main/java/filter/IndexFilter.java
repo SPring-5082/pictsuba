@@ -21,7 +21,7 @@ import jakarta.servlet.http.HttpSession;
 import model.LoginLogic;
 
 @WebFilter("/index.jsp")
-public class TopPageFilter extends HttpFilter implements Filter {
+public class IndexFilter extends HttpFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		List<Advertisement> advertisements;
 		try {

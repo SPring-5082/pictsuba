@@ -10,15 +10,19 @@
     <link href="./img/sightIcon.jpg" rel="icon">
     <link href="./css/comon.css" rel="stylesheet">
     <link href="./css/product_details.css" rel="stylesheet">
-    <title>チームA</title>
+    <title><c:out value="${ applicatoin } ${ product.name() }"/></title>
 </head>
 <body>
     <jsp:include page="../../jsp/header.jsp"></jsp:include>
-    <main>
+     <main>
         <div id="main_parent">
             <div id="product_window">
                 <div class="pictura">
-                    <img src="img/gakubuti.png" alt="額縁">
+                    <div class="frame">
+                        <div class="draw_area">
+                            <img src="${ product.image() }" alt="絵画">
+                        </div>
+                    </div>
                     <button id="favorite_icon">
                         <span class="material-symbols-outlined">
                             favorite
@@ -26,33 +30,18 @@
                     </button>
                 </div>
                 <div class="info">
-                    <h4 class="name">タイトル名</h4>
-                    <p class="creator">作者名</p>
-                    <h4 class="price">￥値段</h4>
+                    <h4 class="name"><c:out value="${ product.name() }"/></h4>
+                    <p class="creator"><c:out value="${ product.creator_name() }"/></p>
+                    <h4 class="price">\ <c:out value="${ product.price() }"/></h4>
                     <p class="description">
-                        text text text text text text text text text text text text
-                        text text text text text text text text text text text text
+                    	<c:out value="${ product.descryption() }"/>
                     </p>
                 </div>
                 <button class="in_cart_btn">カートへ入れる</button>
             </div>
         </div>
     </main>
-    <footer>
-        <div id="footer_parent">
-            <div class="content">
-                <a href="./index.html" id="logo_footer">
-                    <img src="../img/pi.kuro.l 1.png" alt="フッターのロゴ">
-                </a>
-                <a href="./registration.html" class="footer_link">新規会員登録</a>
-                <a href="./contact.html" class="footer_link">お問い合わせ</a>
-                <a href="./about_us.html" class="footer_link">会社概要</a>
-                <a href="./rule.html" class="footer_link">利用規約</a>
-                <a href="./privacy_policy.html" class="footer_link">プライバシーポリシー</a>
-            </div>
-            <p id="copy_right">&copy;pictsuba.com</p>
-        </div>
-    </footer>
+    <jsp:include page="../../jsp/footer.jsp"></jsp:include>
     <script>
         const favorite_icon = document.getElementById("favorite_icon");
 

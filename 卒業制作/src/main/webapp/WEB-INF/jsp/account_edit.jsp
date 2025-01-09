@@ -20,7 +20,7 @@
             <h2>アカウント情報 編集</h2>
                 
             <div id="info_window">
-                <form id="info_form" action="/${ application }/account" method="post">
+                <form id="info_form" action="/${ application }/account" method="post" autocomplete="off">
                     <label for="name"><h4>お名前</h4></label>
                     <input type="text" name="name" class="info_box" value="${ user.name() }" required="required">
 

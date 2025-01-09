@@ -9,7 +9,7 @@
             <span></span>
         </div>
         <a href="/${ application }/" id="header_logo">
-            <img src="./img/pi.kuro.l.png" alt="ロゴ">
+            <img src="../img/pi.kuro.l.png" alt="ロゴ">
         </a>
         <div id="search_box">
             <form method="post" id="search_product_form" action="/${ application }/search">
@@ -23,9 +23,9 @@
         </div>
         <!-- pc用サイト内リンク -->
         <div id="pc_menu">
-            <a href="/${ application }/cart" class="menu_icon"><img class="nav_icon" src="./img/UI.ks-to.png" alt="カート"></a>
-            <a href="/${ application }/signin/" class="menu_icon"><img class="nav_icon" src="./img/UIroguin.png" alt="ログイン"></a>
-            <a href="/${ application }/mypage" class="menu_icon"><img class="nav_icon" src="./img/UI.account.png" alt="マイページ"></a>
+            <a href="/${ application }/cart" class="menu_icon"><img class="nav_icon" src="../img/UI.ks-to.png" alt="カート"></a>
+            <a href="/${ application }/signin/" class="menu_icon"><img class="nav_icon" src="../img/UIroguin.png" alt="ログイン"></a>
+            <a href="/${ application }/mypage" class="menu_icon"><img class="nav_icon" src="../img/UI.account.png" alt="マイページ"></a>
         </div>
         <!-- モバイル用サイト内リンク -->
         <div id="mobile_menu">

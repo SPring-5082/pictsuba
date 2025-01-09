@@ -22,7 +22,7 @@
 				</a>
 				<h2>ログイン</h2>
 				</div>
-				<form id="login_form" action="/${ application }/signin" method="post">
+				<form id="login_form" action="/${ application }/signin" method="post" autocomplete="off">
 					<c:if test="${ not empty param.page }"><input type="hidden" name="page" value="${ param.page }"></c:if>
 					<c:if test="${ param.error }"><p style="color:red;"><c:out value="※入力情報に誤りがあります"/></p></c:if>
 					<label for="mail">メールアドレス</label>
