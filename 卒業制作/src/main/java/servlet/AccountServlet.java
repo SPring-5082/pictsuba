@@ -54,7 +54,7 @@ public class AccountServlet extends HttpServlet {
 		try {
 			age = Integer.parseInt(request.getParameter("age"));
 		}catch (NumberFormatException e) {}
-		Date birth_day = DateLogic.execute(request.getParameter("birth_day"));
+		Date birth_day = DateLogic.valueOf(request.getParameter("birth_day"));
 		String gender = request.getParameter("gender");
 		HttpSession session = request.getSession();
 		Customer user = (Customer)session.getAttribute("user");

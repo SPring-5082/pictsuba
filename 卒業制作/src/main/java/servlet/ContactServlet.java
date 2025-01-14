@@ -26,7 +26,7 @@ public class ContactServlet extends HttpServlet {
 		}catch (Exception e) {}
 		RequestDispatcher dispatcher = null;
 		if(result) {
-			dispatcher = request.getRequestDispatcher("WEB-INF/jsp/contact_successful.jsp");
+			dispatcher = request.getRequestDispatcher("WEB-INF/jsp/contact_comp.jsp");
 			dispatcher.forward(request, response);
 		}else {
 			response.sendRedirect("contact/");

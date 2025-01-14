@@ -1,61 +1,143 @@
 #main_parent{
     min-height: 90dvh;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
-#cart_window{
+#main_window{
     width: 100%;
     background-color: rgba(255, 255, 255, 0.9);
     border-radius: 15px;
     padding: 20px;
-    margin: 30px 0;
     box-shadow: rgba(0, 0, 0, 0.2) 10px 10px 10px;
 }
 .cart_box{
     display: flex;
     align-items: center;
-}
-.checkbox{
-    opacity: 0;
-    -webkit-appearance: none;
-    appearance: none;
-    position: absolute;
-}
-.checkbox:checked{
-    background-color: #949494;
-}
-
-.product_box{
+    justify-content: center;
     border-top: 2px solid #4e4e4e;
     padding: 30px 0;
 }
-.product_box:first-child{
+.cart_box:first-child{
     border: none;
+}
+.checkbox{
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 2px solid #3a3a3a;
+    border-radius: 5px;
+    margin-right: 0.5rem;
+    cursor: pointer;
+}
+.box_right{
+    display: flex;
+    justify-content: center;
 }
 .product{
     display: flex;
+    align-items: center;
+    margin: 0 20px;
+}
+.frame{
+    width: 136px;
+    height: 162px;
+    min-width: 136px;
+    background-image: url("../img/gakubuti.png");
+    background-repeat: no-repeat;
+    padding: 23px;
+    background-size: contain;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+.draw_area{
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+}
+.frame img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 .info{
     margin-left: 20px;
     display: flex;
     align-items: center;
 }
-.info_bottom{
-    text-align: left;
+.info_left{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-.info_bottom > * {
+.info_left > * {
+    text-align: left;
     display: inline;
     padding: 0 10px;
     margin: 0;
 }
+.delete_button {
+    color: red;
+    background: none;
+    border: none;
+    margin: 0 10px;
+    text-decoration: underline;
+}
 .product_bottom{
     display: flex;
-    justify-content: right;
+    flex-direction: column;
+    justify-content: center;
 }
-.product_bottom > input{
-    width: 50px;
+.quantity_area > input{
+    width: 3em;
+    font-size: 1rem;
 }
+
 .price {
-    border-bottom: 1px solid #000;
+    text-decoration: underline;
     width: fit-content;
-    margin: 0 20px;
+}
+input[type=submit]{
+    margin: 20px;
+    padding: 5px 10px;
+    background-color: #ff0000;
+    font-weight: bold;
+    font-size: 16px;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+}
+
+#bag_icon{
+    font-size: 96px;
+}
+
+@media (max-width: 767px){
+    .product{
+        flex-direction: column;
+        margin: 0;
+    }
+    .box_right{
+        flex-direction: column;
+    }
+    .info{
+        margin:0;
+    }
+    .info_left{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .info_left > * {
+        padding: 0;
+        display: inline;
+        text-align: center;
+    }
+    .product_bottom{
+        margin: 10px;
+        flex-direction: row;
+    }
 }

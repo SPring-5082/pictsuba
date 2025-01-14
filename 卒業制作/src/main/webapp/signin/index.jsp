@@ -30,7 +30,7 @@
 					
 					<label for="password">パスワード</label>
 					<input type="password" name="password" required>
-					<a href="" class="anchor">パスワードをお忘れですか？</a>
+					<a href="/${ application }/forgotpassword" class="anchor">パスワードをお忘れですか？</a>
 					
 					<input type="submit" value="ログイン">
 					<a href="/${ application }/signup/">アカウントの作成</a>

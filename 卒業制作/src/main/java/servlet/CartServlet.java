@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import beans.Cart;
-import beans.CartSet;
 import beans.Customer;
 import beans.Product;
 import dao.ProductDAO;
@@ -38,10 +37,12 @@ public class CartServlet extends HttpServlet {
 				products.add(ProductDAO.findById(cart.product_id()));
 				quantities.add(cart.quantity());
 			}
-			request.setAttribute("cart", new CartSet(products, quantities));
+			request.setAttribute("products", products);
 		} catch (SQLException e) {}
 		RequestDispatcher dispatcher = request.getRequestDispatcher(page);
 		dispatcher.forward(request, response);
 	}
-
+	
+	
+	
 }

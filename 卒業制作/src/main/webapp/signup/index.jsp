@@ -36,7 +36,7 @@
 
 					<div class="input_box">
 						<label for="check_password"><h4>パスワード（確認用）<span class="must">*</span></h4></label>
-						<input type="password" name="password" required="required" autocomplete="off" pattern="[a-zA-Z0-9!@#$%^&*()_+=-]{8,16}>
+						<input type="password" name="password" required="required" autocomplete="off" pattern="[a-zA-Z0-9!@#$%^&*()_+=-]{8,16}">
 					</div>
 					
 					<div class="input_box">

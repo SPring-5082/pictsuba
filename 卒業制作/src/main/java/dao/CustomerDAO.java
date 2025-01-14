@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Types;
 
 import beans.Customer;
+import exception.SQLDataNotFoundException;
 
 public class CustomerDAO extends DAO {
 	/**
@@ -45,43 +46,6 @@ public class CustomerDAO extends DAO {
 		pstmt.setDate(9, new Date(customer.fin_log().getTime()));
 		return pstmt.executeUpdate() > 0;
 	}
-	/*
-	public static List<Customer> findALL() throws SQLException{
-		List<Customer> list = new ArrayList<Customer>();
-		final String sql = SQL.select("CUSTOMERS");
-		PreparedStatement pstmt = getPsTmt(sql);
-		
-		for(ResultSet rs = pstmt.executeQuery();rs.next();){
-			int customer_id =  rs.getInt(1);
-			String name = rs.getString(2);
-			String pass = rs.getString(3);
-			String phone = rs.getString(4);
-			String mail = rs.getString(5);
-			int age = rs.getInt(6);
-			Date birth_day = rs.getDate(7);
-			String gender = rs.getString(8);
-			int point = rs.getInt(9);
-			Date first_log = rs.getDate(10);
-			Date fin_log = rs.getDate(11);
-			
-			int address_id;
-			int card_id;
-			try {
-				address_id = rs.getInt(12);
-			}catch (Exception e) {
-				address_id = -1;
-			}
-			try {
-				card_id = rs.getInt(13);
-			}catch (Exception e) {
-				card_id = -1;
-			}
-			Customer customer = new Customer(customer_id, name,pass, phone, mail, age, birth_day, gender, point, first_log, fin_log, address_id, card_id);
-			list.add(customer);
-		}
-		return list;
-	}
-	*/
 	
 	/**
 	 * 顧客番号による顧客情報の取得
@@ -125,6 +89,50 @@ public class CustomerDAO extends DAO {
 			return customer;
 		}else{
 			return null;
+		}
+	}
+	
+	/**
+	 * 
+	 * @return
+	 * @throws SQLException 
+	 * @throws SQLDataNotFoundException 
+	 */
+	public static Customer findByMail(String mail) throws SQLException, SQLDataNotFoundException {
+		final String where = "WHERE MAIL = ?";
+		final String sql = SQL.select("CUSTOMERS").concat(where);
+		PreparedStatement pstmt = getPsTmt(sql);
+		pstmt.setString(1, mail);
+		ResultSet rs = pstmt.executeQuery();	
+		if(rs.next()){
+			int customer_id =  rs.getInt(1);
+			String name = rs.getString(2);
+			String password = rs.getString(3);
+			String phone = rs.getString(4);
+			//rs.getString(5);
+			int age = rs.getInt(6);
+			Date birth_day = rs.getDate(7);
+			String gender = rs.getString(8);
+			int point = rs.getInt(9);
+			Date first_log = rs.getDate(10);
+			Date fin_log = rs.getDate(11);
+			
+			int address_id;
+			int card_id;
+			try {
+				address_id = rs.getInt(12);
+			}catch (Exception e) {
+				address_id = -1;
+			}
+			try {
+				card_id = rs.getInt(13);
+			}catch (Exception e) {
+				card_id = -1;
+			}
+			Customer customer = new Customer(customer_id, name, password, phone, mail, age, birth_day, gender, point, first_log, fin_log, address_id, card_id);
+			return customer;
+		}else{
+			throw new SQLDataNotFoundException();
 		}
 	}
 	
@@ -238,6 +246,23 @@ public class CustomerDAO extends DAO {
 		PreparedStatement pstmt = getPsTmt(sql);
 		pstmt.setDate(1, new Date(new java.util.Date().getTime()));
 		pstmt.setInt(2, customer_id);
+		return pstmt.executeUpdate() > 0;
+	}
+	
+	/**
+	 * メールアドレス情報に基づくパスワードの変更
+	 * @param mail 変更対象条件のメールアドレス
+	 * @param password 新規パスワード
+	 * @return 実行の成否
+	 * @throws SQLException 
+	 */
+	public static boolean updatePasswordByMail(String mail, String password) throws SQLException {
+		final String SET  = "SET `PASSWORD` = ?";
+		final String WHERE = "WHERE MAIL = ?";
+		final String sql = SQL.update("CUSTOMERS").concat(SET).concat(WHERE);
+		PreparedStatement pstmt = getPsTmt(sql);
+		pstmt.setString(1, password);
+		pstmt.setString(2, mail);
 		return pstmt.executeUpdate() > 0;
 	}
 	

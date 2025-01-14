@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&" />
 <link href="./img/sightIcon.jpg" rel="icon">
 <link href="./css/comon.css" rel="stylesheet">
-<link href="./css/account_info_edit.css" rel="stylesheet">
+<link href="./css/account_edit.css" rel="stylesheet">
 <title><c:out value="${ application } アカウント情報"/></title>
 </head>
 <body>

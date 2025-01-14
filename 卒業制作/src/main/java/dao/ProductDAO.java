@@ -73,6 +73,7 @@ public class ProductDAO extends DAO {
 	
 	/**
 	 * 商品IDに基づく特定商品の情報取得
+	 * 
 	 * @param product_id 商品ID
 	 * @return 商品情報
 	 * @throws SQLException

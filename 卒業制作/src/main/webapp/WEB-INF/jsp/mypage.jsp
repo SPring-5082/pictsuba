@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&" />
     <link href="./img/sightIcon.jpg" rel="icon">
     <link href="./css/comon.css" rel="stylesheet">
-    <link href="./css/my_page.css" rel="stylesheet">
+    <link href="./css/mypage.css" rel="stylesheet">
     <title><c:out value="${ application } マイページ"/></title>
 </head>
 <body>

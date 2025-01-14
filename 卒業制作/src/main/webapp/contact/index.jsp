@@ -10,7 +10,7 @@
     <link href="../img/sightIcon.jpg" rel="icon">
     <link href="../css/comon.css" rel="stylesheet">
     <link href="../css/contact.css" rel="stylesheet">
-    <title>チームA</title>
+    <title><c:out value="${ application } お問い合わせ"/></title>
 </head>
 <body>
     <jsp:include page="../jsp/nodispHeader.jsp"></jsp:include>
