@@ -5,9 +5,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import beans.Address;
 import beans.Cart;
+import beans.CreditCard;
 import beans.Customer;
 import beans.Product;
+import dao.AddressDAO;
+import dao.CreditCardDAO;
 import dao.ProductDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -16,33 +20,39 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import model.CustomerLogic;
+import model.CheckLogic;
 
-@WebServlet("/cart")
+@WebServlet("/check")
 public class CartCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	final String page = "WEB-INF/jsp/cart.jsp";
 	/**
-	 * 顧客のカート内情報のページを返す
+	 * カートページで選択された商品を
+	 * セッションのカートに追加し、
+	 * 購入情報確認ページを表示する
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Customer user = (Customer)session.getAttribute("user");
-		List<Cart> carts = null;
+		List<Cart> cart = CheckLogic.execute(request);
+		session.setAttribute("cart", cart);
 		try {
-			carts = CustomerLogic.getCarts(user.customer_id());
-			List<Product> products = new ArrayList<Product>();
-			List<Integer> quantities = new ArrayList<Integer>();
-			for(Cart cart : carts) {
-				products.add(ProductDAO.findById(cart.product_id()));
-				quantities.add(cart.quantity());
-			}
+			List<Product> products = new ArrayList<>();
+			List<Integer> quantities = new ArrayList<>();
+			cart.forEach(element -> {
+				try {
+					products.add(ProductDAO.findById(element.product_id()));
+				} catch (SQLException e) {e.printStackTrace();}
+				quantities.add(element.quantity());
+			});
+			List<Address> addresses = AddressDAO.findByCustomer_id(user.customer_id());
+			List<CreditCard> cards = CreditCardDAO.findByCustomer_id(user.customer_id());
 			request.setAttribute("products", products);
-		} catch (SQLException e) {}
-		RequestDispatcher dispatcher = request.getRequestDispatcher(page);
+			request.setAttribute("quantities", quantities);
+			request.setAttribute("addresses", addresses);
+			request.setAttribute("cards", cards);
+		}catch (SQLException e) {e.printStackTrace();}
+		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/check.jsp");
 		dispatcher.forward(request, response);
 	}
-	
-	
-	
+
 }
