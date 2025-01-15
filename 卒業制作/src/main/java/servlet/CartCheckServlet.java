@@ -19,7 +19,7 @@ import jakarta.servlet.http.HttpSession;
 import model.CustomerLogic;
 
 @WebServlet("/cart")
-public class CartServlet extends HttpServlet {
+public class CartCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	final String page = "WEB-INF/jsp/cart.jsp";
 	/**
