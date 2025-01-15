@@ -4,6 +4,7 @@ import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
 import jakarta.servlet.annotation.WebListener;
+import model.CampaignLogic;
 import model.KeyStorage;
 import model.MailLogic;
 
@@ -32,6 +33,9 @@ public class BootListener implements ServletContextListener {
 		
 		//メールサーバとのセッション確立
 		MailLogic.init();
+		
+		//キャンペーン価格計算機設定
+		sc.setAttribute("calc", new CampaignLogic());
 		
 	}
 	

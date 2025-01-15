@@ -7,6 +7,7 @@ public enum LimitedPage {
 	account("account"),
 	card("card"),
 	mypage("mypage"),
+	favorite("favorite"),
 	;
 	private String page;
 	

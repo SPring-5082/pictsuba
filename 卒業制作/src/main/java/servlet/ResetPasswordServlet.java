@@ -2,12 +2,13 @@ package servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Base64;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 
+import beans.Customer;
 import dao.CustomerDAO;
+import exception.SQLDataNotFoundException;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
@@ -15,6 +16,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.CookieLogic;
 import model.EncryptionLogic;
 
 @WebServlet("/reset-pass")
@@ -25,22 +27,28 @@ public class ResetPasswordServlet extends HttpServlet {
 	 * トークン情報がある場合、トークン情報に該当するユーザーの
 	 * パスワード変更ページを表示する
 	 * tokenが指定されていない、または
-	 * トークン情報がアプリケーションスコープにない場合は
+	 * トークン情報が不正な場合、
 	 * ページを表示させない
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ServletContext application = request.getServletContext();
 		final String token = request.getParameter("token");
-		final String dist_address = token != null? (String)application.getAttribute(token) : null;
-		System.out.println(token);
-		System.out.println(dist_address);
-		if(token == null || dist_address == null) {
-			response.setStatus(response.SC_NOT_FOUND);
-			return;
+		boolean flag = false;
+		Customer user = null;
+		try {
+			user = CustomerDAO.findByMail(EncryptionLogic.dec(token));
+		} catch (IllegalBlockSizeException | BadPaddingException | SQLException | SQLDataNotFoundException e) {}
+		if(user != null & token.equals(CookieLogic.getValueFromKey("token", request.getCookies()))) {
+			flag = true;
 		}
-		request.setAttribute("token", token);
-		RequestDispatcher dispatcher = request.getRequestDispatcher(page);
-		dispatcher.forward(request, response);
+		if(flag) {
+			request.setAttribute("token", token);
+			RequestDispatcher dispatcher = request.getRequestDispatcher(page);
+			dispatcher.forward(request, response);
+		}else {
+			response.setStatus(response.SC_NOT_FOUND);
+		}
+		return;
 		
 	}
 	
@@ -51,10 +59,11 @@ public class ResetPasswordServlet extends HttpServlet {
 	 */
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ServletContext application = request.getServletContext();
 		final String token = request.getParameter("token");
-		application.removeAttribute(token);
-		final String mail = new String(Base64.getDecoder().decode(token));
+		String mail = null;
+		try {
+			mail = EncryptionLogic.dec(token);
+		} catch (IllegalBlockSizeException | BadPaddingException e) {}
 		String password = null;
 		try {
 			password = EncryptionLogic.enc(request.getParameter("password"));

@@ -2,9 +2,9 @@ package servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Base64;
-import java.util.Timer;
-import java.util.TimerTask;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
 
 import beans.Customer;
 import beans.Mail;
@@ -14,10 +14,11 @@ import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.DateLogic;
+import model.EncryptionLogic;
 import model.MailLogic;
 import model.MessageGenerator;
 
@@ -42,21 +43,13 @@ public class ForgotPasswordServlet extends HttpServlet{
 	 * メールの送信に失敗した場合は失敗を示すページを表示する
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//トークンの生成とアプリケーションスコープへの追加
-		final String dist_address = request.getParameter("mail");
-		final String token = Base64.getEncoder().encodeToString(dist_address.getBytes());
 		ServletContext application = request.getServletContext();
-		application.setAttribute(token, dist_address);
-		//期限終了後のトークン削除task生成
-		Timer timer = new Timer();
-		TimerTask task = new TimerTask() {
-			ServletContext application = request.getServletContext();
-			@Override
-			public void run() {
-				application.removeAttribute(token);
-			}
-		};
-		timer.schedule(task, DateLogic.nextDate());
+		//トークンの生成
+		final String dist_address = request.getParameter("mail");
+		String token = null;
+		try {
+			token = EncryptionLogic.enc(dist_address);
+		} catch (IllegalBlockSizeException | BadPaddingException e) {}
 		//メールの送信
 		RequestDispatcher dispatcher = null;
 		try {
@@ -64,11 +57,14 @@ public class ForgotPasswordServlet extends HttpServlet{
 			final String message = MessageGenerator.generate(user.name(),(String)application.getAttribute("domain"),(String)application.getAttribute("application"),token);
 			Mail mail = new Mail(dist_address, "パスワードの変更",message);
 			if(MailLogic.execute(mail)) {
+				response.addCookie(new Cookie("token", token));
 				dispatcher = request.getRequestDispatcher("WEB-INF/jsp/mail_send.jsp");
 			}else {
+				request.setAttribute("link", "forgotpassword");
 				dispatcher = request.getRequestDispatcher("WEB-INF/jsp/mail_failed.jsp");
 			}
 		} catch (SQLException | SQLDataNotFoundException e) {
+			request.setAttribute("link", "forgotpassword");
 			dispatcher = request.getRequestDispatcher("WEB-INF/jsp/mail_failed.jsp");
 		}
 		dispatcher.forward(request, response);

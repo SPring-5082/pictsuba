@@ -33,7 +33,7 @@
 					<a href="/${ application }/forgotpassword" class="anchor">パスワードをお忘れですか？</a>
 					
 					<input type="submit" value="ログイン">
-					<a href="/${ application }/signup/">アカウントの作成</a>
+					<a href="/${ application }/send_mail">アカウントの作成</a>
 				</form>
 			</div>
 		</div>

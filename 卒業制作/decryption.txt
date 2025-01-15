@@ -1,0 +1,10 @@
+起動時引数設定項目
+	path 画像保存先
+	user DBユーザー
+	pass DBパスワード
+	url DBサーバのアドレスまたはドメイン
+	
+	-Dpath=\\localhost\d\image\
+	-Duser=admin
+	-Dpass=adminpass
+	-Durl=localhost

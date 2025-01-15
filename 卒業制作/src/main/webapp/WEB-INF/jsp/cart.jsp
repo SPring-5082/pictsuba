@@ -36,7 +36,7 @@
 										<div class="info_left">
 											<h4 class="name">「<c:out value="${ product.name() }"/>」</h4>
 											<p class="creatord"><c:out value="${ product.creator_name() }"/></p>
-											<h4 class="price">\<c:out value="${ product.price() }"/></h4>
+											<h4 class="price">\<c:out value="${ calc.price(product.price(),product.category_id()) }"/></h4>
 										</div>
 									</div>
 								</a>

@@ -105,9 +105,13 @@ public class Product implements Serializable{
 	}
 
 	public String image() {
+		return "/pictsuba/image?image="+image;
+	}
+	
+	public String simpleImage() {
 		return image;
 	}
-
+	
 	public String descryption() {
 		return descryption;
 	}

@@ -21,8 +21,8 @@ public class AdvertisementDAO extends DAO{
 		for(ResultSet rs = pstmt.executeQuery();rs.next();) {
 			int advertisement_id = rs.getInt(1);
 			String advertisement_name = rs.getString(2);
-			String url = rs.getString(3);
-			Advertisement advertisement = new Advertisement(advertisement_id, advertisement_name, url);
+			String image = rs.getString(3);
+			Advertisement advertisement = new Advertisement(advertisement_id, advertisement_name, image);
 			list.add(advertisement);
 		}
 		return list;

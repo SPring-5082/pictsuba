@@ -4,7 +4,8 @@ import java.util.Date;
 
 public class DateLogic {
 	public static Date valueOf(String date) {
-		return date != null? java.sql.Date.valueOf(date): null;
+		if(date == null || date.equals(""))return null;
+		return java.sql.Date.valueOf(date);
 	}
 	
 	public static Date nextDate() {

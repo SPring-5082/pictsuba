@@ -26,7 +26,7 @@
 						入力したメールアドレスに誤りがないか確認の上、
 						再度お問い合わせをお願いします
 					</h2>
-					<a href="/${ application }/forgotpassword">
+					<a href="/${ application }/${ link }">
 						再度入力ページへ
 					</a>
 				</div>

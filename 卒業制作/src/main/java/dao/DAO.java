@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 abstract class DAO {
 	
@@ -15,12 +17,12 @@ abstract class DAO {
 	 */
 	static PreparedStatement getPsTmt(String sql) throws SQLException {
 		/**接続先URL*/
-		String URL = "jdbc:mysql://localhost/DATABASE"
+		String URL = "jdbc:mysql://"+ System.getProperty("url") +"/DATABASE"
 			.replaceFirst("DATABASE", DATABASE),
 		/**ユーザー名*/
-		USER = "admin",
+		USER = System.getProperty("user"),
 		/**パスワード*/
-		PASS = "adminpass",
+		PASS = System.getProperty("pass"),
 		/**ドライバ名*/
 		DRIVER = "com.mysql.cj.jdbc.Driver";
 	
@@ -28,11 +30,32 @@ abstract class DAO {
 		try{
 			Class.forName(DRIVER);
 			con = DriverManager.getConnection(URL,USER,PASS);
+			Timer timer = new Timer();
+			TimerTask task = new TimerTask() {
+				@Override
+				public void run() {
+					try {
+						con.close();
+					} catch (SQLException e) {}
+				}
+			};
+			timer.schedule(task, 10*1000);
 		}catch (Exception e) {
 			System.err.println("ドライバのダウンロードに失敗しました。");
 			return null;
 		}
-		return con.prepareStatement(sql);
+		PreparedStatement pstmt = con.prepareStatement(sql);
+		Timer timer2 = new Timer();
+		TimerTask task2 = new TimerTask() {
+			@Override
+			public void run() {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {}
+			}
+		};
+		timer2.schedule(task2, 10*1000);
+		return pstmt;
 	}
 	
 }

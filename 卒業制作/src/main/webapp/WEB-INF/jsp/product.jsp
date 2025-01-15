@@ -10,7 +10,7 @@
     <link href="./img/sightIcon.jpg" rel="icon">
     <link href="./css/comon.css" rel="stylesheet">
     <link href="./css/product_details.css" rel="stylesheet">
-    <title><c:out value="${ applicatoin } ${ product.name() }"/></title>
+    <title><c:out value="${ application } ${ product.name() }"/></title>
 </head>
 <body>
     <jsp:include page="../../jsp/header.jsp"></jsp:include>
@@ -32,7 +32,7 @@
                 <div class="info">
                     <h4 class="name"><c:out value="${ product.name() }"/></h4>
                     <p class="creator"><c:out value="${ product.creator_name() }"/></p>
-                    <h4 class="price">\ <c:out value="${ product.price() }"/></h4>
+                    <h4 class="price">\ <c:out value="${ calc.price(product.price(),product.category_id()) }"/></h4>
                     <p class="description">
                     	<c:out value="${ product.descryption() }"/>
                     </p>

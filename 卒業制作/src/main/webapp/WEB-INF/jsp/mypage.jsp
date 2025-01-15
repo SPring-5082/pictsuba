@@ -28,25 +28,31 @@
                     <span class="material-symbols-outlined bottom_icon">
                         menu_book
                     </span>
-                    <h4>注文履歴</h4>
+                    <h3>注文履歴</h3>
                 </a>
                 <a href="/${ application }/favorite" class="menu_btn">
                     <span class="material-symbols-outlined bottom_icon">
                         star
                     </span>
-                    <h4>お気に入り</h4>
+                    <h3>お気に入り</h3>
                 </a>
-                <a href="" class="menu_btn">
+                <a href="/${ application }/card" class="menu_btn">
                     <span class="material-symbols-outlined bottom_icon">
                         credit_card_gear
                     </span>
-                    <h4>住所＆決済情報</h4>
+                    <h3>決済情報</h3>
                 </a>
                 <a href="/${ application }/account" class="menu_btn">
                     <span class="material-symbols-outlined bottom_icon">
                         manage_accounts
                     </span>
-                    <h4>アカウント情報</h4>
+                    <h3>アカウント情報</h3>
+                </a>
+                <a href="/${ application }/address" class="menu_btn">
+                    <span class="material-symbols-outlined bottom_icon">
+                        house
+                    </span>
+                    <h3>住所情報</h3>
                 </a>
             </div>
         </div>

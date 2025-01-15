@@ -12,7 +12,7 @@
     <link href="./css/comon.css" rel="stylesheet">
     <link href="./css/index.css" rel="stylesheet">
     <link href="./css/header.css" rel="stylesheet">
-    <title><c:out value="${ application }"/></title>
+    <title><c:out value="${ application } 絵の総合販売サイト"/></title>
 </head>
 <body>
     <jsp:include page="./jsp/header.jsp"></jsp:include>
@@ -22,7 +22,7 @@
                 <div class="swiper">
                   <div class="swiper-wrapper">
                     <c:forEach items="${ advertisements }" var="advertisement">
-                    	<img class="swiper-slide" src="${ advertisement.url() }">
+                    	<img class="swiper-slide" src="${ advertisement.image() }">
                     </c:forEach>
                   </div><!-- /swiper-wrapper -->
                 </div><!-- /swiper -->
@@ -35,22 +35,44 @@
 
             <div id="products_window">
                 <div id="products">
-                    <c:forEach items="${ popularities }" var="product">
-	                    <a href="/${ application }/product?productId=${ product.product_id() }">
-	                        <div class="product">
-	                            <div class="info">
-	                                <h4 class="name"><c:out value="${ product.name() }"/></h4>
-	                                <p class="creator"><c:out value="${ product.creator_name() }"/></p>
-	                                <h4 class="price">\<c:out value="${ product.price() }"/></h4>
-	                            </div>
-	                            <div class="frame">
-	                                <div class="draw_area">
-	                                    <img src="${ product.image() }" alt="絵画">
-	                                </div>
-	                            </div>
-	                        </div>
-	                    </a>
-                    </c:forEach>
+                    <c:choose>
+                    <c:when test="${ not empty user }">
+	                    <c:forEach items="${ recomends }" var="product">
+		                    <a href="/${ application }/product?productId=${ product.product_id() }">
+		                        <div class="product">
+		                            <div class="info">
+		                                <h4 class="name"><c:out value="${ product.name() }"/></h4>
+		                                <p class="creator"><c:out value="${ product.creator_name() }"/></p>
+		                                <h4 class="price">\<c:out value="${ calc.price(product.price(),product.category_id()) }"/></h4>
+		                            </div>
+		                            <div class="frame">
+		                                <div class="draw_area">
+		                                    <img src="${ product.image() }" alt="絵画">
+		                                </div>
+		                            </div>
+		                        </div>
+		                    </a>
+	                    </c:forEach>
+                    </c:when>
+                    <c:otherwise>
+						<c:forEach items="${ popularities }" var="product">
+		                    <a href="/${ application }/product?productId=${ product.product_id() }">
+		                        <div class="product">
+		                            <div class="info">
+		                                <h4 class="name"><c:out value="${ product.name() }"/></h4>
+		                                <p class="creator"><c:out value="${ product.creator_name() }"/></p>
+		                                <h4 class="price">\<c:out value="${ calc.price(product.price(),product.category_id()) }"/></h4>
+		                            </div>
+		                            <div class="frame">
+		                                <div class="draw_area">
+		                                    <img src="${ product.image() }" alt="絵画">
+		                                </div>
+		                            </div>
+		                        </div>
+		                    </a>
+	                    </c:forEach>
+                    </c:otherwise>
+                    </c:choose>
                 </div>
             </div>
         </div>

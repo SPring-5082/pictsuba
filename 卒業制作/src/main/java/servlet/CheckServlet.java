@@ -41,15 +41,16 @@ public class CheckServlet extends HttpServlet {
 			cart.forEach(element -> {
 				try {
 					products.add(ProductDAO.findById(element.product_id()));
-				} catch (SQLException e) {}
+				} catch (SQLException e) {e.printStackTrace();}
 				quantities.add(element.quantity());
 			});
 			List<Address> addresses = AddressDAO.findByCustomer_id(user.customer_id());
 			List<CreditCard> cards = CreditCardDAO.findByCustomer_id(user.customer_id());
-			
+			request.setAttribute("products", products);
+			request.setAttribute("quantities", quantities);
 			request.setAttribute("addresses", addresses);
 			request.setAttribute("cards", cards);
-		}catch (SQLException e) {}
+		}catch (SQLException e) {e.printStackTrace();}
 		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/check.jsp");
 		dispatcher.forward(request, response);
 	}

@@ -31,7 +31,7 @@ class TestAdvertisementDAO {
 			Advertisement nodb = list.get(i);
 			assertEquals(db.advertisement_id(), nodb.advertisement_id());
 			assertEquals(db.advertisement_name(), nodb.advertisement_name());
-			assertEquals(db.url(), nodb.url());
+			assertEquals(db.image(), nodb.image());
 		}
 		
 	}

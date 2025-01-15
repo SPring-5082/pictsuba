@@ -12,7 +12,6 @@ public class CreditCard {
 	 *  );
 	 */
 	
-	
 	private int card_id;
 	private int customer_id;
 	private String number;
@@ -50,6 +49,13 @@ public class CreditCard {
 	
 	public String number() {
 		return number;
+	}
+	
+	public String blindNumber(){;
+		StringBuilder sb = new StringBuilder();
+		for(int i = 0;i < number.length()-4;sb.append('*'),i ++) {}
+		sb.append(number.substring(number.length()-4));
+		return sb.toString();
 	}
 	
 	public String expire() {

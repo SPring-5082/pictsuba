@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import beans.CartSet;
 import beans.Product;
 
 public class ProductDAO extends DAO {
@@ -69,7 +68,7 @@ public class ProductDAO extends DAO {
 		+ "		(SELECT PRODUCT_ID FROM ORDER_HISTORIES WHERE CUSTOMER_ID = ?)\n"
 		+ "	ORDER BY\n"
 		+ "		(SALES_QUANTITY+LOOKUP/10) DESC"
-		+ " LIMIT 30s";
+		+ " LIMIT 30";
 	
 	/**
 	 * 商品IDに基づく特定商品の情報取得
@@ -172,40 +171,17 @@ public class ProductDAO extends DAO {
 	}
 	
 	/**
-	 * 顧客IDに基づく商品と数量のセットの取得
-	 * @param customer_id 顧客ID
-	 * @return 商品と数量のセット
-	 * @throws SQLException
+	 * 
+	 * @param customer_id
+	 * @return
+	 * @throws SQLException 
 	 */
-	public static CartSet findByCustomers_cart(int customer_id) throws SQLException{
-		//CartSet
-		List<Product> products = new ArrayList<Product>();
-		List<Integer> quantities = new ArrayList<Integer>();
-		final String sql =
-			    "SELECT\n"
-			  + "	PRODUCT_ID, \n"
-			  + "    PRODUCT_NAME,\n"
-			  + "    ADD_DATE,\n"
-			  + "    PRICE,\n"
-			  + "    CREATOR_ID,\n"
-			  + "    (SELECT CREATOR_NAME FROM CREATORS C WHERE P.CREATOR_ID = C.CREATOR_ID) AS CREATOR_NAME,\n"
-			  + "    CATEGORY_ID,\n"
-			  + "    (SELECT CATEGORY_NAME FROM CATEGORIES C WHERE P.CATEGORY_ID = C.CATEGORY_ID) AS CATEGORY_NAME,\n"
-			  + "    STOCK,\n"
-			  + "    LOOKUP,\n"
-			  + "    POINT,\n"
-			  + "    IMAGE,\n"
-			  + "    DESCRYPTION, \n"
-			  + "    (SELECT QUANTITY FROM CART C WHERE CUSTOMER_ID = ? AND C.PRODUCT_ID = P.PRODUCT_ID) AS QUANTITY\n"
-			  + "FROM\n"
-			  + "	PRODUCTS P\n"
-			  + "WHERE\n"
-			  + "	PRODUCT_ID IN (\n"
-			  + "		SELECT PRODUCT_ID FROM CART WHERE CUSTOMER_ID = ?\n"
-			  + "    )";
+	public static List<Product> findByCustomerFavorite(int customer_id) throws SQLException{
+		List<Product> products = new ArrayList<>();
+		final String WHERE = "WHERE PRODUCT_ID IN (SELECT PRODUCT_ID FROM FAVORITES WHERE CUSTOMER_ID = ?)";
+		final String sql = SELECT.concat(WHERE);
 		PreparedStatement pstmt = getPsTmt(sql);
 		pstmt.setInt(1, customer_id);
-		pstmt.setInt(2, customer_id);
 		for(ResultSet rs = pstmt.executeQuery();rs.next();) {
 			int product_id = rs.getInt(1);
 			String product_name = rs.getString(2);
@@ -220,14 +196,12 @@ public class ProductDAO extends DAO {
 			int point = rs.getInt(11);
 			String image = rs.getString(12);
 			String descryption = rs.getString(13);
-			int quantity = rs.getInt(14);
-			Product product = new Product(product_id, product_name, add_date, price, creator_id, category_id, stock, lookup, point, image, descryption, creator_name, category_name);
-			
-			products.add(product);
-			quantities.add(quantity);
+			products.add(new Product(product_id, product_name, add_date, price, creator_id, category_id, stock, lookup, point, image, descryption, creator_name, category_name));
 		}
-		return new CartSet(products, quantities);
+		return products;
 	}
+	
+	
 	
 	/**
 	 * 

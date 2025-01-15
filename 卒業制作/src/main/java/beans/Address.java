@@ -63,6 +63,15 @@ public class Address implements Serializable{
 	public String zip_code() {
 		return zip_code;
 	}
+	
+	public static String zip_code(String zip_code) {
+		StringBuilder sb = new StringBuilder();
+		for(int i = 0 ;i < zip_code.length();i ++) {
+			sb.append(zip_code.charAt(i));
+			if(i == 2)sb.append('-');
+		}
+		return sb.toString();
+	}
 
 	public String pref() {
 		return pref;

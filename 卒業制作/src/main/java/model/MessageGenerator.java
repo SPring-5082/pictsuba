@@ -17,4 +17,12 @@ public class MessageGenerator {
 		message = message.replaceFirst("user_token", URLEncoder.encode(token));
 		return message;
 	}
+	
+	public static String generate(String domain, String application, String token) {
+		return 
+		"アカウント作成用URL\n"+
+		"https://" + domain + "/" + application + "/" + "signup/?token=" + token;
+		
+	}
+	
 }

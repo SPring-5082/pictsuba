@@ -49,7 +49,7 @@ public class MailLogic {
 	public static void init() {}
 	
 	/**
-	 * 取得した情報をもとにメール送信を行う
+	 * 取得した情報をもとにパスワード変更ページのメール送信を行う
 	 * @param mail メール情報
 	 * @return 実行の成否
 	 */
@@ -70,7 +70,9 @@ public class MailLogic {
 			Transport.send(message);
 			return true;
 		} catch (MessagingException e) {
+			e.printStackTrace();
 			return false;
 		}
 	}
+	
 }
