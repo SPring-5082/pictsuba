@@ -51,7 +51,7 @@ public class CartCheckServlet extends HttpServlet {
 			request.setAttribute("addresses", addresses);
 			request.setAttribute("cards", cards);
 		}catch (SQLException e) {e.printStackTrace();}
-		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/check.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/cart-check.jsp");
 		dispatcher.forward(request, response);
 	}
 

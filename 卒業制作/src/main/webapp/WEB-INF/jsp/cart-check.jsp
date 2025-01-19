@@ -21,6 +21,9 @@
 	</c:forEach>
 	<c:forEach	items="${ addresses }" var="address">
 		<c:out value="${ address.pref() }"/>
+		<c:out value="${ address.municipalities() }"/>
+		<c:out value="${ address.street() }"/>
+		<c:out value="${ address.building() }"/>
 	</c:forEach>
 	<c:forEach	items="${ cards }" var="card">
 		<c:out value="${ card.blindNumber() }"/>
