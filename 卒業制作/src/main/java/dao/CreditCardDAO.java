@@ -1,5 +1,6 @@
 package dao;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,13 +20,15 @@ public class CreditCardDAO extends DAO{
 		final String values = "?,?,?,?,?";
 		final String columns = "CUSTOMER_ID,NUMBER,EXPIRE,SECURITY_CODE,OWNER_NAME";
 		final String sql = SQL.insert("CREDIT_CARDS", values, columns);
-		PreparedStatement pstmt = getPsTmt(sql);
-		pstmt.setInt(1, card.customer_id());
-		pstmt.setString(2, card.number());
-		pstmt.setString(3, card.expire());
-		pstmt.setInt(4, card.security_code());
-		pstmt.setString(5, card.owner_name());
-		return pstmt.executeUpdate() > 0;
+		try(Connection con = getConnection();
+			PreparedStatement pstmt = getPsTmt(con,sql);){
+			pstmt.setInt(1, card.customer_id());
+			pstmt.setString(2, card.number());
+			pstmt.setString(3, card.expire());
+			pstmt.setInt(4, card.security_code());
+			pstmt.setString(5, card.owner_name());
+			return pstmt.executeUpdate() > 0;
+		}
 	}
 	
 	/**
@@ -38,19 +41,23 @@ public class CreditCardDAO extends DAO{
 		List<CreditCard> list = new ArrayList<CreditCard>();
 		final String WHERE = "WHERE CUSTOMER_ID = ?";
 		final String sql = SQL.select("CREDIT_CARDS").concat(WHERE);
-		PreparedStatement pstmt = getPsTmt(sql);
-		pstmt.setInt(1, customer_id);
-		for(ResultSet rs = pstmt.executeQuery();rs.next();) {
-			int card_id = rs.getInt(1);
-			//customer_id
-			String number = rs.getString(3);
-			String expire = rs.getString(4);
-			int security_code = rs.getInt(5);
-			String owner_name = rs.getString(6);
-			CreditCard card = new CreditCard(card_id, customer_id, number, expire, security_code, owner_name);
-			list.add(card);
+		try(Connection con = getConnection();
+			PreparedStatement pstmt = getPsTmt(con,sql);){
+			pstmt.setInt(1, customer_id);
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				int card_id = rs.getInt(1);
+				//customer_id
+				String number = rs.getString(3);
+				String expire = rs.getString(4);
+				int security_code = rs.getInt(5);
+				String owner_name = rs.getString(6);
+				CreditCard card = new CreditCard(card_id, customer_id, number, expire, security_code, owner_name);
+				list.add(card);
+			}
+			rs.close();
+			return list;
 		}
-		return list;
 	}
 	
 	/**
@@ -62,8 +69,10 @@ public class CreditCardDAO extends DAO{
 	public static boolean delByCard_id(int card_id) throws SQLException {
 		final String WHERE = "WHERE CARD_ID = ?";
 		final String sql = SQL.delete("CREDIT_CARDS").concat(WHERE);
-		PreparedStatement pstmt = getPsTmt(sql);
-		pstmt.setInt(1, card_id);
-		return pstmt.executeUpdate() > 0;
+		try(Connection con = getConnection();
+			PreparedStatement pstmt = getPsTmt(con,sql)){
+			pstmt.setInt(1, card_id);
+			return pstmt.executeUpdate() > 0;
+		}
 	}
 }

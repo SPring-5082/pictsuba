@@ -1,5 +1,6 @@
 package dao;
 
+import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,15 +21,17 @@ public class Order_HistoryDAO extends DAO{
 	public static boolean insert(Order order) throws SQLException {
 		final String VALUES = "?,?,?,?,?,?,?";
 		final String sql = SQL.insert("ORDER_HISTORIES", VALUES);
-		PreparedStatement pstmt = getPsTmt(sql);
-		pstmt.setInt(1, order.order_id());
-		pstmt.setInt(2, order.customer_id());
-		pstmt.setInt(3, order.product_id());
-		pstmt.setInt(4, order.quantity());
-		pstmt.setInt(5, order.price());
-		pstmt.setInt(6, order.address_id());
-		pstmt.setDate(7, new Date(order.order_date().getTime()));
-		return pstmt.executeUpdate() > 0;
+		try(Connection con = getConnection();
+			PreparedStatement pstmt = getPsTmt(con,sql);){
+			pstmt.setInt(1, order.order_id());
+			pstmt.setInt(2, order.customer_id());
+			pstmt.setInt(3, order.product_id());
+			pstmt.setInt(4, order.quantity());
+			pstmt.setInt(5, order.price());
+			pstmt.setInt(6, order.address_id());
+			pstmt.setDate(7, new Date(order.order_date().getTime()));
+			return pstmt.executeUpdate() > 0;
+		}
 	}
 	
 	/**
@@ -41,19 +44,24 @@ public class Order_HistoryDAO extends DAO{
 		List<Order_History> list = new ArrayList<Order_History>();
 		final String WHERE = "WHERE ORDER_HISTORY_ID = ?";
 		final String sql = SQL.select("ORDER_HISTORIES").concat(WHERE);
-		PreparedStatement pstmt = getPsTmt(sql);
-		pstmt.setInt(1, order_history_id);
-		for(ResultSet rs = pstmt.executeQuery();rs.next();) {
-			//order_history_id
-			int customer_id = rs.getInt(2);
-			int product_id = rs.getInt(3);
-			int quantity = rs.getInt(4);
-			int price = rs.getInt(5);
-			int address_id = rs.getInt(6);
-			java.util.Date add_date = rs.getDate(7);
-			list.add(new Order_History(order_history_id, customer_id, product_id, quantity, price, address_id, add_date));
+		try(Connection con = getConnection();
+			PreparedStatement pstmt = getPsTmt(con,sql);){
+			pstmt.setInt(1, order_history_id);
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				//order_history_id
+				int customer_id = rs.getInt(2);
+				int product_id = rs.getInt(3);
+				int quantity = rs.getInt(4);
+				int price = rs.getInt(5);
+				int address_id = rs.getInt(6);
+				java.util.Date add_date = rs.getDate(7);
+				list.add(new Order_History(order_history_id, customer_id, product_id, quantity, price, address_id, add_date));
+			}
+			rs.close();
+			return list;
 		}
-		return list;
+		
 	}
 	
 	
@@ -67,18 +75,22 @@ public class Order_HistoryDAO extends DAO{
 		List<Order_History> list = new ArrayList<>();
 		final String WHERE = "WHERE CUSTOMER_ID = ?";
 		final String sql = SQL.select("ORDER_HISTORIES").concat(WHERE);
-		PreparedStatement pstmt = getPsTmt(sql);
-		pstmt.setInt(1, customer_id);
-		for(ResultSet rs = pstmt.executeQuery();rs.next();) {
-			int order_id = rs.getInt(1);
-			//customer_id = customer_id;
-			int product_id = rs.getInt(3);
-			int quantity = rs.getInt(4);
-			int price = rs.getInt(5);
-			int address_id = rs.getInt(6);
-			Date order_date = rs.getDate(7);
-			list.add(new Order_History(order_id, customer_id, product_id, quantity, price, address_id, order_date));
+		try(Connection con = getConnection();
+			PreparedStatement pstmt = getPsTmt(con,sql);){
+			pstmt.setInt(1, customer_id);
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				int order_id = rs.getInt(1);
+				//customer_id = customer_id;
+				int product_id = rs.getInt(3);
+				int quantity = rs.getInt(4);
+				int price = rs.getInt(5);
+				int address_id = rs.getInt(6);
+				Date order_date = rs.getDate(7);
+				list.add(new Order_History(order_id, customer_id, product_id, quantity, price, address_id, order_date));
+			}
+			rs.close();
+			return list;
 		}
-		return list;
 	}
 }

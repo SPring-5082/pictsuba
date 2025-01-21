@@ -9,6 +9,7 @@ import beans.Product;
 import dao.CustomerDAO;
 import dao.OrderDAO;
 import dao.ProductDAO;
+import exception.SQLDataNotFoundException;
 
 public class AddOrderLogic {
 	/**
@@ -30,7 +31,7 @@ public class AddOrderLogic {
 			}
 			CustomerDAO.updateAddress_id(cutomer_id, address_id);
 			return true;
-		}catch (SQLException e) {
+		}catch (SQLException | SQLDataNotFoundException e) {
 			return false;
 		}
 	}

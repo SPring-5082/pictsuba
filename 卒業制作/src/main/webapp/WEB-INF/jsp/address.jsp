@@ -25,8 +25,8 @@
 				</span>
 				<h3>住所</h3>
 			</div>
-			<c:forEach items="${ addresses }" var="address">
-				<div class="address items">
+			<div class="address items">
+				<c:forEach items="${ addresses }" var="address">
 					<div class="item">
 						<div class="item_info">
 							〒<c:out value="${ address.zip_code(address.zip_code()) }"/><br>
@@ -35,8 +35,8 @@
 						</div>
 						<button class="delete_button">削除</button>
 					</div>
-				</div>
-			</c:forEach>
+				</c:forEach>
+			</div>
 			<button id="add_button">
 				新しい住所を追加
 				<span class="material-symbols-outlined">
@@ -51,11 +51,11 @@
 					close
 				</span>
 				<h2>住所の追加</h2>
-				<form action="" id="address_form" class="add_form">
+				<form action="/${ application }/address" method="post" id="address_form" class="add_form">
 					<div class="input_box">
 						<label for="zip_code"><h4>郵便番号<span class="must">*</span></h4></label>
 						<div id="address_completion_area">
-							<input type="number" name="zip_code" id="zip_code" placeholder="ハイフンなし" maxlength="7" required>
+							<input type="text"zip_code" name="zip_code" id="zip_code" placeholder="ハイフンなし" maxlength="7" required>
 							<button id="address_completion_btn">住所検索</button>
 						</div>
 						<p id="error_msg"></p>

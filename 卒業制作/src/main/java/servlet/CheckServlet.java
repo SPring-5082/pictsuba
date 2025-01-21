@@ -13,6 +13,7 @@ import beans.Product;
 import dao.AddressDAO;
 import dao.CreditCardDAO;
 import dao.ProductDAO;
+import exception.SQLDataNotFoundException;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -23,7 +24,7 @@ import jakarta.servlet.http.HttpSession;
 import model.CheckLogic;
 
 @WebServlet("/check")
-public class CartCheckServlet extends HttpServlet {
+public class CheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	/**
 	 * カートページで選択された商品を
@@ -41,7 +42,7 @@ public class CartCheckServlet extends HttpServlet {
 			cart.forEach(element -> {
 				try {
 					products.add(ProductDAO.findById(element.product_id()));
-				} catch (SQLException e) {e.printStackTrace();}
+				} catch (SQLException | SQLDataNotFoundException e) {e.printStackTrace();}
 				quantities.add(element.quantity());
 			});
 			List<Address> addresses = AddressDAO.findByCustomer_id(user.customer_id());
@@ -51,7 +52,7 @@ public class CartCheckServlet extends HttpServlet {
 			request.setAttribute("addresses", addresses);
 			request.setAttribute("cards", cards);
 		}catch (SQLException e) {e.printStackTrace();}
-		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/cart-check.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/check.jsp");
 		dispatcher.forward(request, response);
 	}
 

@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import beans.Address;
 import dao.AddressDAO;
+import exception.SQLDataNotFoundException;
 
 class TestAddressDAO {
 	/*
@@ -23,7 +24,7 @@ class TestAddressDAO {
 	
 	
 	@Test
-	void testfindByAddress_id(){
+	void testfindByAddress_id() throws SQLDataNotFoundException{
 		try {
 			Address address = AddressDAO.findByAddress_id(1);
 			assertEquals(1, address.address_id());

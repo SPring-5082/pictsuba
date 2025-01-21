@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import beans.Customer;
 import dao.CustomerDAO;
+import exception.SQLDataNotFoundException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -36,7 +37,7 @@ public class SignInServlet extends HttpServlet {
 		Customer user = null;
 		try {
 			user = CustomerDAO.findByMailandPass(mail, password);
-		} catch (SQLException e) {}
+		} catch (SQLException | SQLDataNotFoundException e) {}
 		
 		if(user != null) {
 			session.setAttribute("user", user);

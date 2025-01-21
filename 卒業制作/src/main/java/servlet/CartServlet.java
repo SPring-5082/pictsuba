@@ -9,6 +9,7 @@ import beans.Cart;
 import beans.Customer;
 import beans.Product;
 import dao.ProductDAO;
+import exception.SQLDataNotFoundException;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -38,7 +39,7 @@ public class CartServlet extends HttpServlet {
 				quantities.add(cart.quantity());
 			}
 			request.setAttribute("products", products);
-		} catch (SQLException e) {}
+		} catch (SQLException | SQLDataNotFoundException e) {}
 		RequestDispatcher dispatcher = request.getRequestDispatcher(page);
 		dispatcher.forward(request, response);
 	}

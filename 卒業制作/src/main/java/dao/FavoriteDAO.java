@@ -1,5 +1,6 @@
 package dao;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -14,10 +15,12 @@ public class FavoriteDAO extends DAO{
 	 */
 	public static boolean insert(Favorite favorite) throws SQLException {
 		final String sql = SQL.insert("FAVORITES", "?,?");
-		PreparedStatement pstmt = getPsTmt(sql);
-		pstmt.setInt(1, favorite.customer_id());
-		pstmt.setInt(2, favorite.product_id());
-		return pstmt.executeUpdate() > 0;
+		try(Connection con = getConnection();
+			PreparedStatement pstmt = getPsTmt(con,sql);){
+			pstmt.setInt(1, favorite.customer_id());
+			pstmt.setInt(2, favorite.product_id());
+			return pstmt.executeUpdate() > 0;
+		}
 	}
 	
 	/**
@@ -29,9 +32,11 @@ public class FavoriteDAO extends DAO{
 	public static boolean delete(Favorite favorite) throws SQLException{
 		final String sql = SQL.delete("FAVORITES");
 		final String WHERE = "WHERE CUSTOMER_ID = ? AND PRODUCT_ID = ?";
-		PreparedStatement pstmt = getPsTmt(sql);
-		pstmt.setInt(1, favorite.customer_id());
-		pstmt.setInt(2, favorite.product_id());
-		return pstmt.executeUpdate() > 0;
+		try(Connection con = getConnection();
+			PreparedStatement pstmt = getPsTmt(con,sql);){
+			pstmt.setInt(1, favorite.customer_id());
+			pstmt.setInt(2, favorite.product_id());
+			return pstmt.executeUpdate() > 0;
+		}
 	}
 }

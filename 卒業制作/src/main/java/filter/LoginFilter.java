@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import beans.Customer;
+import exception.SQLDataNotFoundException;
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -29,7 +30,7 @@ public class LoginFilter extends HttpFilter implements Filter {
 					if(customer != null) {
 						session.setAttribute("user", customer);
 					}
-				} catch (SQLException e) {}
+				} catch (SQLException | SQLDataNotFoundException e) {}
 			}
 		}
 		chain.doFilter(request, response);

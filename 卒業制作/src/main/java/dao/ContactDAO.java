@@ -1,5 +1,6 @@
 package dao;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -15,11 +16,13 @@ public class ContactDAO extends DAO{
 	public static boolean insert(Contact contact) throws SQLException {
 		if(contact == null) throw new NullPointerException("nullは挿入不可能です"); 
 		final String sql = SQL.insert("CONTACTS","?,?,?", "NAME,MAIL,MESSAGE");
-		PreparedStatement pstmt = getPsTmt(sql);
-		pstmt.setString(1, contact.name());
-		pstmt.setString(2, contact.mail());
-		pstmt.setString(3, contact.message());
-		return pstmt.executeUpdate() > 0;
+		try(Connection con = getConnection();
+			PreparedStatement pstmt = getPsTmt(con,sql);){
+			pstmt.setString(1, contact.name());
+			pstmt.setString(2, contact.mail());
+			pstmt.setString(3, contact.message());
+			return pstmt.executeUpdate() > 0;
+		}
 	}
 	
 }

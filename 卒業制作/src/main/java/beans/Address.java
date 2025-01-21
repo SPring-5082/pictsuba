@@ -40,7 +40,7 @@ public class Address implements Serializable{
 		this.street = street;
 		this.building = building;
 	}
-
+	
 	public Address(int address_id, int customer_id, String zip_code, String pref, String municipalities, String street,
 			String building) {
 		this.address_id = address_id;
@@ -52,6 +52,7 @@ public class Address implements Serializable{
 		this.building = building;
 	}
 
+	
 	public int address_id() {
 		return address_id;
 	}

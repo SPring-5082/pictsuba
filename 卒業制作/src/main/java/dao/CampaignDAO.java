@@ -1,5 +1,6 @@
 package dao;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,9 +18,11 @@ public class CampaignDAO extends DAO{
 	public static boolean exists(int category_id) throws SQLException {
 		final String WHERE = "WHERE CATEGORY_ID = ?";
 		final String sql = SQL.select("CAMPAIGN").concat(WHERE);
-		PreparedStatement pstmt = getPsTmt(sql);
-		pstmt.setInt(1, category_id);
-		return pstmt.executeQuery().next();
+		try(Connection con = getConnection();
+			PreparedStatement pstmt = getPsTmt(con,sql);){
+			pstmt.setInt(1, category_id);
+			return pstmt.executeQuery().next();
+		}
 	}
 	
 	/**
@@ -32,14 +35,19 @@ public class CampaignDAO extends DAO{
 	public static int discount_rate(int category_id) throws SQLException, SQLDataNotFoundException {
 		final String WHERE = "WHERE CATEGORY_ID = ?";
 		final String sql = SQL.select("CAMPAIGN").concat(WHERE);
-		PreparedStatement pstmt = getPsTmt(sql);
-		pstmt.setInt(1, category_id);
-		ResultSet rs = pstmt.executeQuery();
-		if(rs.next()) {
-			return rs.getInt("DISCOUNT_RATE");
-		}else {
-			throw new SQLDataNotFoundException();
+		try(Connection con = getConnection();
+			PreparedStatement pstmt = getPsTmt(con,sql);){
+			pstmt.setInt(1, category_id);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				int discount_rate = rs.getInt("DISCOUNT_RATE");;
+				rs.close();
+				return discount_rate;
+			}else {
+				throw new SQLDataNotFoundException();
+			}
 		}
+		
 	}
 	
 }

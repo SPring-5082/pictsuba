@@ -9,6 +9,7 @@ import javax.crypto.IllegalBlockSizeException;
 
 import beans.Customer;
 import dao.CustomerDAO;
+import exception.SQLDataNotFoundException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -50,7 +51,7 @@ public class SignUpServlet extends HttpServlet {
 		Customer user = null;
 		try {
 			user = CustomerDAO.findByMailandPass(mail, password);
-		} catch (SQLException e) {}
+		} catch (SQLException | SQLDataNotFoundException e) {}
 		session.setAttribute("user", user);
 		response.sendRedirect("/pictsuba/");
 	}

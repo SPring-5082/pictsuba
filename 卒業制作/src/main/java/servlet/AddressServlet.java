@@ -37,9 +37,27 @@ public class AddressServlet extends HttpServlet {
 			session.setAttribute("page", "address");
 			response.sendRedirect("signin/");
 		}
-		
-		
-		
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		Customer user = (Customer)session.getAttribute("user");
+		final String zip_code = request.getParameter("zip_code");
+		final String pref = request.getParameter("pref");
+		final String municipalities  =request.getParameter("municipalities");
+		final String street = request.getParameter("street");
+		final String building = request.getParameter("building");
+		int customer_id = user.customer_id();
+		Address address = new Address(customer_id, zip_code, pref, municipalities, street, building);
+		try {
+			AddressDAO.insert(address);
+			doGet(request, response);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			response.setStatus(response.SC_NOT_FOUND);
+		}
+		return;
 	}
 
 }

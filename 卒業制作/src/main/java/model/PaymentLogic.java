@@ -8,6 +8,7 @@ import beans.Customer;
 import beans.Product;
 import dao.CustomerDAO;
 import dao.ProductDAO;
+import exception.SQLDataNotFoundException;
 
 public class PaymentLogic {
 	/**
@@ -18,6 +19,7 @@ public class PaymentLogic {
 	 * @param card_id カードID
 	 * @param use_point ポイント使用量
 	 * @return 実行の成否
+	 * @throws SQLDataNotFoundException 
 	 */
 	public static boolean execute(Customer user, List<Cart> carts, int card_id, int use_point){
 		try {
@@ -38,7 +40,7 @@ public class PaymentLogic {
 			CustomerDAO.updateCard_id(customer_id, card_id);
 			CustomerDAO.updatePoint(customer_id, user.point()-use_point+add_point);
 			return true;
-		}catch (SQLException e) {
+		}catch (SQLException | SQLDataNotFoundException e) {
 			return false;
 		}
 		

@@ -9,6 +9,7 @@ import javax.crypto.IllegalBlockSizeException;
 
 import beans.Customer;
 import dao.CustomerDAO;
+import exception.SQLDataNotFoundException;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -63,7 +64,7 @@ public class AccountServlet extends HttpServlet {
 		try {
 			CustomerDAO.updateByCustomer_id(update);
 			user = CustomerDAO.findById(user.customer_id());
-		} catch (SQLException e) {}
+		} catch (SQLException | SQLDataNotFoundException e) {}
 		
 		
 		//セッション顧客情報の更新

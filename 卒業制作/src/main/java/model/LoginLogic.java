@@ -3,6 +3,7 @@ package model;
 import java.sql.SQLException;
 
 import beans.Customer;
+import exception.SQLDataNotFoundException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -23,8 +24,9 @@ public class LoginLogic {
 	 * @param request リクエストパラメーター
 	 * @return クッキー情報から取得した顧客情報(nullの場合はクッキーがない、または期限切れ)
 	 * @throws SQLException 
+	 * @throws SQLDataNotFoundException 
 	 */
-	public static Customer doLogin(HttpServletRequest request) throws SQLException {
+	public static Customer doLogin(HttpServletRequest request) throws SQLException, SQLDataNotFoundException {
 		Customer customer = null;
 		Cookie[] cookies = request.getCookies();
 		if(cookies == null)return null;
