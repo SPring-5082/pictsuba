@@ -30,6 +30,7 @@ public class AddFavoriteServlet extends HttpServlet {
 		}else {
 			cookie = new Cookie(key, ArrayLogic.encode(new int[]{Integer.parseInt(product_id)}));
 		}
+		cookie.setPath("/");
 		response.addCookie(cookie);
 		
 	}

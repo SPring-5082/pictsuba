@@ -32,7 +32,7 @@
             	<a href="/${ application }/signout" class="menu_icon"><img class="nav_icon" src="./img/UIroguin.png" alt="ログイン"></a>
             </c:otherwise>
             </c:choose>
-            <a href="/${ application }/mypage" class="menu_icon"><img class="nav_icon" src="./img/UI.account.png" alt="マイページ"></a>
+            <a href="/${ application }/mypage" class="menu_icon"><img class="nav_icon" src="./img/UI.circle.jpg" alt="マイページ"></a>
         </div>
         <!-- モバイル用サイト内リンク -->
         <div id="mobile_menu">

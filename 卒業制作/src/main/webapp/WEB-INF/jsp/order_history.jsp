@@ -15,6 +15,8 @@
 <body>
 <jsp:include page="../../jsp/header.jsp"></jsp:include>	   
 
+
+
 <jsp:include page="../../jsp/footer.jsp"></jsp:include>
 <script src="./js/comon.js"></script>
 </body>

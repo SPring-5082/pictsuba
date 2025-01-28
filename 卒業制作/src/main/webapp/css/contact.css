@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 #contact{
@@ -38,11 +39,14 @@ form > .input_area::placeholder{
   color: red;
 }
 #submit_btn{
-  background-color: rgba(255, 255, 255, 0.0);
-  border: 2px solid #000;
-  border-radius: 5px;
   width: 50%;
-  margin: 0 auto;
+  background-color: #ff0000;
+  color: #fff;
+  font-weight: bold;
+  margin: 20px auto;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
 }
 
 #faq{
@@ -72,19 +76,20 @@ form > .input_area::placeholder{
   margin: 5px;
 }
 .details{
+  background-color: rgba(222, 222, 222, 0.5);
   opacity: 0;
-  background-color: #cbcbcb;
   width: 100%;
   max-height: 0px;
-  transition: max-height 1s ease, opacity 1s ease, padding 1s ease, margin 1s ease;
+  transition: padding 0.5s ease,
+      max-height 0.5s ease,
+      opacity 0.5s ease;
   overflow: hidden;
   font-size: 16px;
 }
 .details.view{
   opacity: 1;
-  max-height: 300px;
   padding: 10px;
-  margin: 10px 0px;
+  max-height: 300px;
 }
 button{
   cursor: pointer;
@@ -92,6 +97,9 @@ button{
 
 }
 
+a {
+  text-decoration: underline;
+}
 @media (max-width: 767px) {
   #contact{
     width: 100%;

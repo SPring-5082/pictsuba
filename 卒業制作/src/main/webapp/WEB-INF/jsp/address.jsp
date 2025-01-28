@@ -33,7 +33,7 @@
 							<c:out value="${ address.pref() }"/> <c:out value="${ address.municipalities() }"/><br>
 							<c:out value="${ address.street() }"/>　<c:out value="${ address.building() }"/>
 						</div>
-						<button class="delete_button">削除</button>
+						<button class="delete_button" onclick="delete_address(${ address.address_id() })">削除</button>
 					</div>
 				</c:forEach>
 			</div>
@@ -56,7 +56,7 @@
 						<label for="zip_code"><h4>郵便番号<span class="must">*</span></h4></label>
 						<div id="address_completion_area">
 							<input type="text"zip_code" name="zip_code" id="zip_code" placeholder="ハイフンなし" maxlength="7" required>
-							<button id="address_completion_btn">住所検索</button>
+							<button type="button" id="address_completion_btn">住所検索</button>
 						</div>
 						<p id="error_msg"></p>
 					</div>	
@@ -85,8 +85,9 @@
 </div>
 </main>
 <jsp:include page="../../jsp/footer.jsp"></jsp:include>
-<script src="./js/modal_window.js"></script>
+<script src="./js/address_modal_window.js"></script>
 <script src="./js/zipcode.js"></script>
 <script src="./js/comon.js"></script>
+<script src="./js/del_address.js"></script>
 </body>
 </html>

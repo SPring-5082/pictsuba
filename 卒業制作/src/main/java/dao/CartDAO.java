@@ -6,8 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import beans.Cart;
+import beans.Product;
 
 public class CartDAO extends DAO{
 	/**
@@ -51,6 +54,27 @@ public class CartDAO extends DAO{
 		}
 	}
 	
+	public static List<Integer> findQuantities(int customer_id,List<Product> products) throws SQLException{
+		List<Integer> quantities = new ArrayList<>();
+		Map<Integer, Integer> map = new TreeMap<>();
+		final String WHERE = "WHERE CUSTOMER_ID = ?";
+		final String sql = SQL.select("CART").concat(WHERE);
+		try(Connection con = getConnection();
+			PreparedStatement pstmt = getPsTmt(con,sql);){
+			pstmt.setInt(1, customer_id);
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Cart cart = new Cart(rs.getInt(1), rs.getInt(2), rs.getInt(3));
+				map.put(rs.getInt(2), rs.getInt(3));
+			}
+			rs.close();
+		}
+		for(Product p : products) {
+			quantities.add(map.get(p.product_id()));
+		}
+		return quantities;
+	}
+	
 	/**
 	 * カート内の数量変更メソッド
 	 * @param cart 更新するカート情報
@@ -70,6 +94,15 @@ public class CartDAO extends DAO{
 		}
 	}
 	
+	public static boolean delByCustomer_id(int customer_id) throws SQLException {
+		final String WHERE = " WHERE CUSTOMER_ID = ?";
+		final String sql = SQL.delete("CART").concat(WHERE);
+		try(Connection con = getConnection();
+			PreparedStatement pstmt = getPsTmt(con, sql);){
+			pstmt.setInt(1, customer_id);
+			return pstmt.executeUpdate() > 0;
+		}
+	}
 	
 	/**
 	 * カートから商品を削除するメソッド

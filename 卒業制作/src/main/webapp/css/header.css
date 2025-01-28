@@ -87,9 +87,6 @@
   width: 200px;
   display: flex;
 }
-.nav_icon {
-  width: 80%;
-}
 #mobile_icon{
   display: none;
   flex-direction: column;

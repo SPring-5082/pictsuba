@@ -85,6 +85,7 @@
     border: none;
     margin: 0 10px;
     text-decoration: underline;
+    cursor: pointer;
 }
 .product_bottom{
     display: flex;
@@ -93,7 +94,7 @@
 }
 .quantity_area > input{
     width: 3em;
-    font-size: 1rem;
+    font-size: 1rem-;
 }
 
 .price {

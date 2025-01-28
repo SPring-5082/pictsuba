@@ -23,16 +23,16 @@
         </div>
         <!-- pc用サイト内リンク -->
         <div id="pc_menu">
-            <a href="/${ application }/cart" class="menu_icon"><img class="nav_icon" src="./img/UI.ks-to.png" alt="カート"></a>
+            <a href="/${ application }/cart" class="menu_icon"><img class="nav_icon" src="../img/UI.ks-to.png" alt="カート"></a>
             <c:choose>
             <c:when test="${ empty user }">
-            	<a href="/${ application }/signin/" class="menu_icon"><img class="nav_icon" src="./img/UIroguin.png" alt="ログイン"></a>
+            	<a href="/${ application }/signin/" class="menu_icon"><img class="nav_icon" src="../img/UIroguin.png" alt="ログイン"></a>
             </c:when>
             <c:otherwise>
-            	<a href="/${ application }/signout" class="menu_icon"><img class="nav_icon" src="./img/UIroguin.png" alt="ログイン"></a>
+            	<a href="/${ application }/signout" class="menu_icon"><img class="nav_icon" src="../img/UIroguin.png" alt="ログイン"></a>
             </c:otherwise>
             </c:choose>
-            <a href="/${ application }/mypage" class="menu_icon"><img class="nav_icon" src="./img/UI.account.png" alt="マイページ"></a>
+            <a href="/${ application }/mypage" class="menu_icon"><img class="nav_icon" src="../img/UI.circle.jpg" alt="マイページ"></a>
         </div>
         <!-- モバイル用サイト内リンク -->
         <div id="mobile_menu">

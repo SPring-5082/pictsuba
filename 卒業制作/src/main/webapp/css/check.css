@@ -167,6 +167,7 @@ section{
     padding: 10px;
     border: none;
     color: #000;
+    cursor: pointer;
 }
 .modal_window{
     display: none;
@@ -210,6 +211,11 @@ section{
     width: 6px;
     border-radius: 10px;
 }
+
+.modal_content h2{
+	text-align: center;
+}
+
 .close_icon {
     position: fixed;
     top: 0;
@@ -238,6 +244,12 @@ section{
 #address_completion_area{
     display: flex;
 }
+
+#expire_area{
+    display: flex;
+    align-items: center;
+}
+
 #zip_code{
     width: 70%;
 }

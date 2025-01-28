@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     <link href="./css/comon.css" rel="stylesheet">
     <link href="./css/index.css" rel="stylesheet">
-    <link href="./css/header.css" rel="stylesheet">
     <title><c:out value="${ application } 絵の総合販売サイト"/></title>
 </head>
 <body>

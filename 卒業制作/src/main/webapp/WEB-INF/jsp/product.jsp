@@ -37,7 +37,7 @@
                     	<c:out value="${ product.descryption() }"/>
                     </p>
                 </div>
-                <button class="in_cart_btn">カートへ入れる</button>
+                <button class="in_cart_btn" onclick="add_cart(${ product.product_id()})">カートへ入れる</button>
             </div>
         </div>
     </main>
@@ -49,6 +49,7 @@
             favorite_icon.classList.toggle("click");
         })
     </script>
-    <script src="../js/comon.js"></script>
+    <script src="./js/comon.js"></script>
+    <script src="./js/add_cart.js"></script>
 </body>
 </html>

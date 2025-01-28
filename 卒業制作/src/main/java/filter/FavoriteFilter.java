@@ -32,18 +32,22 @@ public class FavoriteFilter extends HttpFilter implements Filter {
 		Customer user = (Customer)session.getAttribute("user");
 		Cookie[] cookies = httpRequest.getCookies();
 		final String key = "favorite";
-		if(CookieLogic.existKey(key, cookies)) {
-			Cookie favoriteCookie = CookieLogic.getCookie(key, cookies);
-			int[] favorite = ArrayLogic.decode(favoriteCookie.getValue());
-			for(int id : favorite) {
-				try {
-					FavoriteDAO.insert(new Favorite(user.customer_id(), id));
-				}catch (Exception e) {e.printStackTrace();}
+		if(user != null){
+			if(CookieLogic.existKey(key, cookies)) {
+				Cookie favoriteCookie = CookieLogic.getCookie(key, cookies);
+				int[] favorite = ArrayLogic.decode(favoriteCookie.getValue());
+				for(int id : favorite) {
+					try {
+						FavoriteDAO.insert(new Favorite(user.customer_id(), id));
+					}catch (Exception e) {e.printStackTrace();}
+				}
 			}
+			Cookie cookie = new Cookie(key, "");
+			cookie.setPath("/");
+			cookie.setMaxAge(0);
+			httpRResponse.addCookie(cookie);
 		}
-		Cookie cookie = new Cookie(key, "");
-		cookie.setMaxAge(0);
-		httpRResponse.addCookie(cookie);
+		
 		chain.doFilter(request, response);
 	}
 	

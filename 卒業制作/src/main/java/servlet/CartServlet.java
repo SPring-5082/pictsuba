@@ -39,6 +39,7 @@ public class CartServlet extends HttpServlet {
 				quantities.add(cart.quantity());
 			}
 			request.setAttribute("products", products);
+			request.setAttribute("quantities", quantities);
 		} catch (SQLException | SQLDataNotFoundException e) {}
 		RequestDispatcher dispatcher = request.getRequestDispatcher(page);
 		dispatcher.forward(request, response);

@@ -1,8 +1,5 @@
-/beans/
-/dao/
-/exception/
-/filter/
-/listener/
-/model/
 /servlet/
+/filter/
+/dao/
+/model/
 /test/

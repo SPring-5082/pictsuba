@@ -30,7 +30,7 @@
 					<div class="payment items">
 						<div class="item">
 							<div class="item_info">カード番号：<c:out value="${ card.blindNumber() }"/></div>
-							<button class="delete_button">削除</button>
+							<button class="delete_button" onclick="delete_payment(${ card.card_id() })">削除</button>
 						</div>
 					</div>
 				</c:forEach>
@@ -77,5 +77,6 @@
 <jsp:include page="../../jsp/footer.jsp"></jsp:include>
 <script src="./js/modal_window.js"></script>
 <script src="./js/comon.js"></script>
+<script src="./js/del_card.js"></script>
 </body>
 </html>

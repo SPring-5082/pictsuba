@@ -8,10 +8,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import beans.Cart;
 import beans.Product;
 import exception.SQLDataNotFoundException;
 
 public class ProductDAO extends DAO {
+	
 	private static final String SELECT =
 		  "SELECT "
 		+ "		PRODUCT_ID, "
@@ -176,15 +178,59 @@ public class ProductDAO extends DAO {
 				list.add(new Product(product_id, product_name, add_date, price, creator_id, category_id, stock, lookup, point, image, descryption, creator_name, category_name,sales_quantity));
 			}
 			rs.close();
-			if(list.size() < 30) {
-				for(Product p : findByPopularity()) {
-					list.add(p);
-					if(list.size() >= 30) break;
-				}
-			}
 			return list;
 		}
 		
+	}
+	
+	public static List<Product> findByCustomerCart(int customer_id) throws SQLException{
+		List<Product> products = new ArrayList<>();
+		final String SELECT = 
+		  "SELECT"
+		+ "		PRODUCT_ID, "
+		+ "		PRODUCT_NAME,"
+		+ "		ADD_DATE,"
+		+ "		PRICE,"
+		+ "		CREATOR_ID,"
+		+ "		(SELECT CREATOR_NAME FROM CREATORS C WHERE P.CREATOR_ID = C.CREATOR_ID) AS CREATOR_NAME,"
+		+ "		CATEGORY_ID,"
+		+ "		(SELECT CATEGORY_NAME FROM CATEGORIES C WHERE P.CATEGORY_ID = C.CATEGORY_ID) AS CATEGORY_NAME,"
+		+ "		STOCK,"
+		+ "		LOOKUP,"
+		+ "		POINT,"
+		+ "		IMAGE,"
+		+ "		DESCRYPTION "
+		+ "FROM"
+		+ "		PRODUCTS P "
+		+ "WHERE"
+		+ "		PRODUCT_ID IN"
+		+ "		(SELECT"
+		+ "			PRODUCT_ID"
+		+ "		FROM"
+		+ "			CART"
+		+ "		WHERE"
+		+ "			CUSTOMER_ID = " +customer_id + ")";
+		try(Connection con = getConnection();
+			PreparedStatement pstmt = getPsTmt(con, SELECT);
+			ResultSet rs = pstmt.executeQuery();){
+			while(rs.next()) {
+				int product_id = rs.getInt(1);
+				String product_name = rs.getString(2);
+				Date add_date = rs.getDate(3);
+				int price = rs.getInt(4);
+				int creator_id = rs.getInt(5);
+				String creator_name = rs.getString(6);
+				int category_id = rs.getInt(7);
+				String category_name = rs.getString(8);
+				int stock = rs.getInt(9);
+				int lookup = rs.getInt(10);
+				int point = rs.getInt(11);
+				String image = rs.getString(12);
+				String descryption = rs.getString(13);
+				products.add(new Product(product_id, product_name, add_date, price, creator_id, category_id, stock, lookup, point, image, descryption, creator_name, category_name));
+			}
+		}
+		return products;
 	}
 	
 	/**
@@ -270,6 +316,18 @@ public class ProductDAO extends DAO {
 			return results;
 		}
 		
+	}
+	
+	public static boolean updateStockByCart(Cart cart) throws SQLException {
+		final String WHERE = " WHERE PRODUCT_ID = ?";
+		final String SET = " SET STOCK = STOCK - ?";
+		final String sql = SQL.update("PRODUCTS").concat(SET).concat(WHERE);
+		try(Connection con = getConnection();
+			PreparedStatement pstmt = getPsTmt(con, sql);){
+			pstmt.setInt(1, cart.quantity());
+			pstmt.setInt(2, cart.product_id());
+			return pstmt.executeUpdate() > 0;
+		}
 	}
 	
 }

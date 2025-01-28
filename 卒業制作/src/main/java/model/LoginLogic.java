@@ -2,6 +2,9 @@ package model;
 
 import java.sql.SQLException;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+
 import beans.Customer;
 import exception.SQLDataNotFoundException;
 import jakarta.servlet.http.Cookie;
@@ -32,11 +35,12 @@ public class LoginLogic {
 		if(cookies == null)return null;
 		if(!CookieLogic.existKey("session_id", cookies))return null;
 		String session_id = CookieLogic.getValueFromKey("session_id", cookies);
-		customer = SessionLogic.execute(session_id);
-		if(customer != null) {
+		try {
+			customer = SessionLogic.execute(session_id);
 			return customer;
+		} catch (IllegalBlockSizeException | BadPaddingException | SQLException | SQLDataNotFoundException e) {
+			return null;
 		}
-		return null;
 	}
 	
 }

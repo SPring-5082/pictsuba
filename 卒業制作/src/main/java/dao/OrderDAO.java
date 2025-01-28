@@ -18,9 +18,6 @@ public class OrderDAO extends DAO{
 	 * @throws SQLException
 	 */
 	public static boolean insert(Order order) throws SQLException {
-		if(!order.state().equals("済")) {
-			return false;
-		}
 		final String VALUES = "?,?,?,?,?,?,?";
 		final String COLUMNS = "ORDER_ID,CUSTOMER_ID,PRODUCT_ID,QUANTITY,PRICE,ADDRESS_ID,STATE";
 		final String sql = SQL.insert("ORDERS", VALUES,COLUMNS);
@@ -32,7 +29,7 @@ public class OrderDAO extends DAO{
 			pstmt.setInt(4, order.quantity());
 			pstmt.setInt(5, order.price());
 			pstmt.setInt(6, order.address_id());
-			pstmt.setString(7, order.state());
+			pstmt.setString(7, "支払済");
 			return pstmt.executeUpdate() > 0;
 		}
 	}

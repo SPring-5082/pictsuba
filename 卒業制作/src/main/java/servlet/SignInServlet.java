@@ -8,11 +8,13 @@ import dao.CustomerDAO;
 import exception.SQLDataNotFoundException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.EncryptionLogic;
+import model.SessionLogic;
 
 @WebServlet("/signin")
 public class SignInServlet extends HttpServlet {
@@ -41,6 +43,10 @@ public class SignInServlet extends HttpServlet {
 		
 		if(user != null) {
 			session.setAttribute("user", user);
+			final String session_id = SessionLogic.header + user.customer_id() + SessionLogic.footer;
+			Cookie cookie = new Cookie("session_id", session_id);
+			cookie.setPath("/");
+			response.addCookie(cookie	);
 		}
 		if(user != null) {
 			page = page == null? "/pictsuba/" : page ;

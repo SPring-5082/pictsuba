@@ -14,11 +14,10 @@ import model.CookieLogic;
 @WebServlet("/api/cart")
 public class AddCartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	/**
-	 * 現在のカート情報をCookieから取得し、新しい商品IDを加えた
-	 * Cookieを新しくセットするメソッド
+	/*
+	 *
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		final String product_id = request.getParameter("product_id");
 		if(product_id == null)return;
 		final String key = "cart";
@@ -30,7 +29,8 @@ public class AddCartServlet extends HttpServlet {
 		}else {
 			cookie = new Cookie(key, ArrayLogic.encode(new int[]{Integer.parseInt(product_id)}));
 		}
-		response.addCookie(cookie);
+		cookie.setPath("/");
+		response.addCookie(cookie); 
 		
 	}
 

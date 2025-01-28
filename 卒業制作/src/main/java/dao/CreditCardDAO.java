@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import beans.CreditCard;
+import exception.SQLDataNotFoundException;
 
 public class CreditCardDAO extends DAO{
 	/**
@@ -57,6 +58,30 @@ public class CreditCardDAO extends DAO{
 			}
 			rs.close();
 			return list;
+		}
+	}
+	
+	public static CreditCard findById(int card_id) throws SQLException, SQLDataNotFoundException {
+		final String WHERE = "WHERE CARD_ID = ?";
+		final String sql = SQL.select("CREDIT_CARDS").concat(WHERE);
+		try(Connection con = getConnection();
+			PreparedStatement pstmt = getPsTmt(con, sql)){
+			pstmt.setInt(1, card_id);
+			ResultSet rs = pstmt.executeQuery();
+			CreditCard card = null;
+			if(rs.next()) {
+				//rs.getInt(1);
+				int customer_id = rs.getInt(2);
+				String number = rs.getString(3);
+				String expire = rs.getString(4);
+				int security_code = rs.getInt(5);
+				String owner_name = rs.getString(6);
+				card = new CreditCard(card_id, customer_id, number, expire, security_code, owner_name);
+			}else {
+				throw new SQLDataNotFoundException();
+			}
+			rs.close();
+			return card;
 		}
 	}
 	
