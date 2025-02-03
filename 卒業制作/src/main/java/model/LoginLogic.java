@@ -39,6 +39,7 @@ public class LoginLogic {
 			customer = SessionLogic.execute(session_id);
 			return customer;
 		} catch (IllegalBlockSizeException | BadPaddingException | SQLException | SQLDataNotFoundException e) {
+			e.printStackTrace();
 			return null;
 		}
 	}

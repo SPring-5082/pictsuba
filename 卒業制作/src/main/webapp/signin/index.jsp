@@ -13,6 +13,8 @@
 <title><c:out value="${ application }"/></title>
 </head>
 <body>
+<jsp:include page="../jsp/nodispbackground.jsp"></jsp:include>
+
 	<main>
 		<div id="main_parent">
 			<div id="main_window">
@@ -38,5 +40,6 @@
 			</div>
 		</div>
 	</main>
+<script src="../js/comon.js"></script>
 </body>
 </html>

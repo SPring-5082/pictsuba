@@ -13,6 +13,9 @@
 <title><c:out value="${ application } カード情報"/></title>
 </head>
 <body>
+
+<jsp:include page="../../jsp/background.jsp"></jsp:include>
+
 <jsp:include page="../../jsp/header.jsp"></jsp:include>
 <main>
 	<div id="main_parent">
@@ -25,58 +28,60 @@
 					</span>
 					<h3>クレジットカード</h3>
 				</div>
-				
-				<c:forEach items="${ cards }" var="card">
-					<div class="payment items">
+				<div class="payment" id="items">
+					<c:forEach items="${ cards }" var="card">
 						<div class="item">
 							<div class="item_info">カード番号：<c:out value="${ card.blindNumber() }"/></div>
-							<button class="delete_button" onclick="delete_payment(${ card.card_id() })">削除</button>
+							<button class="delete_button" id="${ card.card_id() }" onclick="delete_payment(${ card.card_id() })">削除</button>
 						</div>
-					</div>
-				</c:forEach>
-				
-				<button id="add_button">
+					</c:forEach>
+				</div>
+				<button id="payment_add_button" class="add_button">
 					新しいカードを追加
 					<span class="material-symbols-outlined">
 						add
 					</span>
 				</button>
 			</div>
-				<!-- クレジットカード入力フォーム -->
-				<div id="modal_window">
-					<div id="modal_content">
-						<span class="material-symbols-outlined" id="close_icon">
-							close
-						</span>
-						<h2>クレジットカードの追加</h2>
-						<form action="" class="add_form">
-							<div class="input_box">
-								<label for="name"><h4>お名前<span class="must">*</span></h4></label>
-								<input type="text" name="name" required>
+			<!-- クレジットカード入力フォーム -->
+			<div id="payment_modal_window" class="modal_window">
+				<div id="payment_modal_content" class="modal_content">
+					<span class="material-symbols-outlined" id="payment_close_icon">
+						close
+					</span>
+					<h2>クレジットカードの追加</h2>
+					<div class="add_form">
+						<div class="input_box">
+							<h4>お名前<span class="must">*</span></h4>
+							<input type="text" name="name" id="credit_card_name">
+						</div>
+						<div class="input_box">
+							<h4>カード番号<span class="must">*</span></h4>
+							<input type="number" name="number" id="credit_card_number">
+						</div>
+						<div class="input_box">
+							<h4>有効期限<span class="must">*</span></h4>
+							<div id="expire_area">
+								<input type="text" id="expire_month" name="expire_month" pattern="[0-9]{2}" placeholder="MM">
+								/
+								<input type="text" id="expire_year" name="expire_year" pattern="[0-9]{2}" placeholder="YY">
 							</div>
-							<div class="input_box">
-								<label for="number"><h4>カード番号<span class="must">*</span></h4></label>
-								<input type="number" name="number" required>
-							</div>
-							<div class="input_box">
-								<label for="expire"><h4>有効期限<span class="must">*</span></h4></label>
-								<input type="month" name="expire" required>
-							</div>
-							<div class="input_box">
-								<label for="security_code">セキュリティコード</label>
-								<input type="number" name="security_code" required>
-							</div>
-							<input type="submit" value="追加">
-						</form>
+						</div>
+						<div class="input_box">
+							<h4>セキュリティコード<span class="must">*</span></h4>
+							<input type="number" name="security_code" id="security_code">
+						</div>
+						<input type="submit" value="追加" id="add_credit_card">
 					</div>
 				</div>
 			</div>
-			<a href="/${ application }/mypage" id="back_anchor">マイページへ</a>
 		</div>
-	</main>
+	</div>
+</main>
 <jsp:include page="../../jsp/footer.jsp"></jsp:include>
-<script src="./js/modal_window.js"></script>
 <script src="./js/comon.js"></script>
+<script src="./js/payment_modal_window.js" type="module"></script>
 <script src="./js/del_card.js"></script>
+<script src="./js/add_card.js" type="module"></script>
 </body>
 </html>

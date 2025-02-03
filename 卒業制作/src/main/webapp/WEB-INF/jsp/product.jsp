@@ -13,43 +13,58 @@
     <title><c:out value="${ application } ${ product.name() }"/></title>
 </head>
 <body>
-    <jsp:include page="../../jsp/header.jsp"></jsp:include>
-     <main>
-        <div id="main_parent">
-            <div id="product_window">
-                <div class="pictura">
-                    <div class="frame">
-                        <div class="draw_area">
-                            <img src="${ product.image() }" alt="絵画">
-                        </div>
-                    </div>
-                    <button id="favorite_icon">
-                        <span class="material-symbols-outlined">
-                            favorite
-                        </span>
-                    </button>
-                </div>
-                <div class="info">
-                    <h4 class="name"><c:out value="${ product.name() }"/></h4>
-                    <p class="creator"><c:out value="${ product.creator_name() }"/></p>
-                    <h4 class="price">\ <c:out value="${ calc.price(product.price(),product.category_id()) }"/></h4>
-                    <p class="description">
-                    	<c:out value="${ product.descryption() }"/>
-                    </p>
-                </div>
-                <button class="in_cart_btn" onclick="add_cart(${ product.product_id()})">カートへ入れる</button>
-            </div>
-        </div>
-    </main>
-    <jsp:include page="../../jsp/footer.jsp"></jsp:include>
-    <script>
-        const favorite_icon = document.getElementById("favorite_icon");
 
-        favorite_icon.addEventListener("click", () => {            
-            favorite_icon.classList.toggle("click");
-        })
-    </script>
-    <script src="./js/comon.js"></script>
-    <script src="./js/add_cart.js"></script>
+<jsp:include page="../../jsp/background.jsp"></jsp:include>
+<jsp:include page="../../jsp/header.jsp"></jsp:include>
+<div id="alert_window">
+	<span class="material-symbols-outlined">
+		check_circle
+	</span>
+	<p id="alert_text"></p>
+	<div id="alert_border"></div>
+</div>
+<main>
+	<div id="main_parent">
+		<div id="product_window">
+			<div class="pictura">
+				<div class="frame">
+					<div class="draw_area">
+						<img src="${ product.image() }" alt="絵画">
+					</div>
+				</div>
+				<c:choose>
+				<c:when test="${ fav }">
+					<button id="favorite_icon" class="click" onclick="click_icon(${ product.product_id() })">
+						<span class="material-symbols-outlined">
+							favorite
+						</span>
+					</button>
+				</c:when>
+				<c:otherwise>
+					<button id="favorite_icon" onclick="click_icon(${ product.product_id() })">
+						<span class="material-symbols-outlined">
+							favorite
+						</span>
+					</button>
+				</c:otherwise>
+				</c:choose>
+			</div>
+			<div class="info">
+				<h4 class="name"><c:out value="${ product.name() }"/></h4>
+				<p class="creator"><c:out value="${ product.creator_name() }"/></p>
+				<h4 class="price">\ <c:out value="${ calc.price(product.price(),product.category_id()) }"/></h4>
+				<p class="description">
+				<c:out value="${ product.descryption() }"/>
+				</p>
+			</div>
+			<button class="in_cart_btn" onclick="add_cart(${ product.product_id()})">カートへ入れる</button>
+		</div>
+	</div>
+</main>
+<jsp:include page="../../jsp/footer.jsp"></jsp:include>
+<script src="./js/comon.js"></script>
+<script src="./js/details_add_cart.js"></script>
+<script src="./js/send_favorite.js"></script>
+<script src="./js/show_alert.js"></script>
 </body>
 </html>

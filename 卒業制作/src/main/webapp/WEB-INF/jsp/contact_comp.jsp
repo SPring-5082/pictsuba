@@ -13,6 +13,9 @@
 <title><c:out value="${ application } お問い合わせ"/></title>
 </head>
 <body>
+
+<jsp:include page="../../jsp/background.jsp"></jsp:include>
+
     <jsp:include page="../../jsp/header.jsp"></jsp:include>
     <main>
         <div id="main_parent">

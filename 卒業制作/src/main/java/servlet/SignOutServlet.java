@@ -25,6 +25,7 @@ public class SignOutServlet extends HttpServlet {
 		Cookie[] cookies = request.getCookies();
 		String session_id = CookieLogic.getValueFromKey("session_id", cookies);
 		Cookie sessionCookie = new Cookie("session_id", session_id);
+		sessionCookie.setPath("/");
 		sessionCookie.setMaxAge(0);
 		response.addCookie(sessionCookie);
 		//セッションスコープからユーザー情報を削除

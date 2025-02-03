@@ -13,6 +13,8 @@
     <title><c:out value="${ applicaiotn } 新規登録"/></title>
 </head>
 <body>
+<jsp:include page="../jsp/nodispbackground.jsp"></jsp:include>
+
 	<main>
 		<div id="main_parent">
 			<div id="main_window">
@@ -74,5 +76,6 @@
 			</div>
 		</div>
 	</main>
+<script src="../js/comon.js"></script>
 </body>
 </html>

@@ -20,7 +20,6 @@ public class RemoveCartServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		Customer user = (Customer)session.getAttribute("user");
 		int product_id = Integer.parseInt(request.getParameter("product_id"));
-		System.out.println(product_id);
 		try {
 			Cart cart = new Cart(user.customer_id(), product_id, 0);
 			CartDAO.delByCustomerANDProduct_Id(cart);

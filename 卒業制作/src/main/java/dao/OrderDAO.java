@@ -66,54 +66,64 @@ public class OrderDAO extends DAO{
 	 * @throws SQLException
 	 */
 	public static List<Order> findByCustomer_id(int customer_id) throws SQLException{
-		List<Order> list = new ArrayList<Order>();
-		final String WHERE = "WHERE CUSTOMER_ID = ?";
-		final String sql = SQL.select("ORDERS").concat(WHERE);
+		List<Order> list = new ArrayList<>();
+		final String sql =
+		  "SELECT"
+		+ "		O.ORDER_ID,"
+		+ "		O.ORDER_DATE,"
+		+ "		O.STATE,\n"
+		+ "		(SELECT IMAGE FROM PRODUCTS P WHERE O.PRODUCT_ID = P.PRODUCT_ID) AS IMAGE "
+		+ "FROM "
+		+ "		(SELECT * FROM ORDERS UNION ALL SELECT ORDER_HISTORY_ID,CUSTOMER_ID,PRODUCT_ID,QUANTITY,PRICE,ADDRESS_ID,ORDER_DATE,\"お届け済み\" FROM ORDER_HISTORIES) O "
+		+ "WHERE"
+		+ "		O.CUSTOMER_ID = " + customer_id + " "
+		+ "ORDER BY"
+		+ "		O.ORDER_DATE DESC";
 		try(Connection con = getConnection();
-			PreparedStatement pstmt = getPsTmt(con,sql);){
-			pstmt.setInt(1, customer_id);
-			ResultSet rs = pstmt.executeQuery();
+			PreparedStatement pstmt = getPsTmt(con, sql);
+			ResultSet rs = pstmt.executeQuery()){
 			while(rs.next()) {
 				int order_id = rs.getInt(1);
-				//customer_id = customer_id;
-				int product_id = rs.getInt(3);
-				int quantity = rs.getInt(4);
-				int price = rs.getInt(5);
-				int address_id = rs.getInt(6);
-				Date order_date = rs.getDate(7);
-				String state = rs.getString(8);
-				list.add(new Order(order_id, customer_id, product_id, quantity, price, address_id, order_date, state));
+				Date order_date = rs.getDate(2);
+				String state = rs.getString(3);
+				String image = rs.getString(4);
+				Order order = new Order(order_id, order_date, state, image);
+				list.add(order);
 			}
-			rs.close();
-			return list;
 		}
+		return list;
 	}
 	
 	/**
-	 * 注文IDに基づく注文内容取得
-	 * @param order_id 注文ID
-	 * @return 注文内容リスト
+	 * 注文(履歴)番号に基づく注文基本
+	 * @param order_id
 	 * @throws SQLException 
 	 */
-	public static List<Order> findByOrder_id(int order_id) throws SQLException{
-		List<Order> list = new ArrayList<Order>();
-		final String WHERE = "WHERE ORDER_ID = ?";
-		final String sql = SQL.select("ORDERS").concat(WHERE);
+	public static Order findOrdersOverView(int order_id) throws SQLException {
+		String SQL =
+		  "SELECT"
+		+ "		ORDER_ID,"
+		+ "		ADDRESS_ID,"
+		+ "		ORDER_DATE,"
+		+ "		STATE,"
+		+ "		SUM(QUANTITY * PRICE) AS SUM_PRICE "
+		+ "FROM"
+		+ "		(SELECT * FROM ORDERS UNION ALL SELECT ORDER_HISTORY_ID,CUSTOMER_ID,PRODUCT_ID,QUANTITY,PRICE,ADDRESS_ID,ORDER_DATE,\"お届け済み\" FROM ORDER_HISTORIES) O "
+		+ "WHERE"
+		+ "		O.ORDER_ID = " + order_id + " "
+		+ "GROUP BY "
+		+ "		ORDER_ID,ADDRESS_ID,ORDER_DATE,STATE";
 		try(Connection con = getConnection();
-			PreparedStatement pstmt = getPsTmt(con,sql);){
-			pstmt.setInt(1, order_id);
-			for(ResultSet rs = pstmt.executeQuery();rs.next();) {
-				//order_id
-				int customer_id = rs.getInt(2);
-				int product_id = rs.getInt(3);
-				int quantity = rs.getInt(4);
-				int price = rs.getInt(5);
-				int address_id = rs.getInt(6);
-				java.util.Date add_date = rs.getDate(7);
-				String state = rs.getString(8);
-				list.add(new Order(order_id, customer_id, product_id, quantity, price, address_id, add_date,state));
-			}
-			return list;
+			PreparedStatement pstmt = getPsTmt(con, SQL);
+			ResultSet rs = pstmt.executeQuery()){
+			rs.next();
+			//order_id = rs.getInt(1);
+			int address_id = rs.getInt(2);
+			Date order_date = rs.getDate(3);
+			String state = rs.getString(4);
+			int sum_price = rs.getInt(5);
+			Order order = new Order(address_id, order_date, state, sum_price);
+			return order;
 		}
 	}
 	

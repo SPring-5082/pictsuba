@@ -6,9 +6,7 @@ import java.util.List;
 
 import beans.Customer;
 import beans.Order;
-import beans.Order_History;
 import dao.OrderDAO;
-import dao.Order_HistoryDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -25,19 +23,15 @@ public class Order_HistoryServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Customer user = (Customer)session.getAttribute("user");
-		List<Order> orders = null;
-		List<Order_History> order_histories = null;
 		try {
-			orders = OrderDAO.findByCustomer_id(user.customer_id());
-			order_histories = Order_HistoryDAO.findByCustomr_id(user.customer_id());
-		} catch (SQLException e) {}
-		//リクエストスコープに履歴情報を追加
-		request.setAttribute("orders", orders);
-		request.setAttribute("order_histories", order_histories);
-		RequestDispatcher dispatcher = request.getRequestDispatcher(page);
-		dispatcher.forward(request, response);
-		return;
-		
+			List<Order> orders = OrderDAO.findByCustomer_id(user.customer_id());
+			request.setAttribute("orders", orders);
+			request.setAttribute("orders", orders);
+			RequestDispatcher dispatcher = request.getRequestDispatcher(page);
+			dispatcher.forward(request, response);
+		} catch (SQLException e) {
+			response.setStatus(response.SC_INTERNAL_SERVER_ERROR);
+		}
 	}
 
 }

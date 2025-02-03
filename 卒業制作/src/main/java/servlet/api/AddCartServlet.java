@@ -24,12 +24,15 @@ public class AddCartServlet extends HttpServlet {
 		Cookie[] cookies = request.getCookies();
 		Cookie cookie = null;
 		if(CookieLogic.existKey(key,cookies)) {
+			//既にcookienにある場合return
+			if(ArrayLogic.exisits(ArrayLogic.decode(CookieLogic.getValueFromKey(key, cookies)), Integer.parseInt(product_id)))return;
 			cookie = CookieLogic.getCookie(key, cookies);
 			cookie = CookieLogic.addId(cookie, Integer.parseInt(product_id));
 		}else {
 			cookie = new Cookie(key, ArrayLogic.encode(new int[]{Integer.parseInt(product_id)}));
 		}
 		cookie.setPath("/");
+		cookie.setMaxAge(60 * 60 * 24 * 31);
 		response.addCookie(cookie); 
 		
 	}

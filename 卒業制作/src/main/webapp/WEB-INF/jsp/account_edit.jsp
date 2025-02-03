@@ -13,6 +13,8 @@
 <title><c:out value="${ application } アカウント情報"/></title>
 </head>
 <body>
+<jsp:include page="../../jsp/background.jsp"></jsp:include>
+
 	<jsp:include page="../../jsp/header.jsp"></jsp:include>
 	
 	<main>
@@ -82,5 +84,6 @@
     </main>
 	
 	<jsp:include page="../../jsp/footer.jsp"></jsp:include>
+<script src="./js/comon.js"></script>
 </body>
 </html>

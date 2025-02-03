@@ -22,7 +22,7 @@ import model.CookieLogic;
 @WebFilter("/favorite")
 public class FavoriteFilter extends HttpFilter implements Filter {
 	/**
-	 * カートページを表示する際、現在Cookie内に存在するお気に入り情報を
+	 * お気に入りページを表示する際、現在Cookie内に存在するお気に入り情報を
 	 * DBに反映させ、Cookie内のお気に入り情報をリセットするメソッド
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {

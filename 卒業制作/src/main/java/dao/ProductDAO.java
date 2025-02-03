@@ -6,7 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import beans.Cart;
 import beans.Product;
@@ -59,19 +61,28 @@ public class ProductDAO extends DAO {
 	
 	private static final  String RECOMEND = 
 		SELECTS 
-		+ "WHERE\n"
+		+ " WHERE\n"
 		+ "	(\n"
 		+ "		CATEGORY_ID IN\n"
 		+ "			(SELECT CATEGORY_ID FROM PRODUCTS WHERE PRODUCT_ID IN (SELECT PRODUCT_ID FROM ORDER_HISTORIES WHERE CUSTOMER_ID = ?))\n"
+		+ "        or\n"
+		+ "        CREATOR_ID IN\n"
+		+ "			(SELECT CREATOR_ID FROM PRODUCTS WHERE PRODUCT_ID IN (SELECT PRODUCT_ID FROM ORDER_HISTORIES WHERE CUSTOMER_ID = ?))\n"
+		+ "		or\n"
+		+ "        CATEGORY_ID IN\n"
+		+ "			(SELECT CATEGORY_ID FROM PRODUCTS WHERE PRODUCT_ID IN (SELECT PRODUCT_ID FROM ORDERS WHERE CUSTOMER_ID = ?))\n"
 		+ "		or\n"
 		+ "		CREATOR_ID IN\n"
-		+ "			(SELECT CREATOR_ID FROM PRODUCTS WHERE PRODUCT_ID IN (SELECT PRODUCT_ID FROM ORDER_HISTORIES WHERE CUSTOMER_ID = ?))\n"
+		+ "            (SELECT CREATOR_ID FROM PRODUCTS WHERE PRODUCT_ID IN (SELECT PRODUCT_ID FROM ORDERS WHERE CUSTOMER_ID = ?))\n"
 		+ "	)\n"
 		+ "    AND\n"
 		+ "    PRODUCT_ID NOT IN\n"
 		+ "		(SELECT PRODUCT_ID FROM ORDER_HISTORIES WHERE CUSTOMER_ID = ?)\n"
-		+ "	ORDER BY\n"
-		+ "		(SALES_QUANTITY+LOOKUP/10) DESC"
+		+ "	AND\n"
+		+ "    PRODUCT_ID NOT IN\n"
+		+ "		(SELECT PRODUCT_ID FROM ORDERS WHERE CUSTOMER_ID = ?)\n"
+		+ "ORDER BY\n"
+		+ "	(SALES_QUANTITY+LOOKUP/10) DESC"
 		+ " LIMIT 30";
 	
 	/**
@@ -159,6 +170,9 @@ public class ProductDAO extends DAO {
 			pstmt.setInt(1, customer_id);
 			pstmt.setInt(2, customer_id);
 			pstmt.setInt(3, customer_id);
+			pstmt.setInt(4, customer_id);
+			pstmt.setInt(5, customer_id);
+			pstmt.setInt(6, customer_id);
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
 				int product_id = rs.getInt(1);
@@ -316,6 +330,54 @@ public class ProductDAO extends DAO {
 			return results;
 		}
 		
+	}
+	
+	public static Map<Product, Integer> findByOrderID(int order_id) throws SQLException {
+		Map<Product, Integer> map = new HashMap<>();
+		String sql =
+		"SELECT\n"
+		+ "	PRODUCT_ID,\n"
+		+ "	PRODUCT_NAME,\n"
+		+ "	ADD_DATE,\n"
+		+ "	(SELECT PRICE FROM (SELECT ORDER_ID,PRODUCT_ID,PRICE FROM ORDERS UNION SELECT ORDER_HISTORY_ID,PRODUCT_ID,PRICE FROM ORDER_HISTORIES) O WHERE O.ORDER_ID = " + order_id + " AND O.PRODUCT_ID = P.PRODUCT_ID) AS PRICE,\n"
+		+ "	CREATOR_ID,\n"
+		+ "	(SELECT CREATOR_NAME FROM CREATORS C WHERE P.CREATOR_ID = C.CREATOR_ID) AS CREATOR_NAME,\n"
+		+ "	CATEGORY_ID,\n"
+		+ "	(SELECT CATEGORY_NAME FROM CATEGORIES C WHERE P.CATEGORY_ID = C.CATEGORY_ID) AS CATEGORY_NAME,\n"
+		+ "	STOCK,\n"
+		+ "    LOOKUP,\n"
+		+ "    POINT,\n"
+		+ "    IMAGE,\n"
+		+ "    DESCRYPTION,\n"
+		+ "    (SELECT QUANTITY FROM (SELECT ORDER_ID,PRODUCT_ID,QUANTITY FROM ORDERS UNION SELECT ORDER_HISTORY_ID,PRODUCT_ID,QUANTITY FROM ORDER_HISTORIES) O WHERE O.ORDER_ID = " + order_id + " AND O.PRODUCT_ID = P.PRODUCT_ID) AS QUANTITY\n"
+		+ "FROM \n"
+		+ "	PRODUCTS P\n"
+		+ "WHERE\n"
+		+ "	PRODUCT_ID IN\n"
+		+ "	(SELECT PRODUCT_ID FROM (SELECT ORDER_ID,PRODUCT_ID FROM ORDERS UNION SELECT ORDER_HISTORY_ID,PRODUCT_ID FROM ORDER_HISTORIES) O WHERE O.ORDER_ID = " + order_id + ")";
+		try(Connection con = getConnection();
+			PreparedStatement pstmt = getPsTmt(con, sql);
+			ResultSet rs = pstmt.executeQuery();){
+			while(rs.next()) {
+				int product_id = rs.getInt(1);
+				String product_name = rs.getString(2);
+				Date date = rs.getDate(3);
+				int price = rs.getInt(4);
+				int creator_id = rs.getInt(5);
+				String creator_name = rs.getString(6);
+				int cateory_id = rs.getInt(7);
+				String category_name = rs.getString(8);
+				int stock = rs.getInt(9);
+				int lookup = rs.getInt(10);
+				int point = rs.getInt(11);
+				String image = rs.getString(12);
+				String descryption = rs.getString(13);
+				int quantity = rs.getInt(14);
+				Product product = new Product(product_id, product_name, date, price, creator_id, cateory_id, stock, lookup, point, image, descryption, creator_name, category_name);
+				map.put(product, quantity);
+			}
+		}
+		return map;
 	}
 	
 	public static boolean updateStockByCart(Cart cart) throws SQLException {

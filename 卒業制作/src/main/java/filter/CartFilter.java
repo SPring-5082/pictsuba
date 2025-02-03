@@ -32,13 +32,11 @@ public class CartFilter extends HttpFilter implements Filter {
 		Customer user = (Customer)session.getAttribute("user");
 		Cookie[] cookies = httpRequest.getCookies();
 		if(user != null) {
-			System.out.println(user.name() + ":name");
 			final String key = "cart";
 			if(CookieLogic.existKey(key, cookies)) {
 				Cookie cartCookie = CookieLogic.getCookie(key, cookies);
 				int[] cart = ArrayLogic.decode(cartCookie.getValue());
 				for(int id : cart) {
-					System.out.println(id);
 					try {
 						CartDAO.insert(new Cart(user.customer_id(), id ,1));
 					}catch (Exception e) {e.printStackTrace();}

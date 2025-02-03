@@ -13,6 +13,7 @@
 <title><c:out value="${ application }"/></title>
 </head>
 <body>
+<jsp:include page="../../jsp/background.jsp"></jsp:include>
 <jsp:include page="../../jsp/header.jsp"></jsp:include>
 
 <main>
@@ -134,9 +135,9 @@
 					</label>
 				</div>
 				<div id="point_box">
-					<input type="checkbox" name="use_point" value="true">
+					<input type="checkbox" name="use_point" value="true" id="is_use_point">
 					<label for="point"></label><h4>ポイントを使う：</h4>
-					<input type="number" name="point" id="point" max="${ user.point() }" min="0" step="1">
+					<input type="number" name="point" id="point" value="0" readonly="readonly" max="${ user.point() }" min="0" step="1">
 				</div>
 			</section>
 			<section>
@@ -149,7 +150,7 @@
 				<div id="details_amount">
 					<h4>商品合計</h4><p id="show_product_total"><c:out value="${ total_quantity }"/></p>
 					<h4>送料</h4><p id="show_postage">\500</p>
-					<h4>ポイント</h4><p>-＊＊＊</p>
+					<h4>ポイント</h4><p id="use_point">-＊＊＊</p>
 					<h3 class="total">合計<span>(税込み)</span></h3>
 					<h3 class="total" id="total_amount">\<c:out value="${ sum_price + 500 }"/></h3>
 				</div>
@@ -207,19 +208,19 @@
 					</div>
 					<div class="input_box">
 						<h4>カード番号<span class="must">*</span></h4>
-						<input type="number" name="number" id="credit_card_number" required>
+						<input type="text" pattern="[0-9]{14,16}" name="number" id="credit_card_number" required>
 					</div>
 					<div class="input_box">
 						<h4>有効期限<span class="must">*</span></h4>
 						<div id="expire_area">
-							<input type="number" name="expire_month" placeholder="MM" id="expire_month" oninput="javascript: this.value = this.value.slice(0, 2);">
+							<input type="text" pattern="[0-9]{2}" name="expire_month" placeholder="MM" id="expire_month" oninput="javascript: this.value = this.value.slice(0, 2);">
 							/
-							<input type="number" name="expire_year" placeholder="YY" id="expire_year" oninput="javascript: this.value = this.value.slice(0, 2);">
+							<input type="text" pattern="[0-9]{2}" name="expire_year" placeholder="YY" id="expire_year" oninput="javascript: this.value = this.value.slice(0, 2);">
 						</div>
 					</div>
 					<div class="input_box">
 						<h4>セキュリティコード<span class="must">*</span></h4>
-						<input type="number" name="security_code" id="security_code" required>
+						<input type="text" name="security_code" id="security_code" pattern="[0-9]{3}" required>
 					</div>
 						<input type="submit" value="追加" id="add_credit_card">
 				</div>

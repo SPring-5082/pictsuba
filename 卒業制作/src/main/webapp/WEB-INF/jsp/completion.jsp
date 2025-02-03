@@ -13,6 +13,7 @@
 <title><c:out value="${ application }"/></title>
 </head>
 <body>
+<jsp:include page="../../jsp/background.jsp"></jsp:include>
 <jsp:include page="../../jsp/header.jsp"/>
 <main>
 	<div id="main_parent">
@@ -44,5 +45,6 @@
 	</div>
 </main>
 <jsp:include page="../../jsp/footer.jsp"/>
+<script src="./js/comon.js"></script>
 </body>
 </html>

@@ -19,7 +19,7 @@ public final class OrderCommitLogic {
 				Product p =  ProductDAO.findById(c.product_id());
 				if(p.stock() > 0) {
 					ProductDAO.updateStockByCart(c);
-					Order order = new Order(order_id, customer_id,c.product_id(), c.quantity(),p.price(), address_id, "");
+					Order order = new Order(order_id, customer_id,c.product_id(), c.quantity(),CampaignLogic.price(p.price(), p.category_id()), address_id, "");
 					OrderDAO.insert(order);
 				}
 			}

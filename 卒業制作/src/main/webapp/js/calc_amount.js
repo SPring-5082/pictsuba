@@ -24,14 +24,14 @@ is_use_point.addEventListener("change", ()=>{
 		details_amount_points.forEach((details_amount_point)=>{
 			details_amount_point.classList.add("view");
 		});
-
+		point.removeAttribute("readonly");
 		point.value = 0;
 		use_point.textContent = "0";
 	} else {
 		details_amount_points.forEach((details_amount_point)=>{
 			details_amount_point.classList.remove("view");
 		});
-
+		point.setAttribute("readonly","readonly");
 		point.value = 0;
 		use_point.textContent = "0";
 	}

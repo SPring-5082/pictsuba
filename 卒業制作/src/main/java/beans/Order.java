@@ -14,6 +14,10 @@ public class Order implements Serializable{
 	private String state;
 	
 	
+	private int sum_price;
+	private String product_image;
+	
+	
 	/**INSERT用コンストラクタ*/
 	public Order(int order_id, int customer_id, int product_id, int quantity, int price, int address_id,String state) {
 		this.order_id = order_id;
@@ -36,6 +40,22 @@ public class Order implements Serializable{
 		this.order_date = order_date;
 		this.state = state;
 	}
+	
+	public Order(int order_id,Date order_date,
+			String state,String product_image) {
+		this.order_id = order_id;
+		this.order_date = order_date;
+		this.state = state;
+		this.product_image = product_image;
+	}
+	
+	public Order(int address_id, Date order_date, String state,int sum_price) {
+		this.address_id = address_id;
+		this.order_date = order_date;
+		this.state = state;
+		this.sum_price = sum_price;
+	}
+	
 
 	public int order_id() {
 		return order_id;
@@ -67,6 +87,14 @@ public class Order implements Serializable{
 
 	public String state() {
 		return state;
+	}
+
+	public int sum_price() {
+		return sum_price;
+	}
+
+	public String product_image(){
+		return "/pictsuba/image?image="+product_image;
 	}
 
 }

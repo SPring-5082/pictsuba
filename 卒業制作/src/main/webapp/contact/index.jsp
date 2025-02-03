@@ -13,6 +13,8 @@
 <title><c:out value="${ application }"/></title>
 </head>
 <body>
+<jsp:include page="../jsp/nodispbackground.jsp"></jsp:include>
+
 <jsp:include page="../jsp/nodispHeader.jsp"></jsp:include>
 
 <main>
@@ -43,5 +45,6 @@
 </main>
 
 <jsp:include page="../jsp/nodispFooter.jsp"></jsp:include>
+<script src="../js/comon.js"></script>
 </body>
 </html>

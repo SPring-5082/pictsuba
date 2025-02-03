@@ -43,10 +43,13 @@ public class SignInServlet extends HttpServlet {
 		
 		if(user != null) {
 			session.setAttribute("user", user);
-			final String session_id = SessionLogic.header + user.customer_id() + SessionLogic.footer;
-			Cookie cookie = new Cookie("session_id", session_id);
-			cookie.setPath("/");
-			response.addCookie(cookie	);
+			try {
+				final String session_id = EncryptionLogic.enc(SessionLogic.header + user.customer_id() + SessionLogic.footer);
+				Cookie cookie = new Cookie("session_id", session_id);
+				cookie.setPath("/");
+				cookie.setMaxAge(60 * 60 * 24 * 31);
+				response.addCookie(cookie);
+			}catch (Exception e) {}
 		}
 		if(user != null) {
 			page = page == null? "/pictsuba/" : page ;

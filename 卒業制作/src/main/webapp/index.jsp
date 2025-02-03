@@ -4,16 +4,33 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&" />
-    <link href="./img/sightIcon.jpg" rel="icon">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-    <link href="./css/comon.css" rel="stylesheet">
-    <link href="./css/index.css" rel="stylesheet">
-    <title><c:out value="${ application } 絵の総合販売サイト"/></title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&" />
+<link href="./img/sightIcon.jpg" rel="icon">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+<link href="./css/comon.css" rel="stylesheet">
+<link href="./css/index.css" rel="stylesheet">
+<title><c:out value="${ application } 絵の総合販売サイト"/></title>
 </head>
 <body>
+
+<div class="image-container">
+	<img class="bg_img pink-circle" src="./img/pi.maru.png" alt="Pink Circle">
+	<img class="bg_img orange-circle" src="./img/or.maru.png" alt="Orange Circle">
+	<img class="bg_img blue-circle" src="./img/bl.maru.a.png" alt="Blue Circle Border">
+	<img class="bg_img yellow-triangle" src="./img/ye.sankaku.png" alt="Yellow Triangle">
+	<img class="bg_img green-square" src="./img/ge.sikaku.png" alt="Green Square">
+	<img class="bg_img purple-square" src="./img/pa.sikaku.png" alt="Purple Square">
+	<img class="bg_img purple-triangle" src="./img/pa.sansaku.png" alt="Purple Triangle">
+	<img class="bg_img green-circle" src="./img/gr.maru.png" alt="Green Circle">
+	<img class="bg_img blue-circle-border" src="./img/bl.maru.png" alt="Blue Circle">
+	<img class="bg_img yellow-square" src="./img/ye.sikaku.png" alt="Yellow Square">
+	<img class="bg_img pink-triangle" src="./img/pi.sankaku.png" alt="Pink Triangle">
+	<img class="bg_img blue-triangle" src="./img/bl.sankaku.png" alt="Blue Square">
+	<img class="bg_img orange-circle-border" src="./img/or.maru.a.png" alt="Orange Circle Border">
+</div>
+
     <jsp:include page="./jsp/header.jsp"></jsp:include>
     <main>
         <div id="main_parent">

@@ -10,10 +10,12 @@
 <link href="./img/sightIcon.jpg" rel="icon"/>
 <link href="./css/comon.css" rel="stylesheet"/>
 <link href="./css/search.css" rel="stylesheet">
-<link href="./css/index.css" rel="stylesheet">
 <title><c:out value="${ application }"/></title>
 </head>
 <body>
+
+<jsp:include page="../../jsp/background.jsp"></jsp:include>
+
 	<jsp:include page="../../jsp/header.jsp"></jsp:include>
 	<main>
 		<div id="main_parent">
@@ -41,5 +43,6 @@
 		</div>
 	</main>
 	<jsp:include page="../../jsp/footer.jsp"></jsp:include>
+<script src="./js/comon.js"></script>
 </body>
 </html>

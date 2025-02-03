@@ -72,7 +72,7 @@ add_credit_card.addEventListener("click", () => {
             });
     
             child.innerHTML = `
-            <input type="radio" name="card" id="${"credit_card" + resp_id}" value="${resp_id} checked>
+            <input type="radio" name="card" id="${"credit_card" + resp_id}" value="${resp_id}" checked>
             <div class="item_info">カード番号：${hidden_number}</div>
             `;
             items.append(child);
