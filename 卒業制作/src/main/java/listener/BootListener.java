@@ -10,6 +10,7 @@ import model.MailLogic;
 
 @WebListener
 public class BootListener implements ServletContextListener {
+	public static int reqCount = 0;
 	/**
 	 * サーバ起動時に
 	 * このアプリケーションの名前と
@@ -37,6 +38,11 @@ public class BootListener implements ServletContextListener {
 		//キャンペーン価格計算機設定
 		sc.setAttribute("calc", new CampaignLogic());
 		
+	}
+	
+	@Override
+	public void contextDestroyed(ServletContextEvent sce) {
+		System.out.println(reqCount);
 	}
 	
 }

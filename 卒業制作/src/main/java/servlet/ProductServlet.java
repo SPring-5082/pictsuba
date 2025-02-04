@@ -23,17 +23,19 @@ public class ProductServlet extends HttpServlet {
 		int product_id = -1;
 		try {
 			product_id = Integer.parseInt(request.getParameter("productId"));
-		}catch (Exception e) {}
-		Product product = null;
-		try {
+			Product product = null;
 			product = ProductDAO.findById(product_id);
-		}catch (Exception e) {}
-		//お気に入りであるかどうか
-		boolean isFav = FavoriteLogic.exists(request);
-		request.setAttribute("fav", isFav);
-		request.setAttribute("product", product);
-		RequestDispatcher dispatcher = request.getRequestDispatcher(page);
-		dispatcher.forward(request, response);
+			
+			//お気に入りであるかどうか
+			boolean isFav = FavoriteLogic.exists(request);
+			request.setAttribute("fav", isFav);
+			request.setAttribute("product", product);
+			RequestDispatcher dispatcher = request.getRequestDispatcher(page);
+			dispatcher.forward(request, response);
+		}catch (Exception e) {
+			response.setStatus(response.SC_INTERNAL_SERVER_ERROR);
+		}
+		
 	}
 	
 }

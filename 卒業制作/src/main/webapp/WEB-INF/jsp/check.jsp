@@ -123,6 +123,7 @@
 									add
 								</span>
 							</button>
+							<p id="non_card_error" class="error_msg"></p>
 						</div>
 					</label>
 					<label for="payment_radio2" class="choose">
