@@ -150,7 +150,7 @@
 				<div id="details_amount">
 					<h4>商品合計</h4><p id="show_product_total"><c:out value="${ total_quantity }"/></p>
 					<h4>送料</h4><p id="show_postage">\500</p>
-					<h4>ポイント</h4><p id="use_point">-＊＊＊</p>
+					<h4>ポイント</h4><p id="use_point">-0</p>
 					<h3 class="total">合計<span>(税込み)</span></h3>
 					<h3 class="total" id="total_amount">\<c:out value="${ sum_price + 500 }"/></h3>
 				</div>

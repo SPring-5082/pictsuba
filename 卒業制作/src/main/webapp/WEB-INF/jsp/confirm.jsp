@@ -14,7 +14,8 @@
 <title><c:out value="${ application }"/></title>
 </head>
 <body>
-	
+<jsp:include page="../../jsp/background.jsp"></jsp:include>
+<jsp:include page="../../jsp/header.jsp"></jsp:include>
 <main>
 	<div id="main_parent">
 		<form action="/${ application }/completion" method="post" id="main_box">
@@ -144,7 +145,7 @@
 		</form>
 	</div>
 </main>
-	
-<script src="../js/comon.js"></script>
+<jsp:include page="../../jsp/footer.jsp"></jsp:include>
+<script src="./js/comon.js"></script>
 </body>
 </html>
