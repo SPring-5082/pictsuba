@@ -20,12 +20,9 @@ public class SignupFilter extends HttpFilter implements Filter {
 	 * パラメータとCookieから取得したtokenが不正であればページを表示させない
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		System.out.println("signupfilter");
 		final String token = request.getParameter("token");
 		Cookie[] cookies = ((HttpServletRequest)request).getCookies();
 		boolean pageflag = false;
-		System.out.println(CookieLogic.getValueFromKey("token", cookies));
-		System.out.println(token);
 		if(CookieLogic.existKey("token", cookies)) {
 			if(CookieLogic.getValueFromKey("token", cookies).equals(token)) {
 				pageflag = true;

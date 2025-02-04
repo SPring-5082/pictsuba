@@ -1,13 +1,5 @@
 package test.dao;
 
-import java.sql.SQLException;
-import java.util.List;
-
-import org.junit.jupiter.api.Test;
-
-import beans.Order;
-import dao.OrderDAO;
-
 class TestOrderDAO {
 	/*
 	@Test
@@ -32,17 +24,6 @@ class TestOrderDAO {
 	}
 	*/
 	
-	@Test
-	void testFindByOrder_id() {
-		try {
-			List<Order> list = OrderDAO.findByOrder_id(1);
-			for(Order o : list) {
-				System.out.println(o.product_id());
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
 	
 	/*
 	@Test

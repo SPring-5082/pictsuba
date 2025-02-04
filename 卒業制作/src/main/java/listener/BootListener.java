@@ -22,14 +22,14 @@ public class BootListener implements ServletContextListener {
 		sce.getServletContext().getContextPath();
 		ServletContext sc =  sce.getServletContext();
 		//ドメイン名設定
-		final String domain = "localhost:8080";
+		final String domain = System.getProperty("domain");
 		sc.setAttribute("domain", domain);
 		//アプリケーション名設定
 		final String application = sc.getContextPath();
 		sc.setAttribute("application", application.replaceFirst("/", ""));
 		
 		//暗号鍵の読み込み
-		KeyStorage.init("O52HO0G5C3NtkegLeQE0Kg==", "jxCxl18YNgUEY97WEhbE/Q==");
+		KeyStorage.init(System.getProperty("key"),System.getProperty("iv"));
 		
 		//メールサーバとのセッション確立
 		MailLogic.init();

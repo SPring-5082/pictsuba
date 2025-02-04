@@ -23,59 +23,99 @@
                 
             <div id="info_window">
                 <form id="info_form" action="/${ application }/account" method="post" autocomplete="off">
-                    <label for="name"><h4>お名前</h4></label>
-                    <input type="text" name="name" class="info_box" value="${ user.name() }" required="required">
-
-                    <label for="password"><h4>パスワード</h4></label>
-                    <input type="password" name="password" class="info_box" value="${ user.decryptPassword() }" required="required">
-
-                    <label for="phone"><h4>電話番号</h4></label>
-                    <input type="tel" name="phone" class="info_box" value="${ user.phone() }">
+                    <div class="input_box">
+						<label for="name"><h4>お名前</h4></label>
+                    	<input id="name" type="text" name="name" value="${ user.name() }" required="required">
+					</div>
                     
-                    <label for="mail"><h4>メールアドレス</h4></label>
-                    <input type="email" name="mail" class="info_box" value="${ user.mail() }" required="required">
+                    
+                    <div class="input_box">
+						<label for="password"><h4>パスワード<span class="must">*</span></h4></label>
+						<div class="password_area">
+							<input value="${ user.decryptPassword() }" type="password" name="password" required="required" autocomplete="off" pattern="[a-zA-Z0-9!@#$%^&*()_+=\-]{8,16}" id="password">
+							<span class="material-symbols-outlined eye_icon" id="eye_icon">
+								visibility_off
+							</span>
+						</div>
+						<p id="password_error" class="error_msg"></p>
+					</div>
 
-                    <label for="age"><h4>年齢</h4></label>
-                    <c:choose>
-                    	<c:when test="${ user.age() > 0 }">
-                    		<input type="number" name="age" min="0" class="info_box" value="${ user.age() }">
-                    	</c:when>
-                    	<c:otherwise>
-                    		<input type="number" name="age" min="0" class="info_box">
-                    	</c:otherwise>
-                    </c:choose>
+					<div class="input_box">
+						<label for="check_password"><h4>パスワード（確認用）<span class="must">*</span></h4></label>
+						<div class="password_area">
+							<input value="${ user.decryptPassword() }" type="password" name="check_password" required="required" autocomplete="off" pattern="[a-zA-Z0-9!@#$%^&*()_+=\-]{8,16}" id="check_password">
+							<span class="material-symbols-outlined eye_icon" id="check_eye_icon">
+								visibility_off
+							</span>
+						</div>
+						<p id="check_password_error" class="error_msg"></p>
+						<p id="match_error" class="error_msg"></p>
+					</div>
+                    
+                    
+                    <div class="input_box">
+                    	<label for="phone"><h4>電話番号</h4></label>
+                    	<input id="phone" type="tel" placeholder="ハイフンなし" name="phone"  value="${ user.phone() }" pattern="[0-9]{10,11}">
+                    	<p id="tel_error" class="error_msg"></p>
+                    </div>
+                    
+                    
+                    <div class="input_box">
+                    	<label for="mail"><h4>メールアドレス</h4></label>
+	                    <input type="email" name="mail" value="${ user.mail() }" required="required">
+                    </div>
+                    
+                    <div class="input_box">
+                    	<label for="age"><h4>年齢<span class="must">　*自動入力</span></h4></label>
+	                    <c:choose>
+	                    	<c:when test="${ user.age() > 0 }">
+	                    		<input id="age" type="number" name="age" min="0" value="${ user.age() }" readonly="readonly">
+	                    	</c:when>
+	                    	<c:otherwise>
+	                    		<input id="age" type="number" name="age" min="0" readonly="readonly">
+	                    	</c:otherwise>
+	                    </c:choose>
+                    </div>
+                    
 
-                    <label for="barth_day"><h4>誕生日</h4></label>
-                    <input type="date" name="birth_day" class="info_box" value="${ user.birth_day().toString() }" max="${ user.first_log().toString() }">
-
-                    <label for="gender"><h4>性別</h4></label>
-                    <select name="gender" class="info_box">
-                    	<c:if test="${ empty user.gender() }"><option value="" selected="selected" disabled="disabled">-</option></c:if>
-                        <c:choose>
-                        	<c:when test="${ user.gender() eq 'male' }">
-                        		<option value="male" selected="selected">男</option>
-                        	</c:when>
-                        	<c:otherwise>
-                        		<option value="male">男</option>
-                        	</c:otherwise>
-                        </c:choose>
-                        <c:choose>
-                        	<c:when test="${ user.gender() eq 'female' }">
-                        		<option value="female" selected="selected">女</option>
-                        	</c:when>
-                        	<c:otherwise>
-                        		<option value="female">女</option>
-                        	</c:otherwise>
-                        </c:choose>
-                        <c:choose>
-                        	<c:when test="${ user.gender() eq 'nothing' }">
-                        		<option value="nothing" selected="selected">回答しない</option>
-                        	</c:when>
-                        	<c:otherwise>
-                        		<option value="nothing">回答しない</option>
-                        	</c:otherwise>
-                        </c:choose>
-                    </select>
+                    
+                    <div class="input_box">
+                    	<label for="barth_day"><h4>誕生日</h4></label>
+	                    <input id="birth_day" type="date" name="birth_day" value="${ user.birth_day().toString() }" min="1900-01-01" max="${ user.first_log().toString() }">
+                    </div>
+                    
+                    
+                    <div class="input_box">
+                    	<label for="gender"><h4>性別</h4></label>
+	                    <select name="gender">
+	                    	<c:if test="${ empty user.gender() }"><option value="" selected="selected" disabled="disabled">-</option></c:if>
+	                        <c:choose>
+	                        	<c:when test="${ user.gender() eq 'male' }">
+	                        		<option value="male" selected="selected">男</option>
+	                        	</c:when>
+	                        	<c:otherwise>
+	                        		<option value="male">男</option>
+	                        	</c:otherwise>
+	                        </c:choose>
+	                        <c:choose>
+	                        	<c:when test="${ user.gender() eq 'female' }">
+	                        		<option value="female" selected="selected">女</option>
+	                        	</c:when>
+	                        	<c:otherwise>
+	                        		<option value="female">女</option>
+	                        	</c:otherwise>
+	                        </c:choose>
+	                        <c:choose>
+	                        	<c:when test="${ user.gender() eq 'nothing' }">
+	                        		<option value="nothing" selected="selected">回答しない</option>
+	                        	</c:when>
+	                        	<c:otherwise>
+	                        		<option value="nothing">回答しない</option>
+	                        	</c:otherwise>
+	                        </c:choose>
+	                    </select>
+                    </div>
+                    
                     <input type="submit" id="submit_btn">
                 </form>
             </div>
@@ -85,5 +125,6 @@
 	
 	<jsp:include page="../../jsp/footer.jsp"></jsp:include>
 <script src="./js/comon.js"></script>
+<script src="./js/signup.js"></script>
 </body>
 </html>

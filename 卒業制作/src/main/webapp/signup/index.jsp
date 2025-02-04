@@ -33,32 +33,42 @@
 		
 					<div class="input_box">
 						<label for="password"><h4>パスワード<span class="must">*</span></h4></label>
-						<input type="password" name="password" required="required" autocomplete="off" pattern="[a-zA-Z0-9!@#$%^&*()_+=-]{8,16}">
+						<div class="password_area">
+							<input type="password" name="password" required="required" autocomplete="off" pattern="[a-zA-Z0-9!@#$%^&*()_+=\-]{8,16}" id="password">
+							<span class="material-symbols-outlined eye_icon" id="eye_icon">
+								visibility_off
+							</span>
+						</div>
+						<p id="password_error" class="error_msg"></p>
 					</div>
 
 					<div class="input_box">
 						<label for="check_password"><h4>パスワード（確認用）<span class="must">*</span></h4></label>
-						<input type="password" name="password" required="required" autocomplete="off" pattern="[a-zA-Z0-9!@#$%^&*()_+=-]{8,16}">
+						<div class="password_area">
+							<input type="password" name="check_password" required="required" autocomplete="off" pattern="[a-zA-Z0-9!@#$%^&*()_+=\-]{8,16}" id="check_password">
+							<span class="material-symbols-outlined eye_icon" id="check_eye_icon">
+								visibility_off
+							</span>
+						</div>
+						<p id="check_password_error" class="error_msg"></p>
+						<p id="match_error" class="error_msg"></p>
 					</div>
 					
 					<div class="input_box">
 						<label for="mail"><h4>メールアドレス<span class="must">*</span></h4></label>
 						<input type="email" name="mail" required="required" autocomplete="off">
 					</div>
-
-					<div class="input_box">
-						<label for="age"><h4>年齢</h4></label>
-						<input type="number" name="age" min="0" autocomplete="off">
-					</div>
 					
 					<div class="input_box">
 						<label for="phone"><h4>電話番号</h4></label>
-						<input type="tel" name="phone" autocomplete="off">
+						<input type="tel" name="phone" placeholder="ハイフンなし" autocomplete="off" pattern="[0-9]{10,11}" id="phone">
+						<p id="tel_error" class="error_msg"></p>
 					</div>
 					
 					<div class="input_box">
 						<label for="barth_day"><h4>誕生日</h4></label>
-						<input type="date" name="birth_day" class="info_box" autocomplete="off" max="${ today.toString() }">
+						<input type="date" name="birth_day" class="info_box" autocomplete="off" min="1900-01-01" max="${ today.toString() }" id="birth_day">
+						<input type="hidden" name="age" id="age">
 					</div>
 					
 					<div class="input_box">
@@ -72,10 +82,12 @@
 					</div>
 					
 					<input type="submit" id="submit_btn">
+					<a href="/${ application }/signin/">アカウントをお持ちの方</a>
 				</form>
 			</div>
 		</div>
 	</main>
 <script src="../js/comon.js"></script>
+<script src="../js/signup.js"></script>
 </body>
 </html>

@@ -31,7 +31,12 @@
 					<input type="email" name="mail" required>
 					
 					<label for="password">パスワード</label>
-					<input type="password" name="password" required>
+					<div class="password_area">
+						<input type="password" name="password" required id="password">
+						<span class="material-symbols-outlined eye_icon" id="eye_icon">
+							visibility_off
+						</span>
+					</div>
 					<a href="/${ application }/forgotpassword" class="anchor">パスワードをお忘れですか？</a>
 					
 					<input type="submit" value="ログイン">
@@ -41,5 +46,6 @@
 		</div>
 	</main>
 <script src="../js/comon.js"></script>
+<script src="../js/login.js"></script>
 </body>
 </html>

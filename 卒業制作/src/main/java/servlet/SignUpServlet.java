@@ -44,6 +44,7 @@ public class SignUpServlet extends HttpServlet {
 		try {
 			CustomerDAO.insert(customer);
 		} catch (SQLException e) {
+			e.printStackTrace();
 			response.sendRedirect("signup/?error=true");
 			return;
 		}

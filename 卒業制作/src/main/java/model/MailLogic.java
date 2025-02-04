@@ -21,9 +21,9 @@ public class MailLogic {
 	 * 送信元メールアドレス
 	 * アプリケーションからのメールのため固定
 	 */
-	public static final String src_address = "2004takatori0427@gmail.com";
+	public static final String src_address = System.getProperty("src_add");
 	/**アプリパスワード*/
-	private static final String password = "kgaq ucyj zwhf mfyv";
+	private static final String password = System.getProperty("mail_pass");
 	/**プロパティの設定*/
 	private static final Properties PROPERTIES = new Properties();
 	private static Authenticator auth= null;
@@ -71,6 +71,7 @@ public class MailLogic {
 			return true;
 		} catch (MessagingException e) {
 			e.printStackTrace();
+			init();
 			return false;
 		}
 	}
