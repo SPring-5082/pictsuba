@@ -10,7 +10,7 @@
 <link href="./img/sightIcon.jpg" rel="icon"/>
 <link href="./css/comon.css" rel="stylesheet"/>
 <link href="./css/search.css" rel="stylesheet">
-<title><c:out value="${ application }"/></title>
+<title><c:out value="${ application.replaceFirst('/','') } ${ search }"/></title>
 </head>
 <body>
 
@@ -21,14 +21,14 @@
 		<div id="main_parent">
 			<h2>"<c:out value="${ search }"/>"　の検索結果</h2>
 			<div id="products_window">
-				<div id="products">
+				<div id="products" class="view">
 					<c:forEach items="${ products }" var="product">
-						<a href="/${ application }/product?productId=${ product.product_id() }">
+						<a href="${ application }/product?productId=${ product.product_id() }">
 		                        <div class="product">
 		                            <div class="info">
 		                                <h4 class="name"><c:out value="${ product.name() }"/></h4>
 		                                <p class="creator"><c:out value="${ product.creator_name() }"/></p>
-		                                <h4 class="price">\<c:out value="${ calc.price(product.price(),product.category_id()) }"/></h4>
+		                                <h4 class="price">&yen;<c:out value="${ calc.price(product.price(),product.category_id()) }"/></h4>
 		                            </div>
 		                            <div class="frame">
 		                                <div class="draw_area">
@@ -39,10 +39,18 @@
 		                    </a>
 					</c:forEach>
 				</div>
+				<div id="is_null">
+					<span class="material-symbols-outlined" id="search_icon">
+						search_off
+					</span>
+					<h3>検索結果はありません</h3>
+				</div>
 			</div>
 		</div>
 	</main>
 	<jsp:include page="../../jsp/footer.jsp"></jsp:include>
 <script src="./js/comon.js"></script>
+<script src="./js/search_onload.js"></script>
+<script src="./js/check_null.js"></script>
 </body>
 </html>

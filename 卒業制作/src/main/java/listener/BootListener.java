@@ -1,5 +1,6 @@
 package listener;
 
+import beans.Product;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
@@ -10,7 +11,6 @@ import model.MailLogic;
 
 @WebListener
 public class BootListener implements ServletContextListener {
-	public static int reqCount = 0;
 	/**
 	 * サーバ起動時に
 	 * このアプリケーションの名前と
@@ -25,12 +25,14 @@ public class BootListener implements ServletContextListener {
 		//ドメイン名設定
 		final String domain = System.getProperty("domain");
 		sc.setAttribute("domain", domain);
+		
 		//アプリケーション名設定
 		final String application = sc.getContextPath();
-		sc.setAttribute("application", application.replaceFirst("/", ""));
+		sc.setAttribute("application", application);
+		Product.imagePath = application + "/image?image=";
 		
 		//暗号鍵の読み込み
-		KeyStorage.init(System.getProperty("key"),System.getProperty("iv"));
+		KeyStorage.init("O52HO0G5C3NtkegLeQE0Kg==","jxCxl18YNgUEY97WEhbE/Q==");
 		
 		//メールサーバとのセッション確立
 		MailLogic.init();
@@ -38,11 +40,6 @@ public class BootListener implements ServletContextListener {
 		//キャンペーン価格計算機設定
 		sc.setAttribute("calc", new CampaignLogic());
 		
-	}
-	
-	@Override
-	public void contextDestroyed(ServletContextEvent sce) {
-		System.out.println(reqCount);
 	}
 	
 }

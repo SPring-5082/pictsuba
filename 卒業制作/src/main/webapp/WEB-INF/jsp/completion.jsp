@@ -10,7 +10,7 @@
 <link href="./img/sightIcon.jpg" rel="icon">
 <link href="./css/comon.css" rel="stylesheet">
 <link href="./css/completion.css" rel="stylesheet">
-<title><c:out value="${ application }"/></title>
+<title><c:out value="${ application.replaceFirst('/','') }"/></title>
 </head>
 <body>
 <jsp:include page="../../jsp/background.jsp"></jsp:include>
@@ -39,7 +39,7 @@
 					決済が完了しました。<br>
 					ご利用いただきありがとうございます。
 				</p>
-				<a href="/${ application }/">トップページへ戻る</a>
+				<a href="${ application }/">トップページへ戻る</a>
 			</div>
 		</div>
 	</div>

@@ -25,7 +25,7 @@ public class KeyStorage {
 			// 初期化
 			kg = KeyGenerator.getInstance("AES");
 			kg.init(128);
-			// ファイルが存在すれば、既存のキーとIVを読み込む			// Base64文字列をデコードしてバイト配列に変換
+			// 既存のキーとIVを読み込む			// Base64文字列をデコードしてバイト配列に変換
 			byte[] decodedKey = Base64.getDecoder().decode(KEY_String);
 			byte[] decodedIV = Base64.getDecoder().decode(IV_String);
 			// バイト配列からSecretKeyとIVを生成

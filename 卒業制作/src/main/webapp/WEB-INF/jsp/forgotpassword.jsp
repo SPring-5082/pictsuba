@@ -10,7 +10,7 @@
 <link href="./img/sightIcon.jpg" rel="icon">
 <link href="./css/comon.css" rel="stylesheet">
 <link href="./css/forgotpassword.css" rel="stylesheet">
-<title><c:out value="${ application} "/></title>
+<title><c:out value="${ application.replaceFirst('/','') } "/></title>
 </head>
 <body>
 
@@ -26,7 +26,7 @@
 					</a>
 					<h2>確認URLを送信するメールアドレスを入力してください</h2>
 				</div>
-				<form id="login_form" action="/${ application }/forgotpassword" method="post" autocomplete="off">
+				<form id="login_form" action="${ application }/forgotpassword" method="post" autocomplete="off">
 					<input type="email" name="mail" placeholder="メールアドレス" required>
 					<input type="submit" value="送信">
 				</form>

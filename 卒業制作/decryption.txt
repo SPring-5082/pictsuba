@@ -1,24 +1,27 @@
 起動時引数設定項目
+	domain Webサーバのドメイン
 	path 画像保存先
 	user DBユーザー
 	pass DBパスワード
 	url DBサーバのアドレスまたはドメイン
 	src_add アプリケーション内で使用する送信用アドレス
 	mail_pass サーバへメールを依頼する際のパスワード
-	key iv 暗号化鍵と初期化パラメータ
 	
-	-Ddomain=localhost:8080
-	-Dkey=O52HO0G5C3NtkegLeQE0Kg==
-	-Div=jxCxl18YNgUEY97WEhbE/Q==
-	-Dpath=\\localhost\d\image\
-	-Duser=admin
-	-Dpass=adminpass
-	-Durl=localhost
-	-Dsrc_add=2004takatori0427@gmail.com
+	
+	
+	-Ddomain=localhost
+	-Dpath="\\\\localhost\\d\\image\\"
+	-Duser="admin"
+	-Dpass="adminpass"
+	-Durl="localhost"
+	-Dsrc_add="2004takatori0427@gmail.com"
 	-Dmail_pass="kgaq ucyj zwhf mfyv"
 	
 	
 	-Dmail_pass2=kgaq ucyj zwhf mfyv
+	key iv 暗号化鍵と初期化パラメータ
+	
+	-Ddomain="localhost:8080"
 	
 	
 	
@@ -31,11 +34,3 @@
 	
 	
 	
-	         	<c:choose>
-            <c:when test="${ empty user }">
-            	<a href="/${ application }/signin/">ログイン</a>
-            </c:when>
-            <c:otherwise>
-            	<a href="/${ application }/signout">ログアウト</a>
-            </c:otherwise>
-            </c:choose>

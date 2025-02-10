@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Product implements Serializable{
+	public static String imagePath;
+	
 	
 	/*DBの列要素*/
 	private int product_id;
@@ -105,7 +107,7 @@ public class Product implements Serializable{
 	}
 
 	public String image() {
-		return "/pictsuba/image?image="+image;
+		return imagePath+image;
 	}
 	
 	public String simpleImage() {

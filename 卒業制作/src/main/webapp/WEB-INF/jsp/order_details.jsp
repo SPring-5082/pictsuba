@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="./css/comon.css">
 <link rel="stylesheet" href="./css/check.css">
 <link rel="stylesheet" href="./css/order_details.css">
-<title><c:out value="${ application } 注文詳細"/></title>
+<title><c:out value="${ application.replaceFirst('/','') } 注文詳細"/></title>
 </head>
 <body>
 <jsp:include page="../../jsp/background.jsp"></jsp:include>
@@ -32,7 +32,7 @@
 				<div id="order_details">
 					<h4>注文状況</h4><p>お届け済み</p>
 					<h4>注文日</h4><p>2025/02/12</p>
-					<h4>注文合計</h4><p>\<c:out value="${ order.sum_price() }"/></p>
+					<h4>注文合計</h4><p>&yen;<c:out value="${ order.sum_price() }"/></p>
 				</div>
 			</section>
 			<section>
@@ -55,13 +55,13 @@
 								<p class="creator"><c:out value="${ product.creator_name() }"/></p>
 							</div>
 							<h4 class="price_area">
-								\<c:out value="${ product.price() }"/>× <c:out value="${ map.get(product) }"/>個 = ￥値段
+								&yen;<c:out value="${ product.price() }"/>× <c:out value="${ map.get(product) }"/>個 = ￥値段
 							</h4>
 						</div>
 					</c:forEach>
 				</div>
 				<div id="product_sum">
-					<h4>合計金額：\<c:out value="${ order.sum_price() }"/></h4>
+					<h4>合計金額：&yen;<c:out value="${ order.sum_price() }"/></h4>
 				</div>
 			</section>
 			<section>
@@ -86,12 +86,12 @@
 				</div>
 				<div id="details_amount">
 					<h4>商品合計</h4><p><c:out value="${ total_quantity }"/></p>
-					<h4>送料</h4><p>\500</p>
+					<h4>送料</h4><p>&yen;500</p>
 					<h3 class="total">合計<span>(税込み)</span></h3>
-					<h3 class="total">\<c:out value="${ order.sum_price() + 500 }"/></h3>
+					<h3 class="total">&yen;<c:out value="${ order.sum_price() + 500 }"/></h3>
 				</div>
 			</section>
-			<a href="/${ application }/order-history" id="main_bottom">
+			<a href="${ application }/order-history" id="main_bottom">
 				<span class="material-symbols-outlined">
 					chevron_left
 				</span>

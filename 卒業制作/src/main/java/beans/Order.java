@@ -94,7 +94,7 @@ public class Order implements Serializable{
 	}
 
 	public String product_image(){
-		return "/pictsuba/image?image="+product_image;
+		return Product.imagePath+product_image;
 	}
 
 }

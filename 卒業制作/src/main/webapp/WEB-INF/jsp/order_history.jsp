@@ -10,7 +10,7 @@
 <link href="./img/sightIcon.jpg" rel="icon">
 <link href="./css/comon.css" rel="stylesheet">
 <link href="./css/order_history.css" rel="stylesheet">
-<title><c:out value="${ application } 注文履歴"/></title>
+<title><c:out value="${ application.replaceFirst('/','') } 注文履歴"/></title>
 </head>
 <body>
 
@@ -24,7 +24,7 @@
 		<div id="main_window">
 			<div id="products" class="view">
 				<c:forEach items="${ orders }" var="order">
-					<a href="/${ application }/order-details?order_id=${ order.order_id() }" class="product">
+					<a href="${ application }/order-details?order_id=${ order.order_id() }" class="product">
 						<div class="frame">
 							<div class="draw_area">
 								<img src="${ order.product_image() }" alt="絵画">

@@ -10,18 +10,13 @@
     <link href="./img/sightIcon.jpg" rel="icon">
     <link href="./css/comon.css" rel="stylesheet">
     <link href="./css/product_details.css" rel="stylesheet">
-    <title><c:out value="${ application } ${ product.name() }"/></title>
+    <title><c:out value="${ application.replaceFirst('/','') } ${ product.name() }"/></title>
 </head>
 <body>
 
 <jsp:include page="../../jsp/background.jsp"></jsp:include>
 <jsp:include page="../../jsp/header.jsp"></jsp:include>
 <div id="alert_window">
-	<span class="material-symbols-outlined">
-		check_circle
-	</span>
-	<p id="alert_text"></p>
-	<div id="alert_border"></div>
 </div>
 <main>
 	<div id="main_parent">
@@ -34,30 +29,35 @@
 				</div>
 				<c:choose>
 				<c:when test="${ fav }">
-					<button id="favorite_icon" class="click" onclick="click_icon(${ product.product_id() })">
-						<span class="material-symbols-outlined">
-							favorite
-						</span>
+					<button id="favorite_btn" class="click" onclick="click_icon(${ product.product_id() })">
+						<img id="non_icon" alt="お気に入りでないアイコン" src="./img/non_favorite_icon.png">
+						<img class="view" id="favorite_icon" alt="お気に入りアイコン" src="./img/favorite_icon.png">
 					</button>
 				</c:when>
 				<c:otherwise>
-					<button id="favorite_icon" onclick="click_icon(${ product.product_id() })">
-						<span class="material-symbols-outlined">
-							favorite
-						</span>
+					<button id="favorite_btn" onclick="click_icon(${ product.product_id() })">
+						<img class="view" id="non_icon" alt="お気に入りでないアイコン" src="./img/non_favorite_icon.png">
+						<img id="favorite_icon" alt="お気に入りアイコン" src="./img/favorite_icon.png">
 					</button>
 				</c:otherwise>
 				</c:choose>
 			</div>
 			<div class="info">
 				<h4 class="name"><c:out value="${ product.name() }"/></h4>
+				<h4 class="price">&yen;<c:out value="${ calc.price(product.price(),product.category_id()) }"/></h4>
 				<p class="creator"><c:out value="${ product.creator_name() }"/></p>
-				<h4 class="price">\ <c:out value="${ calc.price(product.price(),product.category_id()) }"/></h4>
 				<p class="description">
-				<c:out value="${ product.descryption() }"/>
+					<c:out value="${ product.descryption() }"/>
 				</p>
 			</div>
-			<button class="in_cart_btn" onclick="add_cart(${ product.product_id()})">カートへ入れる</button>
+			<c:choose>
+			<c:when test="${ product.stock() > 0 }">
+				<button class="in_cart_btn" onclick="add_cart(${ product.product_id()})">カートへ入れる</button>
+			</c:when>
+			<c:otherwise>
+				<button class="in_cart_btn">現在在庫切れ中</button>
+			</c:otherwise>
+			</c:choose>
 		</div>
 	</div>
 </main>

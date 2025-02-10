@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
-<html lang="ja">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +10,7 @@
     <link href="./img/sightIcon.jpg" rel="icon">
     <link href="./css/comon.css" rel="stylesheet">
     <link href="./css/account.css" rel="stylesheet">
-<title><c:out value="${ application } アカウント情報"/></title>
+<title><c:out value="${ application.replaceFirst('/','') } アカウント情報"/></title>
 </head>
 <body>
 
@@ -25,7 +25,7 @@
             </span>
                 
             <div id="info_window">
-                <a id="edit_btn" href="/${ application }/account?edit=do">編集</a>
+                <a id="edit_btn" href="${ application }/account?edit=do">編集</a>
 
                 お名前
                 <div class="info_box"><c:out value="${ user.name() }"/></div>

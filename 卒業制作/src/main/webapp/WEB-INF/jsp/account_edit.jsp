@@ -10,7 +10,7 @@
 <link href="./img/sightIcon.jpg" rel="icon">
 <link href="./css/comon.css" rel="stylesheet">
 <link href="./css/account_edit.css" rel="stylesheet">
-<title><c:out value="${ application } アカウント情報"/></title>
+<title><c:out value="${ application.replaceFirst('/','') } アカウント情報"/></title>
 </head>
 <body>
 <jsp:include page="../../jsp/background.jsp"></jsp:include>
@@ -22,7 +22,7 @@
             <h2>アカウント情報 編集</h2>
                 
             <div id="info_window">
-                <form id="info_form" action="/${ application }/account" method="post" autocomplete="off">
+                <form id="info_form" action="${ application }/account" method="post" autocomplete="off">
                     <div class="input_box">
 						<label for="name"><h4>お名前</h4></label>
                     	<input id="name" type="text" name="name" value="${ user.name() }" required="required">
@@ -117,9 +117,9 @@
                     </div>
                     
                     <input type="submit" id="submit_btn">
+                    <a id="back_anchor" href="${ application }/account">戻る</a>
                 </form>
             </div>
-            <a id="back_anchor" href="/${ application }/account">戻る</a>
         </div>
     </main>
 	

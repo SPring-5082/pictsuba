@@ -10,7 +10,7 @@
     background-color: rgba(255, 255, 255, 0.9);
     border-radius: 15px;
     padding: 20px;
-    box-shadow: rgba(0, 0, 0, 0.2) 10px 10px 10px;
+    box-shadow: rgba(83, 83, 83, 0.09) 5px 5px 10px;
 }
 .cart_box{
     display: flex;
@@ -50,14 +50,14 @@
     width: 136px;
     height: 136px;
     min-width: 136px;
-    background-image: url("../img/gakubuti.png");
+    background-image: url("../img/frame.jpg");
     background-repeat: no-repeat;
     padding: 7px;
     background-size: contain;
     margin: 0;
     display: flex;
     align-items: center;
-    box-shadow: rgba(0, 0, 0, 0.5) 5px 5px 5px;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 5px;
 }
 .draw_area{
     width: 100%;

@@ -10,7 +10,7 @@
 <link href="../img/sightIcon.jpg" rel="icon">
 <link href="../css/comon.css" rel="stylesheet">
 <link href="../css/contact.css" rel="stylesheet">
-<title><c:out value="${ application }"/></title>
+<title><c:out value="${ application.replaceFirst('/','') } お問い合わせ"/></title>
 </head>
 <body>
 <jsp:include page="../jsp/nodispbackground.jsp"></jsp:include>
@@ -21,7 +21,7 @@
 	<div id="main_parent">
 		<div id="contact">
 			<h2>お問い合わせフォーム</h2>
-			<form id="contact_form" action="/${ application }/contact">
+			<form id="contact_form" action="${ application }/contact">
 				<label for="name">
 					<h4>お名前<span class="must">(必須)</span></h4>
 				</label>
@@ -38,9 +38,9 @@
 				<textarea class="input_area" id="message" name="message" rows="5" placeholder="お問い合わせ内容を詳しくご記入ください" required></textarea><br>
 				
 				<input id="submit_btn" type="submit" value="送信">
+				<a href="${ application }/faq/">よくあるご質問はこちらから</a>
 			</form>
 		</div>
-		<a href="/${ application }/faq/">よくあるご質問はこちらから</a>
 	</div>
 </main>
 

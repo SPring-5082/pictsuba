@@ -9,7 +9,7 @@ public class MessageGenerator {
 		+ "■パスワードを再設定する場合\n"
 		+ "以下のURLからパスワードの再設定を行えます\n"
 		+ "このURLは24時間のみ有効です\n"
-		+ "https://domain/application/reset-pass?token=user_token";
+		+ "https://domainapplication/reset-pass?token=user_token";
 	public static String generate(String name,String domain, String application, String token) {
 		String message =  MESSAGE_FORMAT.replaceFirst("name", name);
 		message = message.replaceFirst("domain", domain);

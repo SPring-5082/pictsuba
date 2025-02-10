@@ -10,7 +10,7 @@
 <link href="../img/sightIcon.jpg" rel="icon">
 <link href="../css/comon.css" rel="stylesheet">
 <link href="../css/login.css" rel="stylesheet">
-<title><c:out value="${ application }"/></title>
+<title><c:out value="${ application.replaceFirst('/','') } ログイン"/></title>
 </head>
 <body>
 <jsp:include page="../jsp/nodispbackground.jsp"></jsp:include>
@@ -19,12 +19,12 @@
 		<div id="main_parent">
 			<div id="main_window">
 				<div id="window_top">
-				<a href="/${ application }/">
+				<a href="${ application }/">
 					<img src="../img/pi.kuro.l.png" alt="ロゴ">
 				</a>
 				<h2>ログイン</h2>
 				</div>
-				<form id="login_form" action="/${ application }/signin" method="post" autocomplete="off">
+				<form id="login_form" action="${ application }/signin" method="post" autocomplete="off">
 					<c:if test="${ not empty param.page }"><input type="hidden" name="page" value="${ param.page }"></c:if>
 					<c:if test="${ param.error }"><p style="color:red;"><c:out value="※入力情報に誤りがあります"/></p></c:if>
 					<label for="mail">メールアドレス</label>
@@ -37,10 +37,10 @@
 							visibility_off
 						</span>
 					</div>
-					<a href="/${ application }/forgotpassword" class="anchor">パスワードをお忘れですか？</a>
+					<a href="${ application }/forgotpassword" class="anchor">パスワードをお忘れですか？</a>
 					
 					<input type="submit" value="ログイン">
-					<a href="/${ application }/send_mail">アカウントの作成</a>
+					<a href="${ application }/send_mail">アカウントの作成</a>
 				</form>
 			</div>
 		</div>

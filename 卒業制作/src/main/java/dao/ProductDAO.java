@@ -164,30 +164,7 @@ public class ProductDAO extends DAO {
 	 */
 	public static List<Product> findByRecommendation(int customer_id) throws SQLException{
 		List<Product> list = new ArrayList<Product>();
-		final String sql = 
-		  "SELECT "
-		+ "		PRODUCT_ID, "
-		+ "		PRODUCT_NAME,"
-		+ "		ADD_DATE,"
-		+ "		PRICE,"
-		+ "		CREATOR_ID,"
-		+ "		(SELECT CREATOR_NAME FROM CREATORS C WHERE P.CREATOR_ID = C.CREATOR_ID) AS CREATOR_NAME,"
-		+ "		CATEGORY_ID,"
-		+ "		(SELECT CATEGORY_NAME FROM CATEGORIES C WHERE P.CATEGORY_ID = C.CATEGORY_ID) AS CATEGORY_NAME,"
-		+ "		STOCK,"
-		+ "		LOOKUP,"
-		+ "		POINT,"
-		+ "		IMAGE,"
-		+ "		DESCRYPTION "
-		+ "FROM "
-		+ "("
-		+ RECOMEND 
-		+ " UNION "
-		+ POPULARITY
-		
-		+ ")"
-		+" LIMIT 30";
-		
+		final String sql = RECOMEND;
 		
 		try(Connection con = getConnection();
 			PreparedStatement pstmt = getPsTmt(con,sql);){
@@ -216,6 +193,12 @@ public class ProductDAO extends DAO {
 				list.add(new Product(product_id, product_name, add_date, price, creator_id, category_id, stock, lookup, point, image, descryption, creator_name, category_name,sales_quantity));
 			}
 			rs.close();
+			List<Product> popularities = findByPopularity();
+			for(int i = 0;i < popularities.size() && list.size() < 30;i ++) {
+				if(list.indexOf(popularities.get(i)) < 0) {
+					list.add(popularities.get(i));
+				}
+			}
 			return list;
 		}
 		
@@ -402,18 +385,6 @@ public class ProductDAO extends DAO {
 			}
 		}
 		return map;
-	}
-	
-	public static boolean updateLookCnt(int product_id){
-		final String WHERE = " WHERE PRODUCT_ID = " + product_id;
-		final String SET = " SET LOOKUP = LOOKUP + 1";
-		final String sql = SQL.update("PRODUCTS").concat(SET).concat(WHERE);
-		try(Connection con = getConnection();
-			PreparedStatement pstmt = getPsTmt(con, sql);){
-			return pstmt.executeUpdate() > 0;
-		}catch (Exception e) {
-			return false;
-		}
 	}
 	
 	public static boolean updateStockByCart(Cart cart) throws SQLException {

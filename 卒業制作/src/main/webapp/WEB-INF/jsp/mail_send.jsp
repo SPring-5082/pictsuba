@@ -10,7 +10,7 @@
 <link href="./img/sightIcon.jpg" rel="icon">
 <link href="./css/comon.css" rel="stylesheet">
 <link href="./css/forgotpassword.css" rel="stylesheet">
-<title><c:out value="${ application} "/></title>
+<title><c:out value="${ application.replaceFirst('/','') } "/></title>
 </head>
 <body>
 
@@ -21,7 +21,7 @@
 		<div id="main_parent">
 			<div id="main_window">
 				<div id="window_top">
-					<a href="/${ application }/">
+					<a href="${ application }/">
 						<img src="./img/pi.kuro.l.png" alt="ロゴ">
 					</a>
 					<h2>

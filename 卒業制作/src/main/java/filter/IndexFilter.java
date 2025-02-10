@@ -37,13 +37,13 @@ public class IndexFilter extends HttpFilter implements Filter {
 				try {
 					recomends = ProductDAO.findByRecommendation(customer.customer_id());
 					request.setAttribute("recomends", recomends);
-				} catch (SQLException e) {}
+				} catch (SQLException e) {e.printStackTrace();}
 			}else {
 				List<Product> popularities = null;
 				try {
 					popularities = ProductDAO.findByPopularity();
 					request.setAttribute("popularities", popularities);
-				} catch (SQLException e) {}
+				} catch (SQLException e) {e.printStackTrace();}
 			}
 		}
 		chain.doFilter(request, response);

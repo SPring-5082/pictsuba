@@ -24,7 +24,7 @@
                     </a>
                     <h2>新規登録</h2>
                 </div>
-				<form id="info_form" action="/${ application }/signup" method="post" autocomplete="off">
+				<form id="info_form" action="${ application }/signup" method="post" autocomplete="off">
 					<c:if test="${ not empty param.error }"><p style="color: red;">*登録に失敗しました<br>メールアドレスは既に使用されている可能性があります</p></c:if>
 					<div class="input_box">
 						<label for="name"><h4>名前<span class="must">*</span></h4></label>
@@ -82,7 +82,7 @@
 					</div>
 					
 					<input type="submit" id="submit_btn">
-					<a href="/${ application }/signin/">アカウントをお持ちの方</a>
+					<a href="${ application }/signin/">アカウントをお持ちの方</a>
 				</form>
 			</div>
 		</div>

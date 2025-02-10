@@ -14,7 +14,7 @@
     border-radius: 15px;
     padding: 30px;
     margin: 30px 0;
-    box-shadow: rgba(0, 0, 0, 0.2) 10px 10px 10px;
+    box-shadow: rgba(83, 83, 83, 0.09) 5px 5px 10px;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -45,11 +45,11 @@
 }
 
 .delete_button {
-	font-size: 1rem;
     color: red;
     background: none;
     border: none;
     margin: 10px 0;
+    font-size: 1rem;
 }
 .add_button{
     font-size: 1rem;
@@ -120,9 +120,9 @@
     display: flex;
     flex-direction: column;
 }
-#error_msg {
+.error_msg {
+    font-size: 0.8rem;
     color: #ff0000;
-    padding: 5px;
 }
 .input_box{
     margin: 20px 0;
@@ -137,9 +137,6 @@
 #expire_area{
     display: flex;
     align-items: center;
-}
-#zip_code{
-    width: 70%;
 }
 #address_completion_btn{
     width: 30%;
@@ -156,6 +153,7 @@
 
 .must{
     color: red;
+    font-size: 0.8rem;
 }
 
 input,select,option{
@@ -164,6 +162,10 @@ input,select,option{
     border-radius: 5px;
     border: none;
     padding: 10px;
+
+    &:not(:placeholder-shown):invalid{
+        color: red;
+    }
 }
 input,select{
     padding: 10px;
@@ -185,6 +187,7 @@ input[type=submit]{
     .item{
         padding-bottom: 0;
         flex-direction: column;
+        align-items: center;
     }
     .modal_content{
         width: 90%;

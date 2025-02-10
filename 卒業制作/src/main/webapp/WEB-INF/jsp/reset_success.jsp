@@ -21,7 +21,7 @@
 		<div id="main_parent">
 			<div id="main_window">
 				<div id="window_top">
-					<a href="/${ application }/">
+					<a href="${ application }/">
 						<img src="./img/pi.kuro.l.png" alt="ロゴ">
 					</a>
 					<h3>
@@ -29,7 +29,7 @@
 						再度新しいパスワードで<br>
 						再度ログインをお試しください
 					</h3>
-					<a href="/${ application }/signin/" style="color: blue;">ログインページへ</a>
+					<a href="${ application }/signin/" style="color: blue;">ログインページへ</a>
 				</div>
 			</div>
 		</div>

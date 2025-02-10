@@ -20,12 +20,12 @@
 	<div id="main_parent">
 		<h2>カート</h2>
 		<div id="main_window">
-			<form action="/${ application }/check" method="post" id="products" class="view">
+			<form action="${ application }/check" method="post" id="products" class="view">
 				<c:if test="${ products.size() > 0 }">
 				<c:forEach var="i" begin="0" end="${ products.size() - 1 }" step="1">
 					<div class="cart_box">
 						<div class="box_right">
-							<a class="product" href="/${ application }/product?productId=${ products.get(i).product_id() }">
+							<a class="product" href="${ application }/product?productId=${ products.get(i).product_id() }">
 								<div class="frame">
 									<div class="draw_area">
 										<img src="${ products.get(i).image() }" alt="絵画">
@@ -35,14 +35,14 @@
 									<div class="info_left">
 										<h4 class="name">「<c:out value="${ products.get(i).name() }"/>」</h4>
 										<p class="creatord"><c:out value="${ products.get(i).creator_name() }"/></p>
-										<h4 class="price">\<c:out value="${ calc.price(products.get(i).price(),products.get(i).category_id()) }"/></h4>
+										<h4 class="price">&yen;<c:out value="${ calc.price(products.get(i).price(),products.get(i).category_id()) }"/></h4>
 									</div>
 								</div>
 							</a>
 							<div class="product_bottom">
 								<div class="quantity_area">
 									<label for="quantity">数量：</label>
-									<input type="number" name="${ products.get(i).product_id() }" step="1" value="${ quantities.get(i) }" min="0" max="${ products.get(i).stock() }" required>
+									<input type="number" name="${ products.get(i).product_id() }" step="1" value="${ quantities.get(i) }" min="1" max="${ products.get(i).stock() }" required>
 								</div>
 								<a class="delete_button" id="${ products.get(i).product_id() }" onclick="delete_cart(${ products.get(i).product_id()})">削除</a>
 							</div>

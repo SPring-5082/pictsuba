@@ -10,7 +10,7 @@
 <link href="./img/sightIcon.jpg" rel="icon">
 <link href="./css/contact_comp.css" rel="stylesheet">
 <link href="./css/comon.css" rel="stylesheet">
-<title><c:out value="${ application } お問い合わせ"/></title>
+<title><c:out value="${ application.replaceFirst('/','') } お問い合わせ"/></title>
 </head>
 <body>
 
@@ -28,7 +28,7 @@
                     お問い合わせいただきありがとうございます。
                 </p>
             </div>
-            <a href="/${ application }/" id="back_anchor">トップページに戻る</a>
+            <a href="${ application }/" id="back_anchor">トップページに戻る</a>
         </div>
     </main>
     <jsp:include page="../../jsp/footer.jsp"></jsp:include>

@@ -10,7 +10,7 @@
 <link href="../img/sightIcon.jpg" rel="icon">
 <link href="../css/comon.css" rel="stylesheet">
 <link href="../css/contact.css" rel="stylesheet">
-<title><c:out value="${ application }"/></title>
+<title><c:out value="${ application.replaceFirst('/','') } FAQ"/></title>
 </head>
 <body>
 <jsp:include page="../jsp/nodispbackground.jsp"></jsp:include>
@@ -48,8 +48,8 @@
 				</div>
 				<div class="details">A: 商品到着後7日以内であれば可能です。詳細は返品ポリシーをご確認ください。</div>
 			</button>
+			<a href="${ application }/contact/">お問い合わせフォームはこちらから</a>
 		</div>
-		<a href="/${ application }/contact/">お問い合わせフォームはこちらから</a>
 	</div>
 </main>
 

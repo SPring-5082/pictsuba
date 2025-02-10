@@ -11,14 +11,14 @@
 <link href="./css/comon.css" rel="stylesheet">
 <link href="./css/check.css" rel="stylesheet">
 <link href="./css/confirm.css" rel="stylesheet">
-<title><c:out value="${ application }"/></title>
+<title><c:out value="${ application.replaceFirst('/','') }"/></title>
 </head>
 <body>
 <jsp:include page="../../jsp/background.jsp"></jsp:include>
 <jsp:include page="../../jsp/header.jsp"></jsp:include>
 <main>
 	<div id="main_parent">
-		<form action="/${ application }/completion" method="post" id="main_box">
+		<form action="${ application }/completion" method="post" id="main_box">
 			<div id="main_top">
 				<h2>購入確認</h2>
 				<div class="progress-bar">
@@ -54,14 +54,14 @@
 								<p class="creator"><c:out value="${ products.get(i).creator_name() }"/></p>
 							</div>
 							<h4 class="price_area">
-								\<c:out value="${ calc.price(products.get(i).price(),products.get(i).category_id()) }"/> × <c:out value="${ quantities.get(i) }"/>個 = \<c:out value="${ quantities.get(i) * products.get(i).price() }"/>
+								&yen;<c:out value="${ calc.price(products.get(i).price(),products.get(i).category_id()) }"/> × <c:out value="${ quantities.get(i) }"/>個 = &yen;<c:out value="${ quantities.get(i) * products.get(i).price() }"/>
 							</h4>
 						</div>
 						
 					</c:forEach>
 				</div>
 				<div id="product_sum">
-					<h4>合計金額：\<c:out value="${ sum_price }"/></h4>
+					<h4>合計金額：&yen;<c:out value="${ sum_price }"/></h4>
 				</div>
 			</section>
 			<section>
@@ -110,12 +110,12 @@
 					<h4>送料</h4><p>500</p>
 					<h4>ポイント</h4><p>-<c:out value="${ point }"/></p>
 					<h3 class="total">合計<span>(税込み)</span></h3>
-					<h3 class="total">\<c:out value="${ sum_price + 500 - point }"/></h3>
+					<h3 class="total">&yen;<c:out value="${ sum_price + 500 - point }"/></h3>
 				</div>
 			</section>
 			<div id="main_bottom">
 			<!-- 
-				<a href="/${ application }/check">
+				<a href="${ application }/check">
 					<span class="material-symbols-outlined">
 						chevron_left
 					</span>

@@ -2,7 +2,7 @@
 // 登録されているクレジットカードを表示する
 // 表示時はrequiredを付ける
 
-let payment_radios = document.getElementsByName("payment_radio");
+let payment_radios = document.getElementsByName("pay_type");
 let credit_cart_radios = document.getElementsByName("credit_card");
 let details = document.querySelector(".details");
 let main_box = document.getElementById("main_box");

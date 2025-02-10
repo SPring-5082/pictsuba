@@ -10,7 +10,7 @@
 <link href="./img/sightIcon.jpg" rel="icon">
 <link href="./css/comon.css" rel="stylesheet">
 <link href="./css/address_payment_info.css" rel="stylesheet">
-<title><c:out value="${ application } カード情報"/></title>
+<title><c:out value="${ application.replaceFirst('/','') } カード情報"/></title>
 </head>
 <body>
 

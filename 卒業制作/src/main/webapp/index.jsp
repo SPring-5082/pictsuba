@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 <link href="./css/comon.css" rel="stylesheet">
 <link href="./css/index.css" rel="stylesheet">
-<title><c:out value="${ application } 絵の総合販売サイト"/></title>
+<title><c:out value="${ application.replaceFirst('/','') } 絵の総合販売サイト"/></title>
 </head>
 <body>
 
@@ -50,16 +50,17 @@
             </div>
 
             <div id="products_window">
+            	<h3>あなたへのおすすめ</h3>
                 <div id="products">
                     <c:choose>
                     <c:when test="${ not empty user }">
 	                    <c:forEach items="${ recomends }" var="product">
-		                    <a href="/${ application }/product?productId=${ product.product_id() }">
+		                    <a href="${ application }/product?productId=${ product.product_id() }">
 		                        <div class="product">
 		                            <div class="info">
 		                                <h4 class="name"><c:out value="${ product.name() }"/></h4>
 		                                <p class="creator"><c:out value="${ product.creator_name() }"/></p>
-		                                <h4 class="price">\<c:out value="${ calc.price(product.price(),product.category_id()) }"/></h4>
+		                                <h4 class="price">&yen;<c:out value="${ calc.price(product.price(),product.category_id()) }"/></h4>
 		                            </div>
 		                            <div class="frame">
 		                                <div class="draw_area">
@@ -72,12 +73,12 @@
                     </c:when>
                     <c:otherwise>
 						<c:forEach items="${ popularities }" var="product">
-		                    <a href="/${ application }/product?productId=${ product.product_id() }">
+		                    <a href="${ application }/product?productId=${ product.product_id() }">
 		                        <div class="product">
 		                            <div class="info">
 		                                <h4 class="name"><c:out value="${ product.name() }"/></h4>
 		                                <p class="creator"><c:out value="${ product.creator_name() }"/></p>
-		                                <h4 class="price">\<c:out value="${ calc.price(product.price(),product.category_id()) }"/></h4>
+		                                <h4 class="price">&yen;<c:out value="${ calc.price(product.price(),product.category_id()) }"/></h4>
 		                            </div>
 		                            <div class="frame">
 		                                <div class="draw_area">

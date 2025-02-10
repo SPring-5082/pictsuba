@@ -10,7 +10,7 @@
 <link href="./img/sightIcon.jpg" rel="icon">
 <link href="./css/comon.css" rel="stylesheet">
 <link href="./css/check.css" rel="stylesheet">
-<title><c:out value="${ application }"/></title>
+<title><c:out value="${ application.replaceFirst('/','') } 注文確認"/></title>
 </head>
 <body>
 <jsp:include page="../../jsp/background.jsp"></jsp:include>
@@ -18,7 +18,7 @@
 
 <main>
 	<div id="main_parent">
-		<form action="/${ application }/confirm" method="post" id="main_box">
+		<form action="${ application }/confirm" method="post" id="main_box">
 			<div id="main_top">
 				<h2>購入確認</h2>
 				<div class="progress-bar">
@@ -57,7 +57,7 @@
 					</c:forEach>
 				</div>
 				<div id="product_sum">
-					<h4>合計金額：\<c:out value="${ sum_price }"/></h4>
+					<h4>合計金額：&yen;<c:out value="${ sum_price }"/></h4>
 					<input type="hidden" name="product_total" id="product_total" value="${ sum_price }">
 				</div>
 			</section>
@@ -90,6 +90,7 @@
 						add
 					</span>
 				</div>
+				<p id="non_address_error" class="error_msg"></p>
 			</section>
 			<section>
 				<div class="section_title">
@@ -108,21 +109,23 @@
 								クレジットカード支払い
 							</div>
 						</div>
-						<div id="items" class="details">
-							<c:forEach items="${ cards }" var="card">
-								<div class="item">
-									<input type="radio" name="card" value="${ card.card_id() }" id="credit_card${ card.card_id() }">
-									<label for="credit_card${ card.card_id() }">
-										<div class="item_info">カード番号：<c:out value="${ card.blindNumber() }"/></div>
-									</label>
-								</div>
-							</c:forEach>
-							<button id="payment_add_button" class="add_button">
+						<div id="details" class="details">
+							<div id="items">
+								<c:forEach items="${ cards }" var="card">
+									<div class="item">
+										<input type="radio" name="card" value="${ card.card_id() }" id="credit_card${ card.card_id() }">
+										<label for="credit_card${ card.card_id() }">
+											<div class="item_info">カード番号：<c:out value="${ card.blindNumber() }"/></div>
+										</label>
+									</div>
+								</c:forEach>
+							</div>
+							<div id="payment_add_button" class="add_button">
 								新しいカードを追加
 								<span class="material-symbols-outlined">
 									add
 								</span>
-							</button>
+							</div>
 							<p id="non_card_error" class="error_msg"></p>
 						</div>
 					</label>
@@ -168,19 +171,16 @@
 				<div id="address_form" class="add_form">
 					<div class="input_box">
 						<h4>郵便番号<span class="must">*</span></h4>
-						<div id="address_completion_area">
-							<input type="number" name="zip_code" id="zip_code" placeholder="ハイフンなし" maxlength="7" required>
-							<button id="address_completion_btn">住所検索</button>
-						</div>
-						<p id="error_msg"></p>
+						<input type="text" name="zip_code" id="zip_code" placeholder="ハイフンなし" pattern="[0-9]{7}" maxlength="7" inputmode="numeric" required>
+						<p id="zip_code_error" class="error_msg"></p>
 					</div>
 					<div class="input_box">
 						<h4>都道府県<span class="must">*</span></h4>
-						<input type="text" name="pref" id="pref" required>
+						<input type="text" name="pref" id="pref" required readonly="readonly">
 					</div>
 					<div class="input_box">
 						<h4>市区町村<span class="must">*</span></h4>
-						<input type="text" name="municipalities" id="municipalities" required>
+						<input type="text" name="municipalities" id="municipalities" required readonly="readonly">
 					</div>
 					<div class="input_box">
 						<h4>番地<span class="must">*</span></h4>
@@ -210,18 +210,22 @@
 					<div class="input_box">
 						<h4>カード番号<span class="must">*</span></h4>
 						<input type="text" pattern="[0-9]{14,16}" name="number" id="credit_card_number" required>
+						<p id="number_error" class="error_msg"></p>
 					</div>
 					<div class="input_box">
 						<h4>有効期限<span class="must">*</span></h4>
 						<div id="expire_area">
-							<input type="text" pattern="[0-9]{2}" name="expire_month" placeholder="MM" id="expire_month" oninput="javascript: this.value = this.value.slice(0, 2);">
+							<input type="text" pattern="0[1-9]|1[0-2]" name="expire_month" placeholder="MM" id="expire_month" oninput="javascript: this.value = this.value.slice(0, 2);">
 							/
 							<input type="text" pattern="[0-9]{2}" name="expire_year" placeholder="YY" id="expire_year" oninput="javascript: this.value = this.value.slice(0, 2);">
 						</div>
+						<p id="expire_month_error" class="error_msg"></p>
+						<p id="expire_year_error" class="error_msg"></p>
 					</div>
 					<div class="input_box">
 						<h4>セキュリティコード<span class="must">*</span></h4>
-						<input type="text" name="security_code" id="security_code" pattern="[0-9]{3}" required>
+						<input type="text" name="security_code" id="security_code" pattern="[0-9]{3,4}" required>
+						<p id="code_error" class="error_msg"></p>
 					</div>
 						<input type="submit" value="追加" id="add_credit_card">
 				</div>
@@ -240,5 +244,7 @@
 <script type="module" src="./js/send_address.js"></script>
 <script src="./js/comon.js"></script>
 <script src="./js/calc_amount.js"></script>
+<script src="./js/address_validation.js"></script>
+<script src="./js/payment_validation.js"></script>
 </body>
 </html>

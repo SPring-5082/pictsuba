@@ -64,6 +64,7 @@ public class ForgotPasswordServlet extends HttpServlet{
 				dispatcher = request.getRequestDispatcher("WEB-INF/jsp/mail_failed.jsp");
 			}
 		} catch (SQLException | SQLDataNotFoundException e) {
+			e.printStackTrace();
 			request.setAttribute("link", "forgotpassword");
 			dispatcher = request.getRequestDispatcher("WEB-INF/jsp/mail_failed.jsp");
 		}

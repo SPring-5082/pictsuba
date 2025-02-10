@@ -10,7 +10,7 @@
 <link href="./img/sightIcon.jpg" rel="icon">
 <link href="./css/comon.css" rel="stylesheet">
 <link href="./css/reset_password.css" rel="stylesheet">
-<title><c:out value="${ application }"/></title>
+<title><c:out value="${ application.replaceFirst('/','') }"/></title>
 </head>
 <body>
 
@@ -21,12 +21,12 @@
 		<div id="main_parent">
 			<div id="main_window">
 				<div id="window_top">
-					<a href="/${ application }/">
+					<a href="/">
 						<img src="./img/pi.kuro.l.png" alt="ロゴ">
 					</a>
 					<h2>パスワード再設定</h2>
 				</div>
-				<form id="reset_password_form" action="/${ application }/reset-pass" method="post">
+				<form id="reset_password_form" action="${ application }/reset-pass" method="post">
 					
 					<label for="password"><h4>パスワード<span class="must">*</span></h4></label>
 					<div class="password_area">

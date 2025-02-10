@@ -22,7 +22,7 @@ public class Advertisement implements Serializable {
 	}
 	
 	public String image() {
-		return "/pictsuba/image?image="+image;
+		return  Product.imagePath+image;
 	}
 	
 	public String simpleImage() {

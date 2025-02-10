@@ -10,17 +10,12 @@
 <link href="./img/sightIcon.jpg" rel="icon">
 <link href="./css/comon.css" rel="stylesheet">
 <link href="./css/favorite.css" rel="stylesheet">
-<title><c:out value="${ application } お気に入り"/></title>
+<title><c:out value="${ application.replaceFirst('/','') } お気に入り"/></title>
 </head>
 <body>
 <jsp:include page="../../jsp/background.jsp"></jsp:include>
 <jsp:include page="../../jsp/header.jsp"></jsp:include>
 <div id="alert_window">
-	<span class="material-symbols-outlined">
-		check_circle
-	</span>
-	<p id="alert_text"></p>
-	<div id="alert_border"></div>
 </div>
 <main>
 	<div id="main_parent">
@@ -29,7 +24,7 @@
 		<div id="products" class="view">
 			<c:forEach items="${ products }" var="product">
 				<div class="product">
-					<a class="product_box" href="/${ application }/product?productId=${product.product_id()}">
+					<a class="product_box" href="${ application }/product?productId=${product.product_id()}">
 						<div class="frame">
 							<div class="draw_area">
 								<img src="${ product.image() }" alt="絵画">
@@ -38,13 +33,23 @@
 						<div class="info">
 							<h4 class="name"><c:out value="${ product.name() }"/></h4>
 							<p class="creator"><c:out value="${ product.creator_name() }"/></p>
-							<h4 class="price">\<c:out value="${ calc.price(product.price(),product.category_id()) }"/></h4>
+							<h4 class="price">&yen;<c:out value="${ calc.price(product.price(),product.category_id()) }"/></h4>
 						</div>
 					</a>
-					<div class="product_buttom">
-						<button class="in_cart_btn" onclick="add_cart(${ product.product_id() })">カートへ入れる</button>
-						<div class="delete_button" id="${ product.product_id() }" onclick="delete_favorite(${ product.product_id() })">削除</div>
-					</div>
+					<c:choose>
+					<c:when test="${ product.stock() > 0 }">
+						<div class="product_buttom">
+							<button class="in_cart_btn" onclick="add_cart(${ product.product_id() })">カートへ入れる</button>
+							<div class="delete_button" id="${ product.product_id() }" onclick="delete_favorite(${ product.product_id() })">削除</div>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div class="product_buttom">
+							<button class="in_cart_btn">現在在庫切れ中</button>
+							<div class="delete_button" id="${ product.product_id() }" onclick="delete_favorite(${ product.product_id() })">削除</div>
+						</div>
+					</c:otherwise>
+					</c:choose>
 				</div>
 			</c:forEach>
 		</div>
