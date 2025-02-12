@@ -49,7 +49,8 @@ public class Order implements Serializable{
 		this.product_image = product_image;
 	}
 	
-	public Order(int address_id, Date order_date, String state,int sum_price) {
+	public Order(int order_id,int address_id, Date order_date, String state,int sum_price) {
+		this.order_id = order_id;
 		this.address_id = address_id;
 		this.order_date = order_date;
 		this.state = state;

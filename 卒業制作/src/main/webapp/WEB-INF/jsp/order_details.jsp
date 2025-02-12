@@ -30,8 +30,8 @@
 					<h3>注文詳細</h3>
 				</div>
 				<div id="order_details">
-					<h4>注文状況</h4><p>お届け済み</p>
-					<h4>注文日</h4><p>2025/02/12</p>
+					<h4>注文状況</h4><p><c:out value="${ order.state() }"/></p>
+					<h4>注文日</h4><p><c:out value="${ order.order_date() }"/></p>
 					<h4>注文合計</h4><p>&yen;<c:out value="${ order.sum_price() }"/></p>
 				</div>
 			</section>
@@ -91,7 +91,15 @@
 					<h3 class="total">&yen;<c:out value="${ order.sum_price() + 500 }"/></h3>
 				</div>
 			</section>
-			<a href="${ application }/order-history" id="main_bottom">
+			
+			<c:if test="${ order.state() != 'お届け済み' }">
+				<button id="delete_btn" onclick="delete_order(${ order.order_id() })">
+					この注文を取り消す
+				</button>
+				<script src="./js/delete_order.js"></script>
+			</c:if>
+			
+			<a href="${ application }/order-history" id="back_anchor">
 				<span class="material-symbols-outlined">
 					chevron_left
 				</span>
@@ -103,5 +111,6 @@
 
 
 <jsp:include page="../../jsp/footer.jsp"></jsp:include>
+<script src="./js/comon.js"></script>
 </body>
 </html>

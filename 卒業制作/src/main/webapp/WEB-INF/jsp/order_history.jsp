@@ -53,5 +53,7 @@
 
 <jsp:include page="../../jsp/footer.jsp"></jsp:include>
 <script src="./js/comon.js"></script>
+<script src="./js/check_null.js"></script>
+<script src="./js/order_history_onload.js"></script>
 </body>
 </html>

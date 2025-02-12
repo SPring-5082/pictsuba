@@ -1,3 +1,5 @@
+//お支払い情報ページでクレジットカードを追加する処理
+
 import {hidden_payment} from "./payment_modal_window.js";
 
 const req_name = document.getElementById("credit_card_name");
@@ -5,42 +7,17 @@ const req_number = document.getElementById("credit_card_number");
 const req_expire_month = document.getElementById("expire_month");
 const req_expire_year = document.getElementById("expire_year");
 const req_security_code = document.getElementById("security_code");
-const add_credit_card = document.getElementById("add_credit_card");
+const payment_form = document.getElementById("payment_form");
 
-//住所情報の追加
-add_credit_card.addEventListener("click", () => {
-
-	let error_text = "";
-
-    //未入力チェック
-    if(req_name.value === ""){
-        error_text = "お名前が未入力です。\n";
-    }
-    if(req_number.value === ""){
-        error_text += "カード番号が未入力です。\n";
-    }
-    if(req_expire_month.value === ""){
-        error_text += "有効期限（月）が未入力です。\n";
-    }
-    if(req_expire_year.value === ""){
-        error_text += "有効期限（年）が未入力です。\n";
-    }
-    if(req_security_code.value === ""){
-        error_text += "セキュリティコードが未入力です";
-    }
-    
-    if(error_text !== ""){
-        alert(error_text);
-        return;
-    }
-
+payment_form.addEventListener("submit", () => {
+	
 	let xhr = new XMLHttpRequest();
 
     //サーバーサイドに送るデータ
     let req_data = `owner_name=${req_name.value}&`;
     req_data += `number=${req_number.value}&`;
     req_data += `month=${req_expire_month.value}&`;
-    req_data += `year=${ req_expire_year.value }&`;
+	req_data += `year=${req_expire_year.value}&`;
     req_data += `security_code=${req_security_code.value}`;
 
 	xhr.open('POST', '/pictsuba/api/card_id.json');
@@ -56,7 +33,7 @@ add_credit_card.addEventListener("click", () => {
 			//モーダルウィンドウを非表示
 			hidden_payment();
 	
-			// 住所選択画面に追加
+			// クレジットカード選択画面に追加
 			let items = document.getElementById("items");
 			let child = document.createElement("div");
 			child.setAttribute("class", "item");

@@ -50,7 +50,7 @@
             </c:otherwise>
             </c:choose>
             <a href="${ application }/mypage">マイページ</a>
-            <a href="${ application }/contcact.html">お問い合わせ</a>
+            <a href="${ application }/faq/">FAQ/お問い合わせ</a>
         </div>
         <a href="${ application }/cart" id="mobile_icon" class="cart menu_icon"><img src="./img/UI.ks-to.png" alt="カート"></a>
         <div id="bg_cover"></div>

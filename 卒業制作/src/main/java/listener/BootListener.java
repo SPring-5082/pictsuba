@@ -20,6 +20,7 @@ public class BootListener implements ServletContextListener {
 	 */
 	@Override
 	public void contextInitialized(ServletContextEvent sce)  {
+		
 		sce.getServletContext().getContextPath();
 		ServletContext sc =  sce.getServletContext();
 		//ドメイン名設定

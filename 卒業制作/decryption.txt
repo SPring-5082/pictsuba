@@ -8,6 +8,7 @@
 	mail_pass サーバへメールを依頼する際のパスワード
 	
 	
+	-Da=A
 	
 	-Ddomain=localhost
 	-Dpath="\\\\localhost\\d\\image\\"
@@ -17,6 +18,23 @@
 	-Dsrc_add="2004takatori0427@gmail.com"
 	-Dmail_pass="kgaq ucyj zwhf mfyv"
 	
+	
+	
+	-Dmapping="\\localhost\d\Dynamo\dynamo\mapping.properties"
+	-Dsrc="\\localhost\d\Dynamo\dynamo\\"
+	
+	-Ddomain="localhost"
+	
+	-Dpath="/usr/local/src/tomcat/img/"
+	-Durl="pictsuba-database-01.cl4ass2si0jd.ap-northeast-1.rds.amazonaws.com:3306"
+	-Duser="admin"
+	-Dpass="eQR|-6G5FFsAi3l]XOQ0680aSp(D"
+	-Dsrc_add="2004takatori0427@gmail.com"
+	-Dmail_pass="kgaq ucyj zwhf mfyv"
+	
+	
+	-Dmapping="\\localhost\d\Dynamo\dynamo\mapping.properties"
+	-Dsrc="\\localhost\d\Dynamo\dynamo\\"
 	
 	-Dmail_pass2=kgaq ucyj zwhf mfyv
 	key iv 暗号化鍵と初期化パラメータ

@@ -27,7 +27,6 @@ public class AddAddressServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		Customer user = (Customer)session.getAttribute("user");
 		Address address = new Address(user.customer_id(), zip_code, pref, municipalities, street, building);
-		System.out.println(building);
 		try(PrintWriter pw =  response.getWriter();){
 			AddressDAO.insert(address);
 			Integer address_id = 0;

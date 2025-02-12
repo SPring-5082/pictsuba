@@ -44,37 +44,49 @@
 				</button>
 			</div>
 			<!-- クレジットカード入力フォーム -->
-			<div id="payment_modal_window" class="modal_window">
-				<div id="payment_modal_content" class="modal_content">
-					<span class="material-symbols-outlined" id="payment_close_icon">
-						close
-					</span>
-					<h2>クレジットカードの追加</h2>
-					<div class="add_form">
-						<div class="input_box">
-							<h4>お名前<span class="must">*</span></h4>
-							<input type="text" name="name" id="credit_card_name">
-						</div>
-						<div class="input_box">
-							<h4>カード番号<span class="must">*</span></h4>
-							<input type="number" name="number" id="credit_card_number">
-						</div>
-						<div class="input_box">
-							<h4>有効期限<span class="must">*</span></h4>
-							<div id="expire_area">
-								<input type="text" id="expire_month" name="expire_month" pattern="[0-9]{2}" placeholder="MM">
-								/
-								<input type="text" id="expire_year" name="expire_year" pattern="[0-9]{2}" placeholder="YY">
-							</div>
-						</div>
-						<div class="input_box">
-							<h4>セキュリティコード<span class="must">*</span></h4>
-							<input type="number" name="security_code" id="security_code">
-						</div>
-						<input type="submit" value="追加" id="add_credit_card">
+			<!-- クレジットカード入力フォーム　開始 -->
+		<div id="payment_modal_window" class="modal_window">
+			<div id="payment_modal_content" class="modal_content">
+				<span class="material-symbols-outlined close_icon" id="payment_close_icon">
+					close
+				</span>
+				<h2>クレジットカードの追加</h2>
+				<form id="payment_form" class="add_form" onsubmit="return false;">
+					<div class="input_box">
+						<h4>カード名義人<span class="must">*</span></h4>
+						<input type="text" name="name" id="credit_card_name" required>
 					</div>
-				</div>
+	
+					<div class="input_box">
+						<h4>カード番号<span class="must">*</span></h4>
+						<input type="text" name="number" id="credit_card_number" pattern="[0-9]{14,16}" required>
+						<p id="number_error" class="error_msg"></p>
+					</div>
+	
+					<div class="input_box">
+						<h4>有効期限<span class="must">*</span></h4>
+						<div id="expire_area">
+							<input type="text" name="expire_month" placeholder="MM" id="expire_month"
+								pattern="0[1-9]|1[0-2]" required>
+							/
+							<input type="text" name="expire_year" placeholder="YY" id="expire_year"
+								pattern="[0-9]{2}" required>
+						</div>
+						<p id="expire_month_error" class="error_msg"></p>
+						<p id="expire_year_error" class="error_msg"></p>
+					</div>
+	
+					<div class="input_box">
+						<h4>セキュリティコード<span class="must">*</span></h4>
+						<input type="text" name="security_code" id="security_code" pattern="[0-9]{3,4}" required>
+						<p id="code_error" class="error_msg"></p>
+					</div>
+	
+					<input type="submit" id="add_credit_card" value="追加">
+				</form>
 			</div>
+		</div>
+		<!-- クレジットカード入力フォーム　終了 -->
 		</div>
 	</div>
 </main>
@@ -82,6 +94,7 @@
 <script src="./js/comon.js"></script>
 <script src="./js/payment_modal_window.js" type="module"></script>
 <script src="./js/del_card.js"></script>
+<script src="./js/payment_validation.js"></script>
 <script src="./js/add_card.js" type="module"></script>
 </body>
 </html>

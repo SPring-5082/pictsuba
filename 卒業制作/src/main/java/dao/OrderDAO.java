@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import beans.Cart;
 import beans.Order;
 
 public class OrderDAO extends DAO{
@@ -94,6 +95,19 @@ public class OrderDAO extends DAO{
 		return list;
 	}
 	
+	public static List<Cart> findByOrder_id(int order_id) throws SQLException{
+		List<Cart> cart = new ArrayList<>();
+		final String SQL = "SELECt customer_id,product_id,quantity FROM ORDERS WHERE order_id = " + order_id;
+		try(Connection con = getConnection();
+			PreparedStatement pstmt = getPsTmt(con, SQL);
+			ResultSet rs = pstmt.executeQuery();){
+			while(rs.next()) {
+				cart.add(new Cart(rs.getInt(1), rs.getInt(2), rs.getInt(3)));
+			}
+		}
+		return cart;
+	}
+	
 	/**
 	 * 注文(履歴)番号に基づく注文基本
 	 * @param order_id
@@ -122,7 +136,7 @@ public class OrderDAO extends DAO{
 			Date order_date = rs.getDate(3);
 			String state = rs.getString(4);
 			int sum_price = rs.getInt(5);
-			Order order = new Order(address_id, order_date, state, sum_price);
+			Order order = new Order(order_id,address_id, order_date, state, sum_price);
 			return order;
 		}
 	}

@@ -52,7 +52,7 @@ public class SignInServlet extends HttpServlet {
 			}catch (Exception e) {}
 		}
 		if(user != null) {
-			page = page == null? "/pictsuba/" : page ;
+			page = page == null? (String)request.getServletContext().getAttribute("application") + "/" : page ;
 			response.sendRedirect(page);
 		}else {
 			response.sendRedirect("signin/?error=true" + (page != null?page:""));

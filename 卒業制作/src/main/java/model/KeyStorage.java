@@ -1,16 +1,23 @@
 package model;
 
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
+import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
 public class KeyStorage {
 	private static Cipher cryptoCipher, decryptoCipher;
-	
+	private static SecretKey secretKey = null;
+	private static byte[] iv = null;
+	private static IvParameterSpec ivParameter = null;
+	private static final String padding = "AES/CBC/PKCS5Padding";
 	/**
 	 * 外部から読み込んだ情報をもとに鍵を作成する
 	 * @param KEY_String エンコードされた暗号化鍵
@@ -18,9 +25,6 @@ public class KeyStorage {
 	 */
 	public static void init(String KEY_String,String IV_String){
 		KeyGenerator kg = null;
-		SecretKey secretKey = null;
-		byte[] iv = null;
-		IvParameterSpec ivParameter = null;
 		try {
 			// 初期化
 			kg = KeyGenerator.getInstance("AES");
@@ -33,9 +37,8 @@ public class KeyStorage {
 			iv = decodedIV;
 			ivParameter = new IvParameterSpec(iv);
 			// 暗号化および復号化の設定
-			final String padding = "AES/CBC/PKCS5Padding";
-			cryptoCipher = Cipher.getInstance(padding);
-			cryptoCipher.init(Cipher.ENCRYPT_MODE, secretKey, ivParameter);
+			
+			
 			decryptoCipher = Cipher.getInstance(padding);
 			decryptoCipher.init(Cipher.DECRYPT_MODE, secretKey, ivParameter);
 		} catch (Exception e) {
@@ -66,6 +69,12 @@ public class KeyStorage {
 	 * @return 暗号化に使用するCipher
 	 */
 	static Cipher encCipher() {
+		try {
+			cryptoCipher = Cipher.getInstance(padding);
+			cryptoCipher.init(Cipher.ENCRYPT_MODE, secretKey, ivParameter);
+		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | InvalidAlgorithmParameterException e) {
+			e.printStackTrace();
+		}
 		return cryptoCipher;
 	}
 	/**
@@ -73,6 +82,12 @@ public class KeyStorage {
 	 * @return 復号に使用するCipher
 	 */
 	static Cipher decCipher() {
+		try {
+			decryptoCipher = Cipher.getInstance(padding);
+			decryptoCipher.init(Cipher.DECRYPT_MODE, secretKey, ivParameter);
+		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | InvalidAlgorithmParameterException e) {
+			e.printStackTrace();
+		}
 		return decryptoCipher;
 	}
 	

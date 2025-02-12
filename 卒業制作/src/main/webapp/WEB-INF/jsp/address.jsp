@@ -48,41 +48,46 @@
 			</button>
 		</div>
 		<!-- 住所入力フォーム -->
+		<!-- 住所入力フォーム　開始 -->
 		<div id="address_modal_window" class="modal_window">
 			<div id="address_modal_content" class="modal_content">
-				<span class="material-symbols-outlined" id="address_close_icon">
+				<span class="material-symbols-outlined close_icon" id="address_close_icon">
 					close
 				</span>
 				<h2>住所の追加</h2>
-				<div id="address_form" class="add_form">
+				<form id="address_form" class="add_form" onsubmit="return false;">
 					<div class="input_box">
-						<label for="zip_code"><h4>郵便番号<span class="must">*</span></h4></label>
-						<div id="address_completion_area">
-							<input type="text"zip_code" name="zip_code" id="zip_code" placeholder="ハイフンなし" maxlength="7">
-							<button type="button" id="address_completion_btn">住所検索</button>
-						</div>
-						<p id="error_msg"></p>
-					</div>	
-					<div class="input_box">
-						<label for="pref"><h4>都道府県<span class="must">*</span></h4></label>
-						<input type="text" name="pref" id="pref">
+						<h4>郵便番号<span class="must">*</span></h4>
+						<input type="text" name="zip_code" id="zip_code" placeholder="ハイフンなし" pattern="[0-9]{7}" inputmode="numeric" required>
+						<p id="zip_code_error" class="error_msg"></p>
 					</div>
+	
 					<div class="input_box">
-						<label for="municipalities"><h4>市区町村<span class="must">*</span></h4></label>
-						<input type="text" name="municipalities" id="municipalities">
+						<h4>都道府県<span class="must">(自動入力)</span></h4>
+						<input type="text" name="pref" id="pref" readonly>
+						<p id="pref_error" class="error_msg"></p>
 					</div>
+	
 					<div class="input_box">
-						<label for="street"><h4>番地<span class="must">*</span></h4></label>
-						<input type="text" name="street" id="street">
+						<h4>市区町村<span class="must">(自動入力)</span></h4>
+						<input type="text" name="municipalities" id="municipalities" readonly>
 					</div>
+	
 					<div class="input_box">
-						<label for="building"><h4>建物名</h4></label>
+						<h4>番地<span class="must">*</span></h4>
+						<input type="text" name="street" id="street" required>
+					</div>
+	
+					<div class="input_box">
+						<h4>建物名</h4>
 						<input type="text" name="building" id="building">
 					</div>
-					<input type="submit" value="追加" id="add_address">
+	
+					<input type="submit" id="add_address" value="追加">
 				</form>
 			</div>
 		</div>
+		<!-- 住所入力フォーム 終了 -->
 	</div>
 </div>
 </main>
@@ -92,5 +97,6 @@
 <script src="./js/comon.js"></script>
 <script src="./js/delete_address.js"></script>
 <script src="./js/add_address.js" type="module"></script>
+<script src="./js/address_vaidation.js"></script>
 </body>
 </html>

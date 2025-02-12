@@ -1,34 +1,21 @@
+//注文確認画面で住所を追加したときの処理
+
 import {hidden_address} from "./address_modal_window.js";
 const req_zip_code = document.getElementById("zip_code");
 const req_pref = document.getElementById("pref");
 const req_municipalities = document.getElementById("municipalities");
 const req_street = document.getElementById("street");
 const req_building = document.getElementById("building");
-const add_address = document.getElementById("add_address");
+const address_form = document.getElementById("address_form");
 
-add_address.addEventListener("click", () => {
+window.address_form_flag = 0;
 
-    let error_text = "";
-
-    //未入力チェック
-    if(req_zip_code.value === ""){
-        error_text = "郵便番号が未入力です。\n";
-    }
-    if(req_pref.value === ""){
-        error_text += "都道府県が未入力です。\n";
-    }
-    if(req_municipalities.value === ""){
-        error_text += "市区町村が未入力です。\n";
-    }
-    if(req_street.value === ""){
-        error_text += "番地が未入力です";
-    }
+address_form.addEventListener("submit", () => {
     
-    if(error_text !== ""){
-        alert(error_text);
+    if(address_form_flag === 1){
         return;
     }
-
+    
     let xhr = new XMLHttpRequest();
 
     //サーバーサイドに送るデータ
@@ -69,7 +56,13 @@ add_address.addEventListener("click", () => {
             </div>
             `;
             address_choose_list.append(child);
-            
+
+            //追加ボタンを押した後、inputタグを初期化
+			req_zip_code.value = null;
+			req_pref.value = null;
+			req_municipalities.value = null;
+			req_street.value = null;
+			req_building.value = null;
         }
     };
 

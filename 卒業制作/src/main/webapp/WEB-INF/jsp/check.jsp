@@ -168,67 +168,79 @@
 					close
 				</span>
 				<h2>住所の追加</h2>
-				<div id="address_form" class="add_form">
+				<form id="address_form" class="add_form" onsubmit="return false;">
 					<div class="input_box">
 						<h4>郵便番号<span class="must">*</span></h4>
-						<input type="text" name="zip_code" id="zip_code" placeholder="ハイフンなし" pattern="[0-9]{7}" maxlength="7" inputmode="numeric" required>
+						<input type="text" name="zip_code" id="zip_code" placeholder="ハイフンなし" pattern="[0-9]{7}" inputmode="numeric" required>
 						<p id="zip_code_error" class="error_msg"></p>
 					</div>
+	
 					<div class="input_box">
-						<h4>都道府県<span class="must">*</span></h4>
-						<input type="text" name="pref" id="pref" required readonly="readonly">
+						<h4>都道府県<span class="must">(自動入力)</span></h4>
+						<input type="text" name="pref" id="pref" readonly>
+						<p id="pref_error" class="error_msg"></p>
 					</div>
+	
 					<div class="input_box">
-						<h4>市区町村<span class="must">*</span></h4>
-						<input type="text" name="municipalities" id="municipalities" required readonly="readonly">
+						<h4>市区町村<span class="must">(自動入力)</span></h4>
+						<input type="text" name="municipalities" id="municipalities" readonly>
 					</div>
+	
 					<div class="input_box">
 						<h4>番地<span class="must">*</span></h4>
-						<input type="text" id="street" name="street" required>
+						<input type="text" name="street" id="street" required>
 					</div>
+	
 					<div class="input_box">
 						<h4>建物名</h4>
-						<input type="text" id="building" name="building">
+						<input type="text" name="building" id="building">
 					</div>
-					<input type="submit" value="追加" id="add_address">
-				</div>
+	
+					<input type="submit" id="add_address" value="追加">
+				</form>
 			</div>
 		</div>
-		<!-- 住所入力フォーム　終了 -->
-		<!-- クレジットカード入力フォーム　開始　-->
+		<!-- 住所入力フォーム 終了 -->
+		<!-- クレジットカード入力フォーム　開始 -->
 		<div id="payment_modal_window" class="modal_window">
 			<div id="payment_modal_content" class="modal_content">
 				<span class="material-symbols-outlined close_icon" id="payment_close_icon">
 					close
 				</span>
 				<h2>クレジットカードの追加</h2>
-				<div class="add_form">
+				<form id="payment_form" class="add_form" onsubmit="return false;">
 					<div class="input_box">
-						<h4>お名前<span class="must">*</span></h4>
+						<h4>カード名義人<span class="must">*</span></h4>
 						<input type="text" name="name" id="credit_card_name" required>
 					</div>
+	
 					<div class="input_box">
 						<h4>カード番号<span class="must">*</span></h4>
-						<input type="text" pattern="[0-9]{14,16}" name="number" id="credit_card_number" required>
+						<input type="text" name="number" id="credit_card_number" pattern="[0-9]{14,16}" required>
 						<p id="number_error" class="error_msg"></p>
 					</div>
+	
 					<div class="input_box">
 						<h4>有効期限<span class="must">*</span></h4>
 						<div id="expire_area">
-							<input type="text" pattern="0[1-9]|1[0-2]" name="expire_month" placeholder="MM" id="expire_month" oninput="javascript: this.value = this.value.slice(0, 2);">
+							<input type="text" name="expire_month" placeholder="MM" id="expire_month"
+								pattern="0[1-9]|1[0-2]" required>
 							/
-							<input type="text" pattern="[0-9]{2}" name="expire_year" placeholder="YY" id="expire_year" oninput="javascript: this.value = this.value.slice(0, 2);">
+							<input type="text" name="expire_year" placeholder="YY" id="expire_year"
+								pattern="[0-9]{2}" required>
 						</div>
 						<p id="expire_month_error" class="error_msg"></p>
 						<p id="expire_year_error" class="error_msg"></p>
 					</div>
+	
 					<div class="input_box">
 						<h4>セキュリティコード<span class="must">*</span></h4>
 						<input type="text" name="security_code" id="security_code" pattern="[0-9]{3,4}" required>
 						<p id="code_error" class="error_msg"></p>
 					</div>
-						<input type="submit" value="追加" id="add_credit_card">
-				</div>
+	
+					<input type="submit" id="add_credit_card" value="追加">
+				</form>
 			</div>
 		</div>
 		<!-- クレジットカード入力フォーム　終了 -->

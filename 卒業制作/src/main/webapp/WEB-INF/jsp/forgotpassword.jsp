@@ -21,15 +21,16 @@
 		<div id="main_parent">
 			<div id="main_window">
 				<div id="window_top">
-					<a href="./index.html">
+					<a href="${ application }/">
 						<img src="./img/pi.kuro.l.png" alt="ロゴ">
 					</a>
 					<h2>確認URLを送信するメールアドレスを入力してください</h2>
 				</div>
-				<form id="login_form" action="${ application }/forgotpassword" method="post" autocomplete="off">
+				<form id="sendURL_form" action="${ application }/forgotpassword" method="post" autocomplete="off">
 					<input type="email" name="mail" placeholder="メールアドレス" required>
 					<input type="submit" value="送信">
 				</form>
+				<a href="${ application }/signin/" class="back_anchor">戻る</a>
 			</div>
 		</div>
 	</main>

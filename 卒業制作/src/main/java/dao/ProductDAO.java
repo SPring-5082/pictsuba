@@ -387,6 +387,18 @@ public class ProductDAO extends DAO {
 		return map;
 	}
 	
+	public static boolean updateAddStock(Cart cart) throws SQLException {
+		final String WHERE = " WHERE PRODUCT_ID = ?";
+		final String SET = " SET STOCK = STOCK + ?";
+		final String sql = SQL.update("PRODUCTS").concat(SET).concat(WHERE);
+		try(Connection con = getConnection();
+			PreparedStatement pstmt = getPsTmt(con, sql);){
+			pstmt.setInt(1, cart.quantity());
+			pstmt.setInt(2, cart.product_id());
+			return pstmt.executeUpdate() > 0;
+		}
+	}
+	
 	public static boolean updateStockByCart(Cart cart) throws SQLException {
 		final String WHERE = " WHERE PRODUCT_ID = ?";
 		final String SET = " SET STOCK = STOCK - ?";
