@@ -9,26 +9,6 @@ import javax.crypto.IllegalBlockSizeException;
 import model.EncryptionLogic;
 
 public class Customer implements Serializable{
-	/*
-	 * CREATE TABLE CUSTOMERS(
-	 * 		CUSTOMER_ID INT AUTO_INCREMENT PRIMARY KEY,
-	 * 		NAME VARCHAR(32) NOT NULL,
-	 * 		PASSWORD VARCHAR(16) NOT NULL,
-	 * 		PHONE VARCHAR(16) UNIQUE,
-	 * 		MAIL VARCHAR(32) NOT NULL UNIQUE,
-	 * 		AGE INT NOT NULL CHECK(AGE >= 0),
-	 * 		BIRTH_DAY DATE,
-	 * 		GENDER VARCHAR(8),
-	 * 		POINT INT NOT NULL CHECK(POINT >= 0) DEFAULT 0,
-	 * 		FIRST_LOG DATE NOT NULL,
-	 * 		FIN_LOG DATE NOT NULL,
-	 * 		CHECK(FIRST_LOG <= FIN_LOG)
-	 * );
-	 * 
-	 * ALTER TABLE CUSTOMERS ADD (ADDRESS_ID INT REFERENCES ADDRESS(ADDRESS_ID));
-	 * ALTER TABLE CUSTOMERS ADD (CARD_ID INT REFERENCES CREDIT_CARDS(CARD_ID));
-	 */
-	
 	
 	//フィールド
 	private int customer_id;

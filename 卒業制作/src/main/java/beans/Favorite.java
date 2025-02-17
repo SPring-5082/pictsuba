@@ -3,12 +3,6 @@ package beans;
 import java.io.Serializable;
 
 public class Favorite implements Serializable {
-	/*
-	 * CREATE TABLE FAVORITES(
-	 * 		CUSTOMER_ID INT REFERENCES CUSTOMERS(CUSTOMER_ID) NOT NULL,
-	 * 		PRODUCT_ID INT REFERENCES PRODUCTS(PRODUCT_ID) NOT NULL
-	 * );
-	 */
 	
 	private int customer_id;
 	private int product_id;

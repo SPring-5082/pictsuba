@@ -9,20 +9,23 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&" />
 <link href="./img/sightIcon.jpg" rel="icon">
 <link href="./css/comon.css" rel="stylesheet">
-<link href="./css/mypage.css" rel="stylesheet">
+<link href="./css/product_failed.css" rel="stylesheet">
 <link>
 <title><c:out value="${ application.replaceFirst('/','') }"/></title>
 </head>
 <body>
 <jsp:include page="../../jsp/background.jsp"></jsp:include>
+<jsp:include page="../../jsp/header.jsp"></jsp:include>
 
 <main>
-
-<h1>商品ないよ</h1>
-
+	<div id="main_parent">
+		<span class="material-symbols-outlined" id="search_icon">
+			search_off
+		</span>
+		<h3>商品がありません</h3>
+	</div>
 </main>
 
-<jsp:include page="../../jsp/header.jsp"></jsp:include>
 <jsp:include page="../../jsp/footer.jsp"></jsp:include>
 </body>
 </html>

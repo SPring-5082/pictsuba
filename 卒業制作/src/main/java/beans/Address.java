@@ -3,17 +3,6 @@ package beans;
 import java.io.Serializable;
 
 public class Address implements Serializable{
-	/*
-	 * CREATE TABLE ADDRESS(
-	 * 		ADDRESS_ID INT AUTO_INCREMENT PRIMARY KEY,
-	 * 		CUSTOMER_ID INT REFERENCES CUSTOMERS(CUSTOMER_ID),
-	 * 		ZIP_CODE VARCHAR(8) NOT NULL CHECK( LENGTH(ZIP_CODE) = 7 OR LENGTH(ZIP_CODE) = 8 ),
-	 * 		PREF VARCHAR(8) NOT NULL,
-	 * 		MUNICIPALITIES VARCHAR(32) NOT NULL,
-	 * 		STREET VARCHAR(32) NOT NULL,
-	 * 		BUILDING VARCHAR(64) 
-	 * );
-	 */
 	
 	/**アドレスID*/
 	private int address_id;

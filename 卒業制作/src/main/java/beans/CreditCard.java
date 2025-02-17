@@ -1,16 +1,6 @@
 package beans;
 
 public class CreditCard {
-	/*
-	 * CREATE TABLE CREDIT_CARDS(
-	 *  	CARD_ID INT AUTO_INCREMENT  PRIMARY KEY,
-	 *  	CUSTOMER_ID INT NOT NULL REFERENCES CUSTOMERS(CUSTOMER_ID),
-	 *  	NUMBER VARCHAR(16) NOT NULL,
-	 *  	EXPIRE VARCHAR(8) NOT NULL,
-	 *  	SECURITY_CORD INT NOT NULL,
-	 *  	OWNER_NAME VARCHAR(32) NOT NULL
-	 *  );
-	 */
 	
 	private int card_id;
 	private int customer_id;

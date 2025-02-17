@@ -20,6 +20,7 @@ public class BootListener implements ServletContextListener {
 	 */
 	@Override
 	public void contextInitialized(ServletContextEvent sce)  {
+		property();
 		
 		sce.getServletContext().getContextPath();
 		ServletContext sc =  sce.getServletContext();
@@ -41,6 +42,17 @@ public class BootListener implements ServletContextListener {
 		//キャンペーン価格計算機設定
 		sc.setAttribute("calc", new CampaignLogic());
 		
+	}
+	
+	
+	void property() {
+		System.setProperty("domain", "localhost");
+		System.setProperty("path", "\\\\localhost\\d\\image\\");
+		System.setProperty("user", "admin");
+		System.setProperty("pass", "adminpass");
+		System.setProperty("url", "localhost");
+		System.setProperty("src_add", "2004takatori0427@gmail.com");
+		System.setProperty("mail_pass", "kgaq ucyj zwhf mfyv");
 	}
 	
 }
